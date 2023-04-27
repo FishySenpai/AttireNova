@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar"
 import Home from "./components/home";
 import "./App.css";
+import ProductInfo from "./components/ProductInfo";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -25,7 +26,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          
+          <Route path="/info/:id" element={<ProductInfo />} />
         </Routes>
       </Router>
     </div>

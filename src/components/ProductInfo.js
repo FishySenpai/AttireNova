@@ -5,11 +5,13 @@ const ProductInfo = () => {
     const {id} = useParams();
     console.log(id)
     const [product, setProduct] = useState({});
+    const [thumbnail, setThumbnail] = useState("");
     const FetchProducts = async (query) => {
       const temp = await fetch(`https://dummyjson.com/products/${id}`).then((res) =>
         res.json()
       );
       setProduct(temp);
+      setThumbnail(temp.thumbnail)
       console.log(temp);
     };
 
@@ -17,7 +19,11 @@ const ProductInfo = () => {
       FetchProducts();
       console.log(product);
     }, []);
-    const {title, images, brand, description, thumbnail} = product;
+
+    const handleImageClick = (image) => {
+      setThumbnail(image); // update the thumbnail state variable with the clicked image
+    };
+    const {title, images, brand, description} = product;
   return (
     <div className="flex flex-row">
       <div className="ml-72 mt-32 ">
@@ -26,11 +32,13 @@ const ProductInfo = () => {
           {images?.slice(0, 4).map((image) => (
             <ul className="flex flex-row   ">
               <li>
-                <img
-                  className="h-[52px] w-[52px] mr-6 mt-2"
-                  src={image}
-                  alt="image"
-                />
+                <button onMouseOver={() => handleImageClick(image)}>
+                  <img
+                    className="h-[52px] w-[52px] mr-6 mt-2"
+                    src={image}
+                    alt="image"
+                  />
+                </button>
               </li>
             </ul>
           ))}

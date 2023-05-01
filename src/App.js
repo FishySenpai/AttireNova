@@ -5,7 +5,8 @@ import Home from "./components/home";
 import Search from "./components/Search";
 import "./App.css";
 import ProductInfo from "./components/ProductInfo";
-
+import GetCategories from "./components/Categories/GetCategories";
+import ShowCategories from "./components/Categories/ShowCategories"
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/info/:id" element={<ProductInfo />} />
           <Route path="/search/:search" element={<Search />} />
+          <Route path="/categories" element={<GetCategories />} />
+          <Route path="/categories/:name" element={<ShowCategories />} />
         </Routes>
       </Router>
     </div>

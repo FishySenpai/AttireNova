@@ -7,17 +7,35 @@ import "./App.css";
 import ProductInfo from "./components/ProductInfo";
 import GetCategories from "./components/Categories/GetCategories";
 import ShowCategories from "./components/Categories/ShowCategories"
+import { SearchBar } from "./components";
 function App() {
   return (
     <div className="App">
       <Router>
         <Navbar />
+
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <SearchBar />
+                <Home />
+              </>
+            }
+          />
           <Route path="/info/:id" element={<ProductInfo />} />
-          <Route path="/search/:search" element={<Search />} />
-          <Route path="/categories" element={<GetCategories />} />
-          <Route path="/categories/:name" element={<ShowCategories />} />
+          <Route path="/search/:search" element={<SearchBar />} />
+          <Route path="/categories" element={<SearchBar />} />
+          <Route
+            path="/categories/:name"
+            element={
+              <>
+                <SearchBar />
+                <ShowCategories />
+              </>
+            }
+          />
         </Routes>
       </Router>
     </div>

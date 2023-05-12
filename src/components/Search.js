@@ -29,7 +29,7 @@ const Search = () => {
         <form className="pt-2 h-[80px]" onSubmit={handleSearch}>
           <div className="flex flex-row ">
             <input
-              className="w-[288px] h-[36px] ml-4 pl-2 shadow rounded-l appearance-none border-gray-500 focus:outline-none "
+              className="inline-flex align-left gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               type="search"
               placeholder="Search..."
               value={search}

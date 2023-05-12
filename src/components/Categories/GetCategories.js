@@ -43,14 +43,14 @@ const GetCategories = () => {
         </div>
       </div>
       <div className={!showCategories ? "flex" : "hidden"}>
-        <div className="flex flex-col h-[300px] absolute overflow-y-auto scrollbar bg-white rounded font-normal">
+        <div className="flex flex-col h-[300px] absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left ">
           {categories?.map((genre, index) => (
             <ul className="flex flex-col">
               <li className="px-4 py-2" key={genre.id}>
                 <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
-                  <Link to = {`/categories/${genre}`}>
+                  <Link to={`/categories/${genre}`}>
                     <button>
-                      <div className="">{genre}</div>
+                      <div className="capitalize">{genre}</div>
                     </button>
                   </Link>
                 </div>

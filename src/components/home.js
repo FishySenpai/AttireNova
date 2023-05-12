@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Products from './Products';
 import Search from './Search';
 import { Link } from 'react-router-dom';
+import GetCategories from './Categories/GetCategories';
 
 const Home = () => {
      const [products, setProducts] = useState([]);
@@ -19,7 +20,7 @@ const Home = () => {
      }, []);
   return (
     <div>
-      <Search/>
+      
       <Products products={products} />
     </div>
   );

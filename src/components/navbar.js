@@ -26,7 +26,9 @@ const Navbar = (props) => {
                 >
                   <Link>Add Product</Link>
                 </button>
-
+                <button className="font-mono cursor-pointer text-[16px] text-white  mr-10">
+                  test
+                </button>
                 <button className="font-mono cursor-pointer text-[16px] text-white  mr-10">
                   Profile
                 </button>

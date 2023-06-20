@@ -9,6 +9,7 @@ import GetCategories from "./components/Categories/GetCategories";
 import ShowCategories from "./components/Categories/ShowCategories"
 import { SearchBar } from "./components";
 import Test from "./components/test";
+import GetProductInfo from "./components/getProductInfo"
 function App() {
   return (
     <div className="App">
@@ -25,7 +26,8 @@ function App() {
               </>
             }
           />
-          <Route path="/test" element={< Test/>} />
+          <Route path="/yh/:webID" element={<GetProductInfo />} />
+          <Route path="/test" element={<Test />} />
           <Route path="/info/:id" element={<ProductInfo />} />
           <Route path="/search/:search" element={<SearchBar />} />
           <Route path="/categories" element={<SearchBar />} />

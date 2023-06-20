@@ -51,7 +51,7 @@ const Test = () => {
                   </a>
                   <div className="w-36 md:w-48 text-gray-500 text-lg hover:text-red-500 cursor-pointer">
                     <button>
-                      <Link to={`/info/${top.webID}`}>{top.productTitle}</Link>
+                      <Link to={`/yh/${top.webID}`}>{top.productTitle}</Link>
                     </button>
                   </div>
                 </li>

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Products from "./Products";
-import { Link } from "react-router-dom";
-const Test = () => {
+import { Link, useParams } from "react-router-dom";
+
+const GetProductInfo = () => {
   const [products, setProducts] = useState([]);
+  const [thumbnail, setThumbnail] = useState({});
+  const { webID } = useParams();
+
   useEffect(() => {
     const fetchData = async () => {
       const options = {
         method: "GET",
-        url: "https://kohls.p.rapidapi.com/products/list",
-        params: {
-          limit: "24",
-          offset: "1",
-          dimensionValueID: "AgeAppropriate:Teens",
-        },
+        url: "https://kohls.p.rapidapi.com/products/detail",
+        params: { webID },
         headers: {
           "X-RapidAPI-Key":
             "325a7f72damshf16ffcb2c3ed7bep1f566djsn006db2e1a65a",
@@ -24,40 +23,54 @@ const Test = () => {
       try {
         const response = await axios.request(options);
         console.log(response.data);
-        setProducts(response.data.payload.products);
+        setProducts(response.data.payload.products[0]);      
+        setThumbnail(response.data.payload.products.images[0].url);
       } catch (error) {
         console.error(error);
       }
     };
+
     fetchData();
   }, []);
 
+  const handleImageClick = (image) => {
+    setThumbnail(image.url);
+  };
+
   return (
     <div>
-      <div className="px-6 items-center mx-auto container justify-between">
-        <div className="sm:p-6 pt-12 items-center container justify-between">
-          <ul className="flex flex-wrap">
-            {products?.map((top, index) => (
-              <li className="mr-4 md:mr-8 pb-6 " key={top.webID}>
-                <a href={`/info/${top.webID}`}>
-                  <img
-                    className="w-[220px] h-[144px]  rounded hover:shadow-lg cursor-pointer hover:scale-105"
-                    src={top.image.url}
-                    alt="img"
-                  />
-                </a>
-                <div className="w-36 md:w-48 text-gray-500 text-lg hover:text-red-500 cursor-pointer">
-                  <button>
-                    <Link to={`/info/${top.webID}`}>{top.productTitle}</Link>
+      <div className="flex flex-row">
+        <div className="ml-72 mt-32">
+          <img
+            className="h-[216px] w-[350px]"
+            src={thumbnail}
+            alt="image"
+          />
+          <div className="flex flex-row justify-center align-middle items-center">
+            {products.altImages?.slice(0, 4).map((image, index) => (
+              <ul key={index} className="flex flex-row">
+                <li>
+                  <button onMouseOver={() => handleImageClick(image)}>
+                    <img
+                      className="h-[52px] w-[52px] mr-6 mt-2"
+                      src={image.url}
+                      alt="image"
+                    />
                   </button>
-                </div>
-              </li>
+                </li>
+              </ul>
             ))}
-          </ul>
+          </div>
+        </div>
+        <div className="flex-col">
+          <div className="text-left ml-12 mt-32 text-2xl font-mono text-gray-700">
+            {products.productTitle}
+          </div>
+          
         </div>
       </div>
     </div>
   );
 };
 
-export default Test;
+export default GetProductInfo;

@@ -26,7 +26,7 @@ function App() {
               </>
             }
           />
-          <Route path="/yh/:webID" element={<GetProductInfo />} />
+          <Route path="/yh/:tcin" element={<GetProductInfo />} />
           <Route path="/test" element={<Test />} />
           <Route path="/info/:id" element={<ProductInfo />} />
           <Route path="/search/:search" element={<SearchBar />} />

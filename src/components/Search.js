@@ -1,23 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Products from "./Products";
+import axios from "axios";
 
 const Search = () => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const FetchProducts = async (query) => {
-    const temp = await fetch(
-      `https://dummyjson.com/products/search?q=${search}`
-    ).then((res) => res.json());
-    setProducts(temp.products);
-    console.log(temp);
-  };
+  
+    const fetchData = async () => {
+      const options = {
+        method: "GET",
+        url: "https://target1.p.rapidapi.com/auto-complete",
+        params: { q: search },
+        headers: {
+          "X-RapidAPI-Key":
+            "325a7f72damshf16ffcb2c3ed7bep1f566djsn006db2e1a65a",
+          "X-RapidAPI-Host": "target1.p.rapidapi.com",
+        },
+      };
+
+      try {
+        const response = await axios.request(options);
+        console.log(response.data);
+        setProducts(response.data.suggestions)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
+    
 
   const handleSearch = (e) => {
     if (search) {
       navigate(`/search/${search}`);
-      FetchProducts();
+      fetchData();
       e.preventDefault();
     } else {
       e.preventDefault();

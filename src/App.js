@@ -27,7 +27,15 @@ function App() {
             }
           />
           <Route path="/yh/:tcin" element={<GetProductInfo />} />
-          <Route path="/test" element={<Test />} />
+          <Route
+            path="/test"
+            element={
+              <>
+              <Search/>
+                <Test />
+              </>
+            }
+          />
           <Route path="/info/:id" element={<ProductInfo />} />
           <Route path="/search/:search" element={<SearchBar />} />
           <Route path="/categories" element={<SearchBar />} />

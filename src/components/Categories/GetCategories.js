@@ -4,8 +4,9 @@ const GetCategories = () => {
     const [categories, setCategories] = useState();
     const [showCategories, setShowCategories] = useState(false)
     const handleSubmit=()=>{
-        setShowCategories(!showCategories);
+        
         FetchCategories();
+        
         console.log(categories);
     }
     const FetchCategories = async (query) => {
@@ -13,6 +14,7 @@ const GetCategories = () => {
         "https://dummyjson.com/products/categories"
       ).then((res) => res.json());
       setCategories(temp);
+      setShowCategories(!showCategories);
       console.log(temp);
     };
 
@@ -42,7 +44,7 @@ const GetCategories = () => {
           </button>
         </div>
       </div>
-      <div className={!showCategories ? "flex" : "hidden"}>
+      <div className={showCategories ? "flex" : "hidden"}>
         <div className="flex flex-col h-[300px] absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left ">
           {categories?.map((genre, index) => (
             <ul className="flex flex-col">

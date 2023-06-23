@@ -2,7 +2,11 @@ import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
 const GetCategories = () => {
     const [categories, setCategories] = useState();
-    const [showCategories, setShowCategories] = useState(false)
+    const [showCategories, setShowCategories] = useState(false);
+    const handleClick=()=>{
+      setShowCategories(false);
+      
+    }
     const handleSubmit=()=>{
         
         FetchCategories();
@@ -50,11 +54,12 @@ const GetCategories = () => {
             <ul className="flex flex-col">
               <li className="px-4 py-2" key={genre.id}>
                 <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
-                  <Link to={`/categories/${genre}`}>
-                    <button>
+                  
+                    <button onClick={handleClick} >
+                      <Link to={`/categories/${genre}`}>
                       <div className="capitalize">{genre}</div>
+                      </Link>
                     </button>
-                  </Link>
                 </div>
               </li>
             </ul>

@@ -9,25 +9,16 @@ const Test = () => {
     const fetchData = async () => {
     const options = {
       method: "GET",
-      url: "https://target1.p.rapidapi.com/products/v2/list",
-      params: {
-        store_id: "911",
-        category: "5xtg6",
-        count: "20",
-        offset: "0",
-        default_purchasability_filter: "true",
-        sort_by: "relevance",
-      },
+      url: "https://asos10.p.rapidapi.com/api/v1/getCountries",
       headers: {
         "X-RapidAPI-Key": "325a7f72damshf16ffcb2c3ed7bep1f566djsn006db2e1a65a",
-        "X-RapidAPI-Host": "target1.p.rapidapi.com",
+        "X-RapidAPI-Host": "asos10.p.rapidapi.com",
       },
     };
 
     try {
       const response = await axios.request(options);
-      console.log(response.data.data.search.products);
-      setProducts(response.data.data.search.products);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

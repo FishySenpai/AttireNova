@@ -10,6 +10,7 @@ import ShowCategories from "./components/Categories/ShowCategories"
 import { SearchBar } from "./components";
 import Test from "./components/test";
 import GetProductInfo from "./components/getProductInfo"
+import Products from "./components/Products";
 function App() {
   return (
     <div className="App">
@@ -31,13 +32,21 @@ function App() {
             path="/test"
             element={
               <>
-              <Search/>
+                <Search />
                 <Test />
               </>
             }
           />
           <Route path="/info/:id" element={<ProductInfo />} />
-          <Route path="/search/:search" element={<SearchBar />} />
+          <Route
+            path="/search/:search"
+            element={
+              <>
+                <Search />
+                <Products />
+              </>
+            }
+          />
           <Route path="/categories" element={<SearchBar />} />
           <Route
             path="/categories/:name"

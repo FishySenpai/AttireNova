@@ -2,28 +2,38 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Products from "./Products";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 const Search = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   
     const fetchData = async () => {
       const options = {
         method: "GET",
-        url: "https://target1.p.rapidapi.com/auto-complete",
-        params: { q: search },
+        url: "https://asos10.p.rapidapi.com/api/v1/getProductListBySearchTerm",
+        params: {
+          searchTerm: search,
+          currency: "USD",
+          country: "US",
+          store: "US",
+          languageShort: "en",
+          sizeSchema: "US",
+          limit: "50",
+          offset: "0",
+        },
         headers: {
           "X-RapidAPI-Key":
             "325a7f72damshf16ffcb2c3ed7bep1f566djsn006db2e1a65a",
-          "X-RapidAPI-Host": "target1.p.rapidapi.com",
+          "X-RapidAPI-Host": "asos10.p.rapidapi.com",
         },
       };
 
       try {
         const response = await axios.request(options);
         console.log(response.data);
-        setProducts(response.data.suggestions)
+        setProducts(response.data.data.products);
+        console.log(products)
       } catch (error) {
         console.error(error);
       }
@@ -55,7 +65,28 @@ const Search = () => {
           </div>
         </form>
       </div>
-      <Products products={products} />
+      <div className="px-6 items-center mx-auto container justify-between">
+        <div className="sm:p-6 pt-12 items-center container justify-between">
+          <ul className="flex flex-wrap">
+            {products?.slice(0, 25).map((top, index) => (
+              <li className="mr-4 md:mr-8 pb-6 " key={top.id}>
+                <a href={`/info/${top.id}`}>
+                  <img
+                    className="w-[220px] h-[144px]  rounded hover:shadow-lg cursor-pointer hover:scale-105"
+                    src={`https://${top.imageUrl}`}
+                  />
+                  {console.log(top.imageUrl)}
+                </a>
+                <div className="w-36 md:w-48 text-gray-500 text-lg hover:text-red-500 cursor-pointer">
+                  <button>
+                    <Link to={`/info/${top.id}`}>{top.name}</Link>
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

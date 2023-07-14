@@ -40,11 +40,8 @@ function App() {
           <Route path="/info/:id" element={<ProductInfo />} />
           <Route
             path="/search/:search"
-            element={
-              <>
-                <Search />
-                <Products />
-              </>
+            element={             
+                <SearchBar />  
             }
           />
           <Route path="/categories" element={<SearchBar />} />

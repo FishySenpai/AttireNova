@@ -6,12 +6,12 @@ const Products = ({products}) => {
       <div className="px-6 items-center mx-auto container justify-between">
         <div className="sm:p-6 pt-12 items-center container justify-between">
           <ul className="flex flex-wrap">
-            {products?.slice(0,10).map((top, index) => (
+            {products?.slice(0, 24).map((top, index) => (
               <li className="mr-4 md:mr-8 pb-6 " key={top.id}>
                 <a href={`/info/${top.id}`}>
                   <img
                     className="w-[220px] h-[144px]  rounded hover:shadow-lg cursor-pointer hover:scale-105"
-                    src={top.imageUrl}
+                    src={`https://${top.imageUrl}`}
                     alt="img"
                   />
                 </a>

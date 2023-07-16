@@ -44,7 +44,7 @@ if(products){
     <div>
       <div className="flex flex-row">
         <div className="ml-72 mt-32">
-          <img className="h-[216px] w-[350px]" src={thumbnail} alt="image" />
+          <img className="h-[339px] w-[265px]" src={thumbnail} alt="image" />
           <div className="flex flex-row justify-center align-middle items-center">
             {products.item?.enrichment.images.content_labels
               .slice(0, 4)

@@ -13,7 +13,7 @@ const Home = () => {
          params: {
            store: "US",
            offset: "0",
-           categoryId: "21410",
+           categoryId: "27110",
            limit: "48",
            country: "US",
            sort: "freshness",
@@ -43,7 +43,7 @@ const Home = () => {
      }, []);
   return (
     <div>
-      
+      <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">Men's New</div>
       <Products products={products} />
     </div>
   );

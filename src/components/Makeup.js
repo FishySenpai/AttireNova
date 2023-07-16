@@ -13,7 +13,7 @@ const Makeup = () => {
       params: {
         store: "US",
         offset: "0",
-        categoryId: "16070",
+        categoryId: "5678",
         limit: "48",
         country: "US",
         sort: "freshness",
@@ -29,7 +29,7 @@ const Makeup = () => {
 
     try {
       const response = await axios.request(options);
-      console.log(response.data);
+      console.log(response);
       setProducts(response.data.products);
     } catch (error) {
       console.error(error);
@@ -42,6 +42,9 @@ const Makeup = () => {
   }, []);
   return (
     <div>
+      <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
+        Men's Suites
+      </div>
       <Products products={products} />
     </div>
   );

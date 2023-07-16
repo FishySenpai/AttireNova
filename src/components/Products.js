@@ -3,22 +3,23 @@ import { Link } from 'react-router-dom';
 const Products = ({products}) => {
   return (
     <div>
-      <div className="px-6 items-center mx-auto container justify-between">
+      <div className=" items-center mx-auto container justify-between">
         <div className="sm:p-6 pt-12 items-center container justify-between">
           <ul className="flex flex-wrap">
-            {products?.slice(0, 24).map((top, index) => (
+            {products?.slice(0, 10).map((top, index) => (
               <li className="mr-4 md:mr-8 pb-6 " key={top.id}>
                 <a href={`/info/${top.id}`}>
                   <img
-                    className="w-[220px] h-[144px]  rounded hover:shadow-lg cursor-pointer hover:scale-105"
+                    className="w-[265px] h-[339px]  rounded hover:shadow-lg cursor-pointer hover:scale-105"
                     src={`https://${top.imageUrl}`}
                     alt="img"
                   />
                 </a>
-                <div className="w-36 md:w-48 text-gray-500 text-lg hover:text-red-500 cursor-pointer">
+                <div className="w-36 md:w-[265px] text-gray-700 text-md hover:text-red-500 cursor-pointer">
                   <button>
                     <Link to={`/info/${top.id}`}>{top.name}</Link>
                   </button>
+                  <div className="text-gray-700 text-left font-bold ml-2">{top.price.current.text}</div>
                 </div>
               </li>
             ))}

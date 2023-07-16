@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
+import Similar from './Similar';
 const ProductInfo = () => {
     const {id} = useParams();
     console.log(id)
@@ -44,10 +45,11 @@ const ProductInfo = () => {
     };
     const {name, media, description, info} = product;
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col">
+      <div className="flex flex-row">
       <div className="ml-72 mt-32 ">
         <img
-          className="h-[216px] w-[350px]"
+          className="h-[450px] w-[350px]"
           src={`https://${thumbnail}`}
           alt="image"
         />
@@ -57,7 +59,7 @@ const ProductInfo = () => {
               <li>
                 <button onMouseOver={() => handleImageClick(image.url)}>
                   <img
-                    className="h-[52px] w-[52px] mr-6 mt-2"
+                    className="h-[60px] w-[55px] mr-6 mt-2"
                     src={`https://${image.url}`}
                     alt="image"
                   />
@@ -72,10 +74,11 @@ const ProductInfo = () => {
           {name}
         </div>
         <div className="ml-12 text-xl font-sans ">
-          
           <div dangerouslySetInnerHTML={{ __html: description }} />
         </div>
       </div>
+      </div>
+      <Similar />
     </div>
   );
 }

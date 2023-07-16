@@ -13,7 +13,7 @@ const Sneakers = () => {
       params: {
         store: "US",
         offset: "0",
-        categoryId: "4209",
+        categoryId: "27108",
         limit: "48",
         country: "US",
         sort: "freshness",
@@ -42,6 +42,9 @@ const Sneakers = () => {
   }, []);
   return (
     <div>
+      <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
+        Women's New
+      </div>
       <Products products={products} />
     </div>
   );

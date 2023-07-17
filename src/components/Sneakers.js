@@ -22,7 +22,7 @@ const Sneakers = () => {
         lang: "en-US",
       },
       headers: {
-        "X-RapidAPI-Key": "325a7f72damshf16ffcb2c3ed7bep1f566djsn006db2e1a65a",
+        "X-RapidAPI-Key": "ab5260649dmsh1c14116f3d59e38p17de0djsn0e0cd39cc3ff",
         "X-RapidAPI-Host": "asos2.p.rapidapi.com",
       },
     };

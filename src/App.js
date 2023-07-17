@@ -23,7 +23,7 @@ function App() {
             element={
               <>
                 <SearchBar />
-                <Home />
+                <Sneakers />
                 
               
               </>

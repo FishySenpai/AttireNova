@@ -23,8 +23,9 @@ function App() {
             element={
               <>
                 <SearchBar />
+                <Home/>
                 <Sneakers />
-                
+                <Makeup/>
               
               </>
             }

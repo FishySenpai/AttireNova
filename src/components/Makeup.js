@@ -4,42 +4,37 @@ import Search from "./Search";
 import { Link } from "react-router-dom";
 import GetCategories from "./Categories/GetCategories";
 import axios from "axios";
+import { useFetch } from "./getData";
 const Makeup = () => {
-  const [products, setProducts] = useState([]);
-  const FetchProducts = async (query) => {
-    const options = {
-      method: "GET",
-      url: "https://asos2.p.rapidapi.com/products/v2/list",
-      params: {
-        store: "US",
-        offset: "0",
-        categoryId: "5678",
-        limit: "48",
-        country: "US",
-        sort: "freshness",
-        currency: "USD",
-        sizeSchema: "US",
-        lang: "en-US",
-      },
-      headers: {
-        "X-RapidAPI-Key": "325a7f72damshf16ffcb2c3ed7bep1f566djsn006db2e1a65a",
-        "X-RapidAPI-Host": "asos2.p.rapidapi.com",
-      },
-    };
-
-    try {
-      const response = await axios.request(options);
-      console.log(response);
-      setProducts(response.data.products);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    FetchProducts();
-    console.log(products);
-  }, []);
+   const id = 5678;
+   const { loading, products } = useFetch(id);
+  if(loading){
+    return (
+      <div>
+        <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
+          Men's Suites
+        </div>
+        <div className=" items-center mx-auto container justify-between">
+          <div className="sm:p-6 pt-12 items-center container justify-between">
+            <div className="flex flex-wrap">
+              {[...Array(10)].map((_, index) => (
+                <li
+                  className="mr-4 md:mr-8 pb-6 rounded animate-pulse list-none"
+                  key={index}
+                >
+                  <div className="w-[265px] h-[339px] bg-gray-300 mb-2"></div>
+                  <div className="mt-2">
+                    <div className="w-12 md:w-40  bg-gray-300 h-4 shadow"></div>
+                  </div>
+                </li>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+ else {
   return (
     <div>
       <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
@@ -48,6 +43,6 @@ const Makeup = () => {
       <Products products={products} />
     </div>
   );
-};
+};}
 
 export default Makeup;

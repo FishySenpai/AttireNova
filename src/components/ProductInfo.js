@@ -38,9 +38,9 @@ const ProductInfo = () => {
     }
   };
 
-  // useEffect(() => {
-  //   FetchProducts();
-  // }, [id]);
+  useEffect(() => {
+    FetchProducts();
+  }, [id]);
 
   const handleImageClick = (image) => {
     setThumbnail(image);
@@ -93,42 +93,44 @@ const ProductInfo = () => {
               </ul>
             </div>
             {/* Dummy text */}
-            <div className="flex-col">
-              <div className="text-left ml-12 mt-32 text-2xl font-mono text-gray-700">
-                {name}
-                <div className="flex flex-row font-normal pt-2 mb-2">
-                  <div className="text-[20px] text-gray-800">Price:</div>
-                  <div className="text-red-600 pl-2 bg-gray-200 animate-pulse"></div>
+          </div>
+          <div className="flex flex-col">
+            {/* Dummy text */}
+            <div className="text-left ml-12 mt-32 text-2xl font-mono ">
+              <div className="flex flex-row font-normal pt-2 mb-2">
+                <div className="w-[400px] h-[15px] mb-5 bg-gray-200 animate-pulse"></div>
+              </div>
+            </div>
+            {/* Dummy text */}
+            <div className="flex flex-col">
+              <div className="flex flex-row ml-12 mb-2">
+                <div className="capitalize mb-5 w-[200px] h-[15px] font-mono bg-gray-200 animate-pulse"></div>
+              </div>
+              <div>
+                <div className="flex flex-row px-2  font-mono mb-5">
+                  <div className="w-[200px] h-[15px] ml-10 bg-gray-200 animate-pulse rounded-sm"></div>
                 </div>
               </div>
-              <div className="flex flex-col">
-                <div className=" flex flex-row ml-12 mb-2">
-                  <div className="capitalize text-[20px] text-gray-800 font-mono">
-                    color:
-                  </div>
-
-                  <div className="font-mono pl-2 bg-gray-200 animate-pulse"></div>
-                </div>
-                <div>
-                  <div className="flex flex-row px-2 mb-2 font-mono">
-                    <div className="text-[20px] text-gray-800 ml-10">
-                      Size:{" "}
-                    </div>
-                    <div className="relative bg-gray-200 animate-pulse"></div>
-                  </div>
-                </div>
+            </div>
+            {/* Dummy text */}
+            <div className="mt-4">
+              <div className="ml-12 py-2 text-lg font-mono text-left">
+                <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
               </div>
-              <div className="ml-16 py-2 text-lg font-mono text-left">
-                <div className="pt-2 text-[20px] text-gray-800">
-                  Model's Size:{" "}
-                </div>
-                <div
-                  className="bg-gray-200 animate-pulse"
-                  
-                />
+              <div className="ml-12 py-2 text-lg font-mono text-left">
+                <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
+              </div>
+              <div className="ml-12 py-2 text-lg font-mono text-left">
+                <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
+              </div>
+              <div className="ml-12 py-2 text-lg font-mono text-left">
+                <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
               </div>
             </div>
           </div>
+        </div>
+        <div className="ml-72 mt-12">
+          <Similar />
         </div>
       </div>
     );
@@ -245,6 +247,9 @@ const ProductInfo = () => {
               />
             </div>
           </div>
+        </div>
+        <div className="ml-72 mt-12">
+          <Similar />
         </div>
       </div>
     );

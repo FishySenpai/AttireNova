@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 const Products = ({products}) => {
+  if(products){
   return (
     <div>
       <div className=" items-center mx-auto container justify-between">
@@ -28,6 +29,9 @@ const Products = ({products}) => {
       </div>
     </div>
   );
-}
+            }
+  
+  }
+
 
 export default Products

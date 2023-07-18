@@ -7,10 +7,11 @@ import "./App.css";
 import ProductInfo from "./components/ProductInfo";
 import GetCategories from "./components/Categories/GetCategories";
 import ShowCategories from "./components/Categories/ShowCategories"
-import { Makeup, SearchBar, Sneakers } from "./components";
+import { Makeup, SearchBar, Sneakers, Login, Registration } from "./components";
 import Test from "./components/test";
 import GetProductInfo from "./components/getProductInfo"
 import Products from "./components/Products";
+
 function App() {
   return (
     <div className="App">
@@ -23,10 +24,9 @@ function App() {
             element={
               <>
                 <SearchBar />
-                <Home/>
+                <Home />
                 <Sneakers />
-                <Makeup/>
-              
+                <Makeup />
               </>
             }
           />
@@ -43,6 +43,22 @@ function App() {
           <Route path="/info/:id" element={<ProductInfo />} />
           <Route path="/search/:search" element={<SearchBar />} />
           <Route path="/categories" element={<SearchBar />} />
+          <Route
+            path="/login"
+            element={
+              <>
+                <Login /> 
+              </>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <>
+                <Registration /> 
+              </>
+            }
+          />
           <Route
             path="/categories/:name"
             element={

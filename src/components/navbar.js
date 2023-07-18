@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import {Link, useNavigate} from "react-router-dom"
-
+import Profile from "./User/Profile";
 const Navbar = (props) => {
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Navbar = (props) => {
                   test
                 </button>
                 <button className="font-mono cursor-pointer text-[16px] text-white  mr-10">
-                  Profile
+                  <Profile/>
                 </button>
               </ul>
             </nav>

@@ -14,17 +14,15 @@ const Similar = () => {
   const FetchProducts = async (query) => {
     const options = {
       method: "GET",
-      url: "https://asos10.p.rapidapi.com/api/v1/getYouMightAlsoLike",
+      url: "https://asos-com1.p.rapidapi.com/products/list-similarities",
       params: {
-        productId: id,
+        id: id,
+        country_code: "US",
         currency: "USD",
-        country: "US",
-        store: "US",
-        language: "en-US",
       },
       headers: {
         "X-RapidAPI-Key": "325a7f72damshf16ffcb2c3ed7bep1f566djsn006db2e1a65a",
-        "X-RapidAPI-Host": "asos10.p.rapidapi.com",
+        "X-RapidAPI-Host": "asos-com1.p.rapidapi.com",
       },
     };
 

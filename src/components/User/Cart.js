@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from 'react'
-
-const Cart = ({price, brand}) => {
+import {
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+  deleteDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "../firebaseConfig";
+import { useNavigate, useParams } from "react-router-dom";
+const Cart = ({price, brand, product}) => {
     const [quantity, setQuantity] = useState(1);
     const [showQuantity, setShowQuantity] = useState(false);
     const [quantityPrice, setQuantityPrice] = useState(price);
+      const [user, setUser] = useState({});
+      const [checkFav, setCheckFav] = useState(false);
+      const id = useParams();
+      const navigate = useNavigate();
+
       useEffect(() => {
         setQuantityPrice(price * quantity);
       }, [price, quantity]);
@@ -12,6 +29,49 @@ const Cart = ({price, brand}) => {
       setQuantityPrice(newQuantity * price);
       setShowQuantity(false);
     };
+      useEffect(() => {
+        onAuthStateChanged(auth, (currentUser) => {
+          setUser(currentUser);
+        });
+      });
+      useEffect(() => {
+        const userFav = async () => {
+          // Make sure user is defined and has a valid uid property
+          if (user && user.uid) {
+            try {
+              await setDoc(doc(db, "users", user.uid), {});
+            } catch (err) {
+              console.log(err);
+            }
+          }
+        };
+
+        userFav();
+      });
+      const addFav = async () => {
+        // Add a new document in the "products" subcollection under the user's document
+        if (user && product && id) {
+          try {
+            const userRef = doc(db, "users", user.uid);
+            const productsCollectionRef = collection(userRef, "products");
+
+            // Make sure the "products" subcollection exists
+            await setDoc(productsCollectionRef, {});
+
+            // Add a new document to the "products" subcollection
+            await addDoc(productsCollectionRef, product);
+          } catch (err) {
+            console.log(err);
+          }
+        } else {
+          navigate("/login");
+        }
+      };
+
+
+
+
+
   return (
     <div className="flex flex-col shadow-lg w-[265px] h-[300px] font-mono ">
       <div className="flex flex-row text-gray-700">
@@ -65,7 +125,7 @@ const Cart = ({price, brand}) => {
           </div>
         </div>
         <div className="py-2">
-          <button className="bg-gray-600 p-2 rounded text-white w-[200px]">
+          <button className="bg-gray-600 p-2 rounded text-white w-[200px]" onClick={addFav}>
             Add to Cart
           </button>
         </div>

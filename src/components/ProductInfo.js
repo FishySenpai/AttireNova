@@ -7,6 +7,7 @@ import Cart from "./User/Cart";
 const ProductInfo = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+
   const [thumbnail, setThumbnail] = useState("");
   const [size, setSize] = useState("Select:");
   const [showSize, setShowSize] = useState(false);
@@ -40,11 +41,13 @@ const ProductInfo = () => {
     }
   };
 
+
   useEffect(() => {
     FetchProducts();
   }, [id]);
   useEffect(() => {
     // Update the price state here after the product state has been updated
+    console.log(product)
     setPrice(product.price?.current.value);
     console.log(price)
   }, [product]);
@@ -260,7 +263,7 @@ const ProductInfo = () => {
             </div>
           </div>
           <div className="ml-24 mt-32">
-            <Cart price={price} brand={brand} />
+            {product && <Cart price={price} brand={brand} product={product} />}
           </div>
         </div>
         {/* <div className="ml-72 mt-12">

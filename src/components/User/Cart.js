@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const Cart = ({price, brand}) => {
     const [quantity, setQuantity] = useState(1);
     const [showQuantity, setShowQuantity] = useState(false);
     const [quantityPrice, setQuantityPrice] = useState(price);
+      useEffect(() => {
+        setQuantityPrice(price * quantity);
+      }, [price, quantity]);
     const handleQuantityChange = (newQuantity) => {
       setQuantity(newQuantity);
       setQuantityPrice(newQuantity * price);
@@ -11,16 +14,16 @@ const Cart = ({price, brand}) => {
     };
   return (
     <div className="flex flex-col shadow-lg w-[265px] h-[300px] font-mono ">
-      <div className="flex flex-row text-red-400">
-        <div>{quantityPrice}</div>
-        <div>Wishlist</div>
+      <div className="flex flex-row text-gray-700">
+        <div className="text-[20px] text-red-700 ml-10">${quantityPrice}</div>
+        <div className="text-[20px] ml-24">Wishlist</div>
       </div>
-      <div className="">
-        <div>Sold by {brand?.name}</div>
+      <div>
+        <div className="text-[16px] py-4 text-left ml-14">Sold by {brand?.name}</div>
         <div>
           <div className="flex flex-row px-2 mb-2 font-mono">
             <div className="text-[20px] text-gray-800 ml-10">Size: </div>
-            <div className="relative">
+            <div className="relative pb-2">
               <button
                 type="button"
                 className="inline-flex align-left gap-x-1.5 rounded-md w-[52px] bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -61,13 +64,13 @@ const Cart = ({price, brand}) => {
             </div>
           </div>
         </div>
-        <div>
-          <button className="bg-gray-600 p-2 rounded text-white">
+        <div className="py-2">
+          <button className="bg-gray-600 p-2 rounded text-white w-[200px]">
             Add to Cart
           </button>
         </div>
         <div>
-          <button className="bg-gray-600 p-2 rounded mt-2 text-white">
+          <button className="bg-gray-600 p-2 rounded mt-2 text-white w-[200px]">
             Buy Now
           </button>
         </div>

@@ -11,7 +11,7 @@ const ProductInfo = () => {
   const [size, setSize] = useState("Select:");
   const [showSize, setShowSize] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const FetchProducts = async () => {
     const options = {
       method: "GET",
@@ -34,17 +34,20 @@ const ProductInfo = () => {
       setProduct(response.data);
       console.log(product);
       setThumbnail(response.data.media?.images[0].url);
-      setPrice(product?.price?.current.value);
-      console.log(price);
       setLoading(false);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // useEffect(() => {
-  //   FetchProducts();
-  // }, [id]);
+  useEffect(() => {
+    FetchProducts();
+  }, [id]);
+  useEffect(() => {
+    // Update the price state here after the product state has been updated
+    setPrice(product.price?.current.value);
+    console.log(price)
+  }, [product]);
 
   const handleImageClick = (image) => {
     setThumbnail(image);
@@ -173,7 +176,7 @@ const ProductInfo = () => {
               {name}
               <div className="flex flex-row font-normal pt-2 mb-2">
                 <div className="text-[20px] text-gray-800">Price:</div>
-                <div className="text-red-600 pl-2">{price}</div>
+                <div className="text-red-600 pl-2">${price}</div>
               </div>
             </div>
             <div className="flex flex-col">

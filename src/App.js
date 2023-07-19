@@ -25,8 +25,8 @@ function App() {
               <>
                 <SearchBar />
                 <Home />
-                <Sneakers />
-                <Makeup />
+                {/* <Sneakers />
+                <Makeup /> */}
               </>
             }
           />

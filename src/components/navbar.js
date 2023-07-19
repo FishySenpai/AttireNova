@@ -13,7 +13,7 @@ const Navbar = (props) => {
         <div>
           <div>
             <nav className="w-full flex py-6 justify-between items-center overflow-hidden">
-              <ul className="list-none sm:flex hidden justify-end items-center flex-1">
+              <ul className="list-none sm:flex hidden justify-end items-center flex-1 mr-10">
                 <button
                   onClick={handleClick}
                   className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mr-10"
@@ -26,9 +26,7 @@ const Navbar = (props) => {
                 >
                   <Link>Add Product</Link>
                 </button>
-                <button className="font-mono cursor-pointer text-[16px] text-white  mr-10">
-                  test
-                </button>
+                
                 <button className="font-mono cursor-pointer text-[16px] text-white  mr-10">
                   <Profile/>
                 </button>

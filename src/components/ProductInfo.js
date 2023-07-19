@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Similar from "./Similar";
+import Cart from "./User/Cart";
 
 const ProductInfo = () => {
   const { id } = useParams();
@@ -10,6 +11,7 @@ const ProductInfo = () => {
   const [size, setSize] = useState("Select:");
   const [showSize, setShowSize] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [price, setPrice] = useState("");
   const FetchProducts = async () => {
     const options = {
       method: "GET",
@@ -32,21 +34,23 @@ const ProductInfo = () => {
       setProduct(response.data);
       console.log(product);
       setThumbnail(response.data.media?.images[0].url);
+      setPrice(product?.price?.current.value);
+      console.log(price);
       setLoading(false);
     } catch (error) {
       console.error(error);
     }
   };
 
-  useEffect(() => {
-    FetchProducts();
-  }, [id]);
+  // useEffect(() => {
+  //   FetchProducts();
+  // }, [id]);
 
   const handleImageClick = (image) => {
     setThumbnail(image);
   };
 
-  const { name, media, description, info, variants, price } = product;
+  const { name, media, description, info, variants, brand } = product;
 
   function addBulletPointsToDescription(description) {
     const bulletPointsAddedDescription = description?.replace(
@@ -128,10 +132,13 @@ const ProductInfo = () => {
               </div>
             </div>
           </div>
+          <div className="ml-24 mt-32">
+            <Cart />
+          </div>
         </div>
-        <div className="ml-72 mt-12">
+        {/* <div className="ml-72 mt-12">
           <Similar />
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -166,7 +173,7 @@ const ProductInfo = () => {
               {name}
               <div className="flex flex-row font-normal pt-2 mb-2">
                 <div className="text-[20px] text-gray-800">Price:</div>
-                <div className="text-red-600 pl-2">{price?.current.text}</div>
+                <div className="text-red-600 pl-2">{price}</div>
               </div>
             </div>
             <div className="flex flex-col">
@@ -208,7 +215,7 @@ const ProductInfo = () => {
                   </div>
                 </div>
                 <div className={showSize ? "flex" : "hidden"}>
-                  <div className="flex flex-col h-[300px] ml-[102px] mt-0 w-[152px]  absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
+                  <div className="flex flex-col pb-3 ml-[102px] mt-0 w-[152px]  absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
                     {variants?.map((size) => (
                       <ul className="flex flex-col " key={size.id}>
                         <li className="px-4 py-2">
@@ -216,6 +223,8 @@ const ProductInfo = () => {
                             <button
                               onClick={() => {
                                 setSize(size.displaySizeText);
+                                setPrice(size.price.current.value);
+                                console.log(price);
                                 setShowSize(false);
                               }}
                             >
@@ -247,10 +256,13 @@ const ProductInfo = () => {
               />
             </div>
           </div>
+          <div className="ml-24 mt-32">
+            <Cart price={price} brand={brand} />
+          </div>
         </div>
-        <div className="ml-72 mt-12">
+        {/* <div className="ml-72 mt-12">
           <Similar />
-        </div>
+        </div> */}
       </div>
     );
   }

@@ -5,12 +5,46 @@
 .App {
   text-align: center;
 }
+.sidebar {
+  -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
 
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+.tooltip{
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

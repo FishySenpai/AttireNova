@@ -40,17 +40,17 @@ const CartUser = () => {
         <div className="sm:p-6 pt-12 items-center container justify-between">
           <div className="text-gray-500 text-2xl py-4 capitalize">
             {localStorage.getItem("name") || user.email?.split("@")[0]}'s
-            Favourites
+            Cart
           </div>
           {data.length === 0 ? (
             <div className="flex flex-wrap">
-              No Favourite anime have been added yet.
+              No Products have been added yet.
             </div>
           ) : (
             <ul className="flex flex-wrap">
               {data.map((top) => (
                 <li className="mr-4 md:mr-8 pb-6" key={top.product.id}>
-                  <a href={`/topanime/${top.product.id}`}>
+                  <a href={`/info/${top.product.id}`}>
                     <img
                       className="w-[140px] h-[220px] md:w-[188px] md:h-[264px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
                       src={`https://${top.product?.media.images[0].url}`}
@@ -59,7 +59,7 @@ const CartUser = () => {
                   </a>
                   <div className="w-36 md:w-48 text-gray-500 text-lg hover:text-red-500 cursor-pointer">
                     <button>
-                      <Link className="text" to={`/topanime/${top.product.id}`}>
+                      <Link className="text" to={`/info/${top.product.id}`}>
                         {top.product.name}
                       </Link>
                     </button>

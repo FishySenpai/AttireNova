@@ -175,7 +175,7 @@ const ProductInfo = () => {
             </div>
           </div>
           <div className="flex-col">
-            <div className="text-left ml-12 mt-32 text-2xl font-mono text-gray-700">
+            <div className="text-left ml-12 mt-32 text-2xl font-mono text-gray-700 w-[500px]">
               {name}
               <div className="flex flex-row font-normal pt-2 mb-2">
                 <div className="text-[20px] text-gray-800">Price:</div>
@@ -262,13 +262,13 @@ const ProductInfo = () => {
               />
             </div>
           </div>
-          <div className="ml-24 mt-32">
+          <div className=" mt-32">
             {product && <Cart price={price} brand={brand} product={product} />}
           </div>
         </div>
-        {/* <div className="ml-72 mt-12">
+        <div className="ml-72 mt-12">
           <Similar />
-        </div> */}
+        </div>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import arrow from "../Assets/arrow.png"
-const CartPopUp = ({ product }) => {
+const CartPopUp = ({ product, quantityPrice }) => {
 
   useEffect(() => {
     console.log(product);
@@ -11,7 +11,7 @@ const CartPopUp = ({ product }) => {
   // Add a conditional check to ensure product is an array before mapping over it
   if (product) {
     return (
-      <div className="relative sidebar">
+      <div className="relative sidebar ">
         <img src={arrow} className="ml-48 h-4 w-10" />
         <div className="flex flex-col shadow-lg w-[265px] h-[280px] font-sans bg-white rounded ">
           <ul className="flex flex-wrap">
@@ -35,7 +35,7 @@ const CartPopUp = ({ product }) => {
                   <div className="text-gray-700 text-left text-[14px] flex flex-row ">
                     Price:
                     <div className="text-red-700 ml-2">
-                      {product.price.current.text}
+                      ${quantityPrice}
                     </div>
                   </div>
                 </div>

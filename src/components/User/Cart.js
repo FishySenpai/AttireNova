@@ -143,7 +143,7 @@ const Cart = ({ price, brand, product }) => {
               : "hidden"
           }`}
         >
-          {<CartPopUp product={product} />}
+          {<CartPopUp product={product} quantityPrice={quantityPrice}/>}
         </div>
       </div>
     </div>

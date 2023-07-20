@@ -6,6 +6,7 @@ import Sneakers from "./Sneakers";
 import Makeup from "./Makeup";
 import Login from "./User/Login";
 import Registration from "./User/Registration";
+import CartUser from "./User/CartUser";
 export {
     GetCategories,
     SearchBar,
@@ -13,5 +14,6 @@ export {
     Sneakers,
     Makeup,
     Login,
-    Registration
+    Registration,
+    CartUser
 }

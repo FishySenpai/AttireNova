@@ -18,7 +18,7 @@ const Cart = ({price, brand, product}) => {
     const [quantityPrice, setQuantityPrice] = useState(price);
       const [user, setUser] = useState({});
       const [checkFav, setCheckFav] = useState(false);
-      const id = useParams();
+      const {id} = useParams();
       const navigate = useNavigate();
 
       useEffect(() => {
@@ -48,25 +48,20 @@ const Cart = ({price, brand, product}) => {
 
         userFav();
       });
-      const addFav = async () => {
-        // Add a new document in the "products" subcollection under the user's document
-        if (user && product && id) {
-          try {
-            const userRef = doc(db, "users", user.uid);
-            const productsCollectionRef = collection(userRef, "products");
-
-            // Make sure the "products" subcollection exists
-            await setDoc(productsCollectionRef, {});
-
-            // Add a new document to the "products" subcollection
-            await addDoc(productsCollectionRef, product);
-          } catch (err) {
-            console.log(err);
-          }
-        } else {
-          navigate("/login");
-        }
-      };
+       const addFav = async () => {
+         // Add a new document in collection "favs"
+         if (user) {
+           try {
+             await setDoc(doc(db, "users", user.uid, "products", id), {
+               product,
+             });
+           } catch (err) {
+             console.log(err);
+           }
+         } else {
+           navigate("/login");
+         }
+       };
 
 
 

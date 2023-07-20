@@ -9,7 +9,7 @@ const CartUser = () => {
   const [data, setData] = useState([]); // data is returned back in []
   const [user, setUser] = useState({});
   const navigate = useNavigate();
-  const [thumbnail, setThumbnail] = useState("");
+  const [thumbnail, setThumbnail] = useState();
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -33,12 +33,7 @@ const CartUser = () => {
       }
     }
   }, [user?.uid]); // use dependency list so useEffect only runs when there is change to useState
-useEffect(() => {
-  // Update the price state here after the product state has been updated
-  console.log(data);
- setThumbnail(data.product?.media.images[0].url);
- console.log(thumbnail)
-}, [data]);
+
   if (user) {
     return (
       <div className="px-6 items-center mx-auto container justify-between">
@@ -58,7 +53,7 @@ useEffect(() => {
                   <a href={`/topanime/${top.product.id}`}>
                     <img
                       className="w-[140px] h-[220px] md:w-[188px] md:h-[264px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
-                      src={thumbnail}
+                      src={`https://${top.product?.media.images[0].url}`}
                       alt="img"
                     />
                   </a>
@@ -68,6 +63,9 @@ useEffect(() => {
                         {top.product.name}
                       </Link>
                     </button>
+                    <div className="text-gray-700 text-left font-bold ml-2">
+                      {top.product.price.current.text}
+                    </div>
                   </div>
                 </li>
               ))}

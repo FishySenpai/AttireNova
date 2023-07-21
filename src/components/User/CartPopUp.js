@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import arrow from "../Assets/arrow.png"
-const CartPopUp = ({ product, quantityPrice }) => {
+import useOutsideClick from "./useOutsideClick";
+const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
+ const cartPopupRef = useRef(null);
 
+ // Attach the useOutsideClick hook to the cart popup
+ useOutsideClick(cartPopupRef, () => {
+   // This callback will be executed when a click is detected outside of the cart popup
+   // Hide the cart popup here
+   hideCartPopup();
+ });
   useEffect(() => {
     console.log(product);
     console.log(product?.name);
@@ -11,7 +19,7 @@ const CartPopUp = ({ product, quantityPrice }) => {
   // Add a conditional check to ensure product is an array before mapping over it
   if (product) {
     return (
-      <div className="relative sidebar ">
+      <div ref={cartPopupRef} className="relative sidebar ">
         <img src={arrow} className="ml-48 h-4 w-10" />
         <div className="flex flex-col shadow-lg w-[265px] h-[280px] font-sans bg-white rounded ">
           <ul className="flex flex-wrap">
@@ -34,16 +42,14 @@ const CartPopUp = ({ product, quantityPrice }) => {
                   </div>
                   <div className="text-gray-700 text-left text-[14px] flex flex-row ">
                     Price:
-                    <div className="text-red-700 ml-2">
-                      ${quantityPrice}
-                    </div>
+                    <div className="text-red-700 ml-2">${quantityPrice}</div>
                   </div>
                 </div>
               </div>
 
               <div className="py-2">
                 <button className="bg-gray-600 p-2 rounded text-white w-[200px]">
-                  <Link to="/cart" >View Cart</Link>
+                  <Link to="/cart">View Cart</Link>
                 </button>
               </div>
               <div>

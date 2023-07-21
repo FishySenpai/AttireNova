@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   collection,
   addDoc,
@@ -13,6 +13,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../firebaseConfig";
 import { useNavigate, useParams } from "react-router-dom";
 import CartPopUp from "./CartPopUp";
+import useOutsideClick from "./useOutsideClick";
 const Cart = ({ price, brand, product, size }) => {
   const [quantity, setQuantity] = useState(1);
   const [showQuantity, setShowQuantity] = useState(false);
@@ -21,7 +22,17 @@ const Cart = ({ price, brand, product, size }) => {
   const [popUp, setPopUp] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+ const [cartPopupVisible, setCartPopupVisible] = useState(false);
+const cartPopupRef = useRef(null);
+const showCartPopup = () => {
+  // Show the cart popup when the button is clicked
+  setCartPopupVisible(true);
+};
 
+const hideCartPopup = () => {
+  // Hide the cart popup when called
+  setCartPopupVisible(false);
+};
   useEffect(() => {
     setQuantityPrice(price * quantity);
   }, [price, quantity]);
@@ -56,7 +67,7 @@ const Cart = ({ price, brand, product, size }) => {
         await setDoc(doc(db, "users", user.uid, "products", id), {
           product, size
         });
-        setPopUp(!popUp)
+       showCartPopup();
       } catch (err) {
         console.log(err);
       }
@@ -136,14 +147,14 @@ const Cart = ({ price, brand, product, size }) => {
         </div>
       </div>
       <div className="absolute top-[45px] right-[115px] ">
-        <div
-          className={`${
-            product && popUp
-              ? "flex"
-              : "hidden"
-          }`}
-        >
-          {<CartPopUp product={product} quantityPrice={quantityPrice}/>}
+        <div className={`${product && cartPopupVisible ? "flex" : "hidden"}`}>
+          {
+            <CartPopUp
+              product={product}
+              quantityPrice={quantityPrice}
+              hideCartPopup={hideCartPopup}
+            />
+          }
         </div>
       </div>
     </div>

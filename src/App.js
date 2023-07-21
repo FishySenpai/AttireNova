@@ -7,7 +7,7 @@ import "./App.css";
 import ProductInfo from "./components/ProductInfo";
 import GetCategories from "./components/Categories/GetCategories";
 import ShowCategories from "./components/Categories/ShowCategories"
-import { Makeup, SearchBar, Sneakers, Login, Registration, CartUser } from "./components";
+import { Makeup, SearchBar, Sneakers, Login, Registration, CartUser, CheckOut } from "./components";
 import Test from "./components/test";
 import GetProductInfo from "./components/getProductInfo"
 import Products from "./components/Products";
@@ -72,7 +72,15 @@ function App() {
             path="/cart"
             element={
               <>
-               <CartUser/>
+                <CartUser />
+              </>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <>
+                <CheckOut />
               </>
             }
           />

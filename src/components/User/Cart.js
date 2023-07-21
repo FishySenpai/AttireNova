@@ -13,7 +13,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../firebaseConfig";
 import { useNavigate, useParams } from "react-router-dom";
 import CartPopUp from "./CartPopUp";
-const Cart = ({ price, brand, product }) => {
+const Cart = ({ price, brand, product, size }) => {
   const [quantity, setQuantity] = useState(1);
   const [showQuantity, setShowQuantity] = useState(false);
   const [quantityPrice, setQuantityPrice] = useState(price);
@@ -54,7 +54,7 @@ const Cart = ({ price, brand, product }) => {
     if (user) {
       try {
         await setDoc(doc(db, "users", user.uid, "products", id), {
-          product,
+          product, size
         });
         setPopUp(!popUp)
       } catch (err) {
@@ -78,7 +78,7 @@ const Cart = ({ price, brand, product }) => {
           </div>
           <div>
             <div className="flex flex-row px-2 mb-2 font-mono">
-              <div className="text-[20px] text-gray-800 ml-10">Size: </div>
+              <div className="text-[20px] text-gray-800 ml-10">Quantity: </div>
               <div className="relative pb-2">
                 <button
                   type="button"

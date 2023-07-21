@@ -263,7 +263,7 @@ const ProductInfo = () => {
             </div>
           </div>
           <div className=" mt-32">
-            {product && <Cart price={price} brand={brand} product={product} />}
+            {product && <Cart price={price} brand={brand} product={product} size={size} />}
           </div>
         </div>
         <div className="ml-72 mt-12">

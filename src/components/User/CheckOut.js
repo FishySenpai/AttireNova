@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
-import { doc, getDocs, collection, where } from "firebase/firestore";
+import { doc, getDocs, collection, where, deleteDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 const CheckOut = () => {
   const [data, setData] = useState([]); // data is returned back in []
@@ -16,7 +16,17 @@ const CheckOut = () => {
       console.log(user);
     });
   }, [user]);
-
+const deleteFav = async (id) => {
+  // delete document in collection "products"
+  try {
+    console.log(id);
+    const idAsString = id.toString(); //firebase expects id to be a string
+    const docRef = doc(db, "users", user.uid, "products", idAsString);
+    await deleteDoc(docRef);
+  } catch (err) {
+    console.log(err);
+  }
+};
   useEffect(() => {
     // ... (previous useEffect hooks) ...
 
@@ -40,6 +50,7 @@ const CheckOut = () => {
     // Call the function to calculate the subtotal
     calculateSubTotal();
   }, [data]);
+
   useEffect(() => {
     if (user?.uid) {
       try {
@@ -60,6 +71,9 @@ const CheckOut = () => {
     return (
       <div className="flex flex-row ml-96">
         <div class="leading-loose">
+          <div className="text-gray-500 text-2xl py-4 capitalize">
+            Contact Information
+          </div>
           <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
             <p class="text-gray-800 font-medium">Customer information</p>
             <div class="">
@@ -173,19 +187,19 @@ const CheckOut = () => {
         </div>
         <div className="px-6 items-center mx-auto container justify-between">
           <div className="sm:p-6 pt-12 items-center container justify-between">
-            <div className="text-gray-500 text-2xl py-4 capitalize">
-              {localStorage.getItem("name") || user.email?.split("@")[0]}'s Cart
+            <div className="text-gray-500 text-2xl py-4 capitalize mr-96">
+              Order History
             </div>
             {data.length === 0 ? (
               <div className="flex flex-wrap">
                 No Products have been added yet.
               </div>
             ) : (
-              <ul className="flex flex-col bg-white shadow">
+              <ul className="flex flex-col bg-white shadow w-[450px]">
                 {data.map((top) => {
                   return (
                     <li
-                      className="mr-4 md:mr-8 pb-6 flex flex-row  w-[600px]"
+                      className="mr-4 md:mr-8 pb-6 flex flex-row ml-4"
                       key={top.product.id}
                     >
                       <a href={`/info/${top.product.id}`}>
@@ -203,21 +217,37 @@ const CheckOut = () => {
                         </button>
                         <div>{top.product.variants[0]?.colour}</div>
                         <div>{top.size}</div>
+
                         <div className="text-gray-700 text-left font-bold ml-2">
                           {top.product.price.current.text}
                         </div>
                       </div>
+                      <div className=" ml-5 mt-4">
+                        <button onClick={() => deleteFav(top.product.id)}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="1em"
+                            viewBox="0 0 448 512"
+                          >
+                            <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                          </svg>
+                        </button>
+                      </div>
                     </li>
                   );
                 })}
-                <div className="flex flex-col">
-                  <div className="flex flex-row">
-                    SubTotal:
-                    <div className="text-red-500">${subTotal}</div>
+                <div className="flex flex-col text-[16px]">
+                  <div className="flex flex-row px-4 py-2">
+                    Subtotal:
+                    <div className="text-red-500 ml-72">${subTotal}</div>
                   </div>
-                  <div className="flex flex-row">
-                    Shipping
-                    <div>$5</div>
+                  <div className="flex flex-row px-4 pb-4">
+                    Shipping:
+                    <div className="text-red-500 ml-72">$5.00</div>
+                  </div>
+                  <div className="flex flex-row px-4 pb-4 font-semibold text-[20px]">
+                    Total:
+                    <div className="text-red-500 ml-[300px]">${subTotal+5}</div>
                   </div>
                 </div>
               </ul>

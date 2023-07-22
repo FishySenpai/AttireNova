@@ -16,6 +16,7 @@ const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
     console.log(product?.name);
   }, [product]);
 
+
   // Add a conditional check to ensure product is an array before mapping over it
   if (product) {
     return (

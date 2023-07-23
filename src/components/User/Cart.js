@@ -65,7 +65,7 @@ const hideCartPopup = () => {
     if (user) {
       try {
         await setDoc(doc(db, "users", user.uid, "products", id), {
-          product, size
+          product, size, quantity
         });
        showCartPopup();
       } catch (err) {

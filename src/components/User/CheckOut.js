@@ -209,13 +209,16 @@ const deleteFav = async (id) => {
                           alt="img"
                         />
                       </a>
-                      <div className="w-36 md:w-60 text-gray-500 text-[16px] hover:text-red-500 text-left cursor-pointer font-normal">
-                        <button>
-                          <Link to={`/info/${top.product.id}`} className="text">
+                      <div className="w-36 md:w-60 text-gray-700 text-[16px] hover:text-red-500 text-left cursor-pointer font-normal ml-2">
+                        <button className="">
+                          <Link to={`/info/${top.product.id}`} className="text-left ">
                             {top.product.name}
                           </Link>
                         </button>
-                        <div>{top.product.variants[0]?.colour}</div>
+                        <div className="flex flex-row ">
+                          <div>{top.product.variants[0]?.colour}</div>
+                          <div className="ml-6">Qty: {top.quantity}</div>
+                        </div>
                         <div>{top.size}</div>
 
                         <div className="text-gray-700 text-left font-bold ml-2">

@@ -55,7 +55,7 @@ const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
               </div>
               <div>
                 <button className="bg-gray-600 p-2 rounded mt-2 text-white w-[200px]">
-                  Buy Now
+                  <Link to="/checkout">Buy Now</Link>
                 </button>
               </div>
             </li>

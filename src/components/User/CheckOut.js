@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
-import { doc, getDocs, collection, where, deleteDoc } from "firebase/firestore";
+import { doc, getDocs, collection, where, deleteDoc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 const CheckOut = () => {
   const [data, setData] = useState([]); // data is returned back in []
@@ -10,6 +10,32 @@ const CheckOut = () => {
   const [subTotal, setSubTotal] = useState();
   const navigate = useNavigate();
   const [thumbnail, setThumbnail] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [zip, setZip] = useState("");
+
+  // State for payment information
+  const [card, setCard] = useState("");
+const info = {name, email, address, city, country, zip, card};
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    addFav();
+    e.preventDefault();
+    // Do something with the form data, e.g., send it to a server
+    console.log({
+      name,
+      email,
+      address,
+      city,
+      country,
+      zip,
+      card,
+    });
+  };
+  
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -27,6 +53,31 @@ const deleteFav = async (id) => {
     console.log(err);
   }
 };
+
+ const addFav = async () => {
+   // Add a new document in collection "favs"
+   if (user) {
+     try {
+      const infoAsString = info.toString();
+       await setDoc(
+         doc(db, "users", user.uid, "info", name, {
+           name,
+           email,
+           address,
+           city,
+           country,
+           zip,
+           card,
+         })
+       );
+     } catch (err) {
+       console.log(err);
+     }
+   } else {
+     navigate("/login");
+   }
+ };
+
   useEffect(() => {
     // ... (previous useEffect hooks) ...
 
@@ -41,7 +92,7 @@ const deleteFav = async (id) => {
           const price = parseFloat(
             top.product.price.current.text.replace(/\$/g, "")
           );
-          return acc + price;
+          return acc + price*top.quantity;
         }, 0);
         setSubTotal(totalPrice);
       }
@@ -88,6 +139,7 @@ const deleteFav = async (id) => {
                 required=""
                 placeholder="Your Name"
                 aria-label="Name"
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div class="mt-2">
@@ -102,6 +154,7 @@ const deleteFav = async (id) => {
                 required=""
                 placeholder="Your Email"
                 aria-label="Email"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div class="mt-2">
@@ -116,6 +169,7 @@ const deleteFav = async (id) => {
                 required=""
                 placeholder="Street"
                 aria-label="Email"
+                onChange={(e) => setAddress(e.target.value)}
               />
             </div>
             <div class="mt-2">
@@ -130,6 +184,7 @@ const deleteFav = async (id) => {
                 required=""
                 placeholder="City"
                 aria-label="Email"
+                onChange={(e) => setCity(e.target.value)}
               />
             </div>
             <div class="inline-block mt-2 w-1/2 pr-1">
@@ -144,6 +199,7 @@ const deleteFav = async (id) => {
                 required=""
                 placeholder="Country"
                 aria-label="Email"
+                onChange={(e) => setCountry(e.target.value)}
               />
             </div>
             <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
@@ -158,6 +214,7 @@ const deleteFav = async (id) => {
                 required=""
                 placeholder="Zip"
                 aria-label="Email"
+                onChange={(e) => setZip(e.target.value)}
               />
             </div>
             <p class="mt-4 text-gray-800 font-medium">Payment information</p>
@@ -173,14 +230,16 @@ const deleteFav = async (id) => {
                 required=""
                 placeholder="Card Number MM/YY CVC"
                 aria-label="Name"
+                onChange={(e) => setCard(e.target.value)}
               />
             </div>
             <div class="mt-4">
               <button
                 class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
                 type="submit"
+                onClick={handleSubmit}
               >
-                $3.00
+                Pay: ${subTotal + 5}
               </button>
             </div>
           </form>
@@ -211,17 +270,22 @@ const deleteFav = async (id) => {
                       </a>
                       <div className="w-36 md:w-60 text-gray-700 text-[16px] hover:text-red-500 text-left cursor-pointer font-normal ml-2">
                         <button className="">
-                          <Link to={`/info/${top.product.id}`} className="text-left ">
+                          <Link
+                            to={`/info/${top.product.id}`}
+                            className="text-left "
+                          >
                             {top.product.name}
                           </Link>
                         </button>
                         <div className="flex flex-row ">
-                          <div>{top.product.variants[0]?.colour}</div>
-                          <div className="ml-6">Qty: {top.quantity}</div>
+                          <div className="mt-1">
+                            {top.product.variants[0]?.colour}
+                          </div>
+                          <div className="ml-6 mt-1">Qty: {top.quantity}</div>
                         </div>
-                        <div>{top.size}</div>
+                        <div className="mt-1">{top.size}</div>
 
-                        <div className="text-gray-700 text-left font-bold ml-2">
+                        <div className="text-gray-700 text-left font-bold ml-2 mt-1">
                           {top.product.price.current.text}
                         </div>
                       </div>
@@ -250,7 +314,9 @@ const deleteFav = async (id) => {
                   </div>
                   <div className="flex flex-row px-4 pb-4 font-semibold text-[20px]">
                     Total:
-                    <div className="text-red-500 ml-[300px]">${subTotal+5}</div>
+                    <div className="text-red-500 ml-[300px]">
+                      ${subTotal + 5}
+                    </div>
                   </div>
                 </div>
               </ul>

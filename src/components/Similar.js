@@ -28,6 +28,7 @@ const Similar = () => {
 
     try {
       const response = await axios.request(options);
+
       console.log(response.data);
       setProducts(response.data.data)
       setLoading(false)

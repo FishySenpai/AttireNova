@@ -24,7 +24,7 @@ const Navbar = (props) => {
                   onClick={handleClick}
                   className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mr-10"
                 >
-                  <Link>Add Product</Link>
+                  <Link to="/women">Women</Link>
                 </button>
                 <button className="mr-20">
                   <Link to="/cart">

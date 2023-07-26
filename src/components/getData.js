@@ -26,6 +26,7 @@ export const useFetch = (id) => {
 
    try {
      const response = await axios.request(options);
+           console.log(response);
      console.log(response.data);
      setProducts(response.data.products);
      console.log(products);

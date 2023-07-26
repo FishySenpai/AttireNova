@@ -8,6 +8,9 @@ import Login from "./User/Login";
 import Registration from "./User/Registration";
 import CartUser from "./User/CartUser";
 import CheckOut from "./User/CheckOut";
+import Dresses from "./Women/Dresses";
+import Shoes from "./Women/Shoes";
+import WorkWear from "./Women/WorkWear";
 export {
     GetCategories,
     SearchBar,
@@ -17,5 +20,9 @@ export {
     Login,
     Registration,
     CartUser,
-    CheckOut
+    CheckOut,
+    WorkWear,
+    Shoes,
+    Dresses
+
 }

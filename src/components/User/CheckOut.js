@@ -1,8 +1,16 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
-import { doc, getDocs, collection, where, deleteDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDocs,
+  collection,
+  where,
+  deleteDoc,
+  setDoc,
+  updateDoc
+} from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import ContactInfo from "./ContactInfo";
 const CheckOut = () => {
@@ -11,29 +19,54 @@ const CheckOut = () => {
   const [subTotal, setSubTotal] = useState();
   const [quantity, setQuantity] = useState(1);
   const [showQuantity, setShowQuantity] = useState(false);
-  const [quantityPrice, setQuantityPrice] = useState();
+  const [productId, setProductId] = useState();
+  const [quantityPrice, setQuantityPrice] = useState(0);
   const navigate = useNavigate();
   const [thumbnail, setThumbnail] = useState();
-
-  
+const [reFetch, setReFetch] = useState(0)
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log(user);
     });
   }, [user]);
-const deleteFav = async (id) => {
-  // delete document in collection "products"
-  try {
-    console.log(id);
-    const idAsString = id.toString(); //firebase expects id to be a string
-    const docRef = doc(db, "users", user.uid, "products", idAsString);
-    await deleteDoc(docRef);
-  } catch (err) {
-    console.log(err);
+  const deleteFav = async (id) => {
+    // delete document in collection "products"
+    try {
+      console.log(id);
+      const idAsString = id.toString(); //firebase expects id to be a string
+      const docRef = doc(db, "users", user.uid, "products", idAsString);
+      await deleteDoc(docRef);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+const handleClick = (id) => {
+  if (id === productId) {
+    setShowQuantity(!showQuantity);
+  } else {
+    setShowQuantity(true);
   }
+  setProductId(id);
 };
 
+ const handleQuantityChange = async (newQuantity, price, id) => {
+  const idAsString = id.toString();
+   if (user) {
+     try {
+       await updateDoc(doc(db, "users", user.uid, "products", idAsString), {
+         quantity: newQuantity,
+       });
+       setShowQuantity(false);
+       setReFetch(reFetch+1)
+     } catch (err) {
+       console.log(err);
+     }
+   } else {
+     navigate("/login");
+   }
+
+ };
 
 
   useEffect(() => {
@@ -50,7 +83,7 @@ const deleteFav = async (id) => {
           const price = parseFloat(
             top.product.price.current.text.replace(/\$/g, "")
           );
-          return acc + price*top.quantity;
+          return acc + price * top.quantity;
         }, 0);
         setSubTotal(totalPrice);
       }
@@ -67,8 +100,12 @@ const deleteFav = async (id) => {
 
         const docSnap = async () => {
           const fav = await getDocs(docRef);
-          setData(fav.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-          setQuantityPrice(data.product.price.current.value)
+          setData(
+            fav.docs.map((doc) => ({
+              ...doc.data(),
+              id: doc.id,
+            }))
+          );
           console.log(data);
         };
         docSnap();
@@ -76,10 +113,10 @@ const deleteFav = async (id) => {
         console.log(err);
       }
     }
-  }, [user?.uid]); // use dependency list so useEffect only runs when there is change to useState
+  }, [user?.uid, reFetch]);
 
 
-  if (user && subTotal!==0) {
+  if (user && subTotal !== 0) {
     return (
       <div className="flex flex-row ml-96">
         <ContactInfo user={user} subTotal={subTotal} />
@@ -124,12 +161,65 @@ const deleteFav = async (id) => {
                             <div className="text-[20px] text-gray-800 ml-10">
                               Quantity:{" "}
                             </div>
+                            <div className="relative pb-2">
+                              <button
+                                type="button"
+                                className="inline-flex align-left gap-x-1.5 rounded-md w-[52px] bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                id="menu-button"
+                                onClick={() =>
+                                  handleClick(top.product.id)
+                                } // Update the onClick handler
+                              >
+                                {top.quantity}
+                                <div className="absolute top-0 right-0 mr-2 mt-2">
+                                  <svg
+                                    className="-mr-1 h-5 w-5 text-gray-400"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                          <div
+                            className={
+                              top.product.id === productId && showQuantity
+                                ? "flex"
+                                : "hidden"
+                            }
+                          >
+                            <div className="flex flex-col pb-3 ml-[102px] mt-0 w-[52px] absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
+                              {[...Array(4)].map((_, index) => (
+                                <ul className="flex flex-col" key={index + 1}>
+                                  <li className="px-4 py-2">
+                                    <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
+                                      <button
+                                        onClick={() =>
+                                          handleQuantityChange(index + 1, top.product.price.current.value, top.product.id, )
+                                        }
+                                      >
+                                        <div className="capitalize">
+                                          {index + 1}
+                                        </div>
+                                      </button>
+                                    </div>
+                                  </li>
+                                </ul>
+                              ))}
+                            </div>
                           </div>
                         </div>
                         <div className="mt-1">{top.size}</div>
 
                         <div className="text-gray-700 text-left font-bold ml-2 mt-1">
-                          {top.product.price.current.text}
+                          ${top.product.price.current.value*top.quantity}
                         </div>
                       </div>
                       <div className=" ml-5 mt-4">

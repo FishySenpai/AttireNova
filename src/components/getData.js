@@ -19,7 +19,7 @@ export const useFetch = (id) => {
        lang: "en-US",
      },
      headers: {
-       "X-RapidAPI-Key": "ab5260649dmsh1c14116f3d59e38p17de0djsn0e0cd39cc3ff",
+       "X-RapidAPI-Key": "a5555e8425msh0e3b2d01db9ba61p17c64djsn379b3aceaaa4",
        "X-RapidAPI-Host": "asos2.p.rapidapi.com",
      },
    };

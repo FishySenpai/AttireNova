@@ -17,7 +17,7 @@ const CheckOut = () => {
   const [data, setData] = useState([]); // data is returned back in []
   const [user, setUser] = useState({});
   const [subTotal, setSubTotal] = useState();
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
   const [showQuantity, setShowQuantity] = useState(false);
   const [productId, setProductId] = useState();
   const [quantityPrice, setQuantityPrice] = useState(0);
@@ -58,6 +58,7 @@ const handleClick = (id) => {
          quantity: newQuantity,
        });
        setShowQuantity(false);
+       setQuantity(0);
        setReFetch(reFetch+1)
      } catch (err) {
        console.log(err);
@@ -71,14 +72,23 @@ const handleClick = (id) => {
 
   useEffect(() => {
     // ... (previous useEffect hooks) ...
+const quantityCheck = () => {
+  if (data.length > 0) {
+    data.forEach((top) => {
+      setQuantity((prevQuantity) => prevQuantity + top.quantity);
+    });
+  }
+};
 
     // Calculate the subtotal
     const calculateSubTotal = () => {
       if (data.length === 0) {
         setSubTotal(0); // If there are no products, set the subtotal to 0
       } else {
+
         // Calculate the sum of all product prices
         const totalPrice = data.reduce((acc, top) => {
+
           // Assuming price is a string and needs to be converted to a number for the calculation
           const price = parseFloat(
             top.product.price.current.text.replace(/\$/g, "")
@@ -88,7 +98,7 @@ const handleClick = (id) => {
         setSubTotal(totalPrice);
       }
     };
-
+quantityCheck();
     // Call the function to calculate the subtotal
     calculateSubTotal();
   }, [data]);
@@ -130,11 +140,11 @@ const handleClick = (id) => {
                 No Products have been added yet.
               </div>
             ) : (
-              <ul className="flex flex-col bg-white shadow w-[450px]">
+              <ul className="flex flex-col bg-white shadow w-[450px] divide-y">
                 {data.map((top) => {
                   return (
                     <li
-                      className="mr-4 md:mr-8 pb-6 flex flex-row ml-4"
+                      className="mr-4 md:mr-8 pb-6 flex flex-row ml-4 "
                       key={top.product.id}
                     >
                       <a href={`/info/${top.product.id}`}>
@@ -144,7 +154,7 @@ const handleClick = (id) => {
                           alt="img"
                         />
                       </a>
-                      <div className="w-36 md:w-60 text-gray-700 text-[16px] hover:text-red-500 text-left cursor-pointer font-normal ml-2">
+                      <div className="w-36 md:w-60 text-gray-700 text-[16px] text-left  font-normal ml-2">
                         <button className="">
                           <Link
                             to={`/info/${top.product.id}`}
@@ -153,25 +163,23 @@ const handleClick = (id) => {
                             {top.product.name}
                           </Link>
                         </button>
-                        <div className="flex flex-row ">
+                        <div className="flex flex-row relative">
                           <div className="mt-1">
                             {top.product.variants[0]?.colour}
                           </div>
-                          <div className="flex flex-row px-2 mb-2 font-mono">
-                            <div className="text-[20px] text-gray-800 ml-10">
-                              Quantity:{" "}
+                          <div className="flex flex-row px-2 mb-2  absolute right-[0px] mt-1">
+                            <div className="text-[16px] text-gray-800 ml-10 mr-1">
+                              Qty: {" "}
                             </div>
                             <div className="relative pb-2">
                               <button
                                 type="button"
-                                className="inline-flex align-left gap-x-1.5 rounded-md w-[52px] bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                className="inline-flex align-left gap-x-1.5 rounded-md w-[52px] h-[28px] bg-white px-3 pt-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                                 id="menu-button"
-                                onClick={() =>
-                                  handleClick(top.product.id)
-                                } // Update the onClick handler
+                                onClick={() => handleClick(top.product.id)} // Update the onClick handler
                               >
                                 {top.quantity}
-                                <div className="absolute top-0 right-0 mr-2 mt-2">
+                                <div className="absolute top-0 right-0 mr-2 mt-1">
                                   <svg
                                     className="-mr-1 h-5 w-5 text-gray-400"
                                     viewBox="0 0 20 20"
@@ -195,14 +203,18 @@ const handleClick = (id) => {
                                 : "hidden"
                             }
                           >
-                            <div className="flex flex-col pb-3 ml-[102px] mt-0 w-[52px] absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
-                              {[...Array(4)].map((_, index) => (
+                            <div className="flex-col pb-3 mt-9 z-20 w-[52px] h-[200px] scrollbar absolute  right-[8px] overflow-y-auto  bg-white rounded font-normal text-left shadow-lg">
+                              {[...Array(10)].map((_, index) => (
                                 <ul className="flex flex-col" key={index + 1}>
                                   <li className="px-4 py-2">
                                     <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
                                       <button
                                         onClick={() =>
-                                          handleQuantityChange(index + 1, top.product.price.current.value, top.product.id, )
+                                          handleQuantityChange(
+                                            index + 1,
+                                            top.product.price.current.value,
+                                            top.product.id
+                                          )
                                         }
                                       >
                                         <div className="capitalize">
@@ -219,10 +231,10 @@ const handleClick = (id) => {
                         <div className="mt-1">{top.size}</div>
 
                         <div className="text-gray-700 text-left font-bold ml-2 mt-1">
-                          ${top.product.price.current.value*top.quantity}
+                          ${top.product.price.current.value * top.quantity}
                         </div>
                       </div>
-                      <div className=" ml-5 mt-4">
+                      <div className=" ml-5 mt-4 h-[30px] ">
                         <button onClick={() => deleteFav(top.product.id)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -237,17 +249,19 @@ const handleClick = (id) => {
                   );
                 })}
                 <div className="flex flex-col text-[16px]">
-                  <div className="flex flex-row px-4 py-2">
-                    Subtotal:
-                    <div className="text-red-500 ml-72">${subTotal}</div>
+                  <div className="flex flex-row px-4 py-2 relative">
+                    Subtotal({quantity} items):
+                    <div className="text-red-500 absolute right-5">
+                      ${subTotal}
+                    </div>
                   </div>
-                  <div className="flex flex-row px-4 pb-4">
+                  <div className="flex flex-row px-4 pb-4 relative">
                     Shipping:
-                    <div className="text-red-500 ml-72">$5.00</div>
+                    <div className="text-red-500 absolute right-5">$5.00</div>
                   </div>
-                  <div className="flex flex-row px-4 pb-4 font-semibold text-[20px]">
+                  <div className="flex flex-row px-4 pb-4 font-semibold text-[20px] relative">
                     Total:
-                    <div className="text-red-500 ml-[300px]">
+                    <div className="text-red-500 absolute right-5">
                       ${subTotal + 5}
                     </div>
                   </div>

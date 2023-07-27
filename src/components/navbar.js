@@ -18,7 +18,7 @@ const Navbar = (props) => {
                   onClick={handleClick}
                   className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mr-10"
                 >
-                  <Link to="/"> Home</Link>
+                  <Link to="/"> Men</Link>
                 </button>
                 <button
                   onClick={handleClick}

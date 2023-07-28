@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Similar from "./Similar";
 import Cart from "./User/Cart";
-
+import arrowLeft from "./Assets/arrowLeft.png"
+import arrowRight from "./Assets/arrowRight.png"
 const ProductInfo = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
@@ -13,6 +14,7 @@ const ProductInfo = () => {
   const [showSize, setShowSize] = useState(false);
   const [loading, setLoading] = useState(true);
   const [price, setPrice] = useState(0);
+  const [index, setIndex] = useState(0)
   const FetchProducts = async () => {
     const options = {
       method: "GET",
@@ -55,6 +57,32 @@ const ProductInfo = () => {
   const handleImageClick = (image) => {
     setThumbnail(image);
   };
+const handleImageBack = ()=>{
+if(product){
+  if(index>0){
+setIndex(index - 1);
+setThumbnail(product.media?.images[index].url);
+console.log(index);
+  } else{
+    setIndex(0)
+  }
+  
+}
+}
+const handleImageForward = () => {
+  
+  if (product) {
+    
+    if (index <=3) {
+
+      setIndex(index + 1);
+      setThumbnail(product.media?.images[index].url);
+      console.log(index);
+    } else {
+      setIndex(0);
+    }
+  }
+};
 
   const { name, media, description, info, variants, brand } = product;
 
@@ -153,11 +181,25 @@ const ProductInfo = () => {
       <div className="flex flex-col">
         <div className="flex flex-row">
           <div className="ml-72 mt-32 ">
-            <img
-              className="h-[450px] w-[350px]"
-              src={`https://${thumbnail}`}
-              alt="image"
-            />
+            <div className="relative">
+              <button onClick={handleImageBack}>
+                <img
+                  src={arrowLeft}
+                  className="absolute top-[170px] -left-8 w-[90px] h-[90px]"
+                />
+              </button>
+              <img
+                className="h-[450px] w-[350px]"
+                src={`https://${thumbnail}`}
+                alt="image"
+              />
+              <button onClick={handleImageForward}>
+              <img
+                src={arrowRight}
+                className="absolute top-[170px] -right-8 w-[90px] h-[90px]"
+              />
+              </button>
+            </div>
             <div className="flex flex-row justify-center align-middle items-center">
               {media?.images.map((image) => (
                 <ul className="flex flex-row" key={image.url}>
@@ -263,12 +305,14 @@ const ProductInfo = () => {
             </div>
           </div>
           <div className=" mt-32">
-            {product && <Cart price={price} brand={brand} product={product} size={size} />}
+            {product && (
+              <Cart price={price} brand={brand} product={product} size={size} />
+            )}
           </div>
         </div>
-        <div className="ml-72 mt-12">
+        {/* <div className="ml-72 mt-12">
           <Similar />
-        </div>
+        </div> */}
       </div>
     );
   }

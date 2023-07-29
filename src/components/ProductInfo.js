@@ -60,11 +60,12 @@ const ProductInfo = () => {
 const handleImageBack = ()=>{
 if(product){
   if(index>0){
-setIndex(index - 1);
-setThumbnail(product.media?.images[index].url);
+    setIndex((prevIndex) => prevIndex - 1);
+setThumbnail(product.media?.images[index-1].url);
 console.log(index);
   } else{
-    setIndex(0)
+    setIndex(3);
+    setThumbnail(product.media?.images[3].url);
   }
   
 }
@@ -73,13 +74,13 @@ const handleImageForward = () => {
   
   if (product) {
     
-    if (index <=3) {
-
-      setIndex(index + 1);
-      setThumbnail(product.media?.images[index].url);
+    if (index < 3) {
+setIndex((prevIndex) => prevIndex + 1);
+      setThumbnail(product.media?.images[index+1].url);
       console.log(index);
     } else {
       setIndex(0);
+      setThumbnail(product.media?.images[0].url);
     }
   }
 };
@@ -180,7 +181,7 @@ const handleImageForward = () => {
     return (
       <div className="flex flex-col">
         <div className="flex flex-row">
-          <div className="ml-72 mt-32 ">
+          <div className="ml-72 mt-28 ">
             <div className="relative">
               <button onClick={handleImageBack}>
                 <img

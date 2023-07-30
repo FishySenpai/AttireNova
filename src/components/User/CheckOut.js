@@ -23,7 +23,8 @@ const CheckOut = () => {
   const [quantityPrice, setQuantityPrice] = useState(0);
   const navigate = useNavigate();
   const [thumbnail, setThumbnail] = useState();
-  const [success, setSuccess] = useState(false)
+  const [success, setSuccess] = useState(false);
+
 const [reFetch, setReFetch] = useState(0)
 const handleSuccessToggle = () => {
   setSuccess(true);
@@ -281,8 +282,8 @@ quantityCheck();
           </div>
         </div>
         <div className={!success ? "hidden" : "flex"}>
-          <div class="absolute inset-0 pt-[196px]  h-[890px] backdrop-blur-[2px]  z-50">
-            <div class="bg-white p-6  md:mx-auto w-[500px] shadow-xl">
+          <div class="absolute inset-0 pt-[196px]  h-full  bg-gray-900/50  z-50">
+            <div class="bg-white p-6  md:mx-auto w-[500px] shadow-xl rounded">
               <svg
                 viewBox="0 0 24 24"
                 class="text-green-600 w-16 h-16 mx-auto my-6"
@@ -302,7 +303,7 @@ quantityCheck();
                 <p> Have a great day! </p>
                 <div class="py-10 text-center">
                   <button
-                    class="px-12 bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3"
+                    class="px-12 bg-gray-900 hover:bg-gray-800 rounded text-white font-semibold py-3"
                   >
                     <Link to="/">GO BACK</Link>
                   </button>

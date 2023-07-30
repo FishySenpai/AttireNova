@@ -14,7 +14,9 @@ const ProductInfo = () => {
   const [showSize, setShowSize] = useState(false);
   const [loading, setLoading] = useState(true);
   const [price, setPrice] = useState(0);
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [showError, setShowError] = useState(false);
   const FetchProducts = async () => {
     const options = {
       method: "GET",
@@ -53,6 +55,7 @@ const ProductInfo = () => {
     setPrice(product.price?.current.value);
     console.log(price)
   }, [product]);
+
 
   const handleImageClick = (image) => {
     setThumbnail(image);
@@ -195,10 +198,10 @@ setIndex((prevIndex) => prevIndex + 1);
                 alt="image"
               />
               <button onClick={handleImageForward}>
-              <img
-                src={arrowRight}
-                className="absolute top-[170px] -right-8 w-[90px] h-[90px]"
-              />
+                <img
+                  src={arrowRight}
+                  className="absolute top-[170px] -right-8 w-[90px] h-[90px]"
+                />
               </button>
             </div>
             <div className="flex flex-row justify-center align-middle items-center">
@@ -271,6 +274,8 @@ setIndex((prevIndex) => prevIndex + 1);
                           <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
                             <button
                               onClick={() => {
+                                setSelectedSize(size.displaySizeText);
+                                setShowError(false);
                                 setSize(size.displaySizeText);
                                 setPrice(size.price.current.value);
                                 console.log(price);
@@ -307,7 +312,15 @@ setIndex((prevIndex) => prevIndex + 1);
           </div>
           <div className=" mt-32">
             {product && (
-              <Cart price={price} brand={brand} product={product} size={size} />
+              <Cart
+                price={price}
+                brand={brand}
+                product={product}
+                size={size}
+                selectedSize={selectedSize}
+                showError={showError}
+                setShowError={setShowError}
+              />
             )}
           </div>
         </div>

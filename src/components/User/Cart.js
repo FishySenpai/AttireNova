@@ -11,14 +11,15 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../firebaseConfig";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import CartPopUp from "./CartPopUp";
 import useOutsideClick from "./useOutsideClick";
-const Cart = ({ price, brand, product, size }) => {
+const Cart = ({ price, brand, product, size, selectedSize, showError, setShowError }) => {
   const [quantity, setQuantity] = useState(1);
   const [showQuantity, setShowQuantity] = useState(false);
   const [quantityPrice, setQuantityPrice] = useState(price);
   const [user, setUser] = useState({});
+
   const [popUp, setPopUp] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -62,17 +63,23 @@ const hideCartPopup = () => {
   });
   const addFav = async () => {
     // Add a new document in collection "favs"
-    if (user) {
-      try {
-        await setDoc(doc(db, "users", user.uid, "products", id), {
-          product, size, quantity
-        });
-       showCartPopup();
-      } catch (err) {
-        console.log(err);
+    if(selectedSize){
+      if (user) {
+        try {
+          await setDoc(doc(db, "users", user.uid, "products", id), {
+            product,
+            size,
+            quantity,
+          });
+          showCartPopup();
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        navigate("/login");
       }
-    } else {
-      navigate("/login");
+    } else{
+setShowError(true)
     }
   };
 
@@ -138,10 +145,15 @@ const hideCartPopup = () => {
             >
               Add to Cart
             </button>
+            {!selectedSize && showError && (
+              <p className="text-red-500 mt-2 text-sm px-2">
+                Please select a size before adding to cart.
+              </p>
+            )}
           </div>
           <div>
             <button className="bg-gray-600 p-2 rounded mt-2 text-white w-[200px]">
-              Buy Now
+              <Link to="/checkout">Buy Now</Link>
             </button>
           </div>
         </div>

@@ -26,6 +26,12 @@ const Navbar = (props) => {
                 >
                   <Link to="/women">Women</Link>
                 </button>
+                <button
+                  onClick={handleClick}
+                  className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mr-10"
+                >
+                  <Link to="/wishlist">Wishlist</Link>
+                </button>
                 <button className="mr-20">
                   <Link to="/cart">
                     <svg
@@ -42,6 +48,7 @@ const Navbar = (props) => {
                     </svg>
                   </Link>
                 </button>
+
                 <button className="font-mono cursor-pointer text-[16px] text-white  mr-10">
                   <Profile />
                 </button>

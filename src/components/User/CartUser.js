@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
-import { doc, getDocs, collection, where, deleteDoc, updateDoc } from "firebase/firestore";
+import { doc, getDocs, collection, where, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 
 const CartUser = () => {
@@ -24,6 +24,21 @@ const CartUser = () => {
       console.log(user);
     });
   }, [user]);
+
+  const wishList = async(id, product)=>{
+    const idAsString = id.toString();
+    if (user) {
+        try {
+          await setDoc(doc(db, "users", user.uid, "wishlist", idAsString), {
+            product
+          });
+          deleteFav(id)
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        navigate("/login");}
+  }
   const deleteFav = async (id) => {
     // delete document in collection "products"
     try {
@@ -223,17 +238,17 @@ const CartUser = () => {
                         <div className="text-gray-700 text-left font-bold ml-2 mt-1">
                           ${top.product.price.current.value * top.quantity}
                         </div>
-                      </div>
-                      <div className=" ml-5 mt-4 h-[30px] ">
-                        <button onClick={() => deleteFav(top.product.id)}>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="1em"
-                            viewBox="0 0 448 512"
+                        <div className=" ml-5 mt-4 text-[16px]">
+                          <button
+                            className="px-3 py-[1px]  text-white  tracking-wider bg-gray-700 rounded"
+                            onClick={() => deleteFav(top.product.id)}
                           >
-                            <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
-                          </svg>
-                        </button>
+                            Delete
+                          </button>
+                          <button className="px-3 py-[1px] ml-2 text-white tracking-wider bg-gray-700 rounded" onClick={()=>wishList(top.product.id, top.product)}>
+                            Add to Wishlist
+                          </button>
+                        </div>
                       </div>
                     </li>
                   );

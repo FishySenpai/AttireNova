@@ -11,6 +11,7 @@ import CheckOut from "./User/CheckOut";
 import Dresses from "./Women/Dresses";
 import Shoes from "./Women/Shoes";
 import WorkWear from "./Women/WorkWear";
+import WishList from "./User/WishList";
 export {
     GetCategories,
     SearchBar,
@@ -23,6 +24,6 @@ export {
     CheckOut,
     WorkWear,
     Shoes,
-    Dresses
-
+    Dresses,
+    WishList
 }

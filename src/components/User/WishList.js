@@ -32,11 +32,14 @@ const WishList = () => {
     }
     setProductId(id);
   };
-    const addFav = async (id, product) => {
+    const addFav = async (id, product, size) => {
+      setProductId(id)
       // Add a new document in collection "favs"
           const idAsString = id.toString();
-      if (selectedSize) {
+          
+      if (selectedSize || size) {
         if (user) {
+          console.log(size);
           try {
             await setDoc(doc(db, "users", user.uid, "products", idAsString), {
               product, size, quantity:1
@@ -60,6 +63,8 @@ const handleSizeChange = async (id, newSize, product) => {
         product,
        size: newSize,
       });
+      setProductId(null);
+      setSelectedSize(null);
       setShowSize(false);
       setReFetch(reFetch + 1);
     } catch (err) {
@@ -189,7 +194,11 @@ const handleSizeChange = async (id, newSize, product) => {
                                 <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
                                   <button
                                     onClick={() => {
-                                      handleSizeChange(top.product.id, size.displaySizeText, top.product)
+                                      handleSizeChange(
+                                        top.product.id,
+                                        size.displaySizeText,
+                                        top.product
+                                      );
                                       setSelectedSize(size.displaySizeText);
                                       setShowError(false);
                                       setSize(size.displaySizeText);
@@ -209,14 +218,22 @@ const handleSizeChange = async (id, newSize, product) => {
                     </div>
                     <button
                       className="bg-gray-800 text-white w-[262px] py-1 rounded text-[16px]"
-                      onClick={() => addFav(top.product.id, top.product)}
+                      onClick={() => addFav(top.product.id, top.product, top.size)}
                     >
                       Move to cart
                     </button>
-                    {!selectedSize && showError && (
-                      <p className="text-red-500 mt-2 text-sm px-2">
-                        Please select a size before adding to cart.
-                      </p>
+                    {!selectedSize && !top.size && showError && (
+                      <div
+                        className={
+                          top.product.id === productId
+                            ? "flex"
+                            : "hidden"
+                        }
+                      >
+                        <p className="text-red-500 mt-2 text-sm px-2">
+                          Please select a size before adding to cart.
+                        </p>
+                      </div>
                     )}
                   </div>
                 </li>

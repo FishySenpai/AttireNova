@@ -130,7 +130,6 @@ const CartUser = () => {
     }
   }, [user?.uid, reFetch]);
 
-
   if (user) {
     return (
       <div className="px-6 items-center mx-auto container justify-between">
@@ -138,16 +137,12 @@ const CartUser = () => {
           <div className="text-gray-500 text-2xl py-4 capitalize">
             {localStorage.getItem("name") || user.email?.split("@")[0]}'s Cart
           </div>
-
-          <div className="text-gray-500 text-2xl pb-7 capitalize w-[450px] ">
-            Order History
-          </div>
           {data.length === 0 ? (
             <div className="flex flex-wrap">
               No Products have been added yet.
             </div>
           ) : (
-            <div className="flex flex-row">
+            <div className="flex flex-row ml-44 mt-10">
               <ul className="flex flex-col bg-white shadow w-[650px] divide-y pt-2">
                 {data.map((top) => {
                   return (
@@ -273,7 +268,7 @@ const CartUser = () => {
                 </div>
               </ul>
               <div>
-                <div className="flex flex-col text-[16px] bg-white ml-10 w-[350px]">
+                <div className="flex flex-col text-[16px] bg-white ml-10 w-[300px]">
                   <div className="flex flex-row px-4 py-2 relative">
                     Subtotal({quantity} items):
                     <div className="text-red-500 absolute right-5">
@@ -289,6 +284,11 @@ const CartUser = () => {
                     <div className="text-red-500 absolute right-5">
                       ${subTotal + 5}
                     </div>
+                  </div>
+                  <div className="pb-4">
+                    <button className="bg-gray-800 rounded px-12 py-1 text-white">
+                      Proceed to Checkout
+                    </button>
                   </div>
                 </div>
               </div>

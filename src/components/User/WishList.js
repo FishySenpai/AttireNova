@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
-import { doc, getDocs, collection, where, deleteDoc } from "firebase/firestore";
+import { doc, getDocs, collection, where, deleteDoc, setDoc, updateDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 
 const WishList = () => {
@@ -11,6 +11,10 @@ const WishList = () => {
     const [size, setSize] = useState("Select size:");
     const [showSize, setShowSize] = useState(false);
   const navigate = useNavigate();
+    const [selectedSize, setSelectedSize] = useState(null);
+    const [showError, setShowError] = useState(false);
+    const [productId, setProductId] = useState();
+      const [reFetch, setReFetch] = useState(0);
   const [thumbnail, setThumbnail] = useState();
     useEffect(() => {
       onAuthStateChanged(auth, (currentUser) => {
@@ -18,6 +22,53 @@ const WishList = () => {
         console.log(user);
       });
     }, [user]);
+  const handleClick = (id) => {
+    console.log(id)
+    console.log(productId)
+    if (id === productId) {
+      setShowSize(!showSize);
+    } else {
+      setShowSize(true);
+    }
+    setProductId(id);
+  };
+    const addFav = async (id, product) => {
+      // Add a new document in collection "favs"
+          const idAsString = id.toString();
+      if (selectedSize) {
+        if (user) {
+          try {
+            await setDoc(doc(db, "users", user.uid, "products", idAsString), {
+              product, size, quantity:1
+            });
+
+          } catch (err) {
+            console.log(err);
+          }
+        } else {
+          navigate("/login");
+        }
+      } else {
+        setShowError(true);
+      }
+    };
+const handleSizeChange = async (id, newSize, product) => {
+  const idAsString = id.toString();
+  if (user) {
+    try {
+      await updateDoc(doc(db, "users", user.uid, "wishlist", idAsString), {
+        product,
+       size: newSize,
+      });
+      setShowSize(false);
+      setReFetch(reFetch + 1);
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    navigate("/login");
+  }
+};
     const deleteFav = async (id) => {
       // delete document in collection "products"
       try {
@@ -45,7 +96,7 @@ const WishList = () => {
         console.log(err);
       }
     }
-  }, [user?.uid]); // use dependency list so useEffect only runs when there is change to useState
+  }, [user?.uid, reFetch]); // use dependency list so useEffect only runs when there is change to useState
 
   if (user) {
     return (
@@ -104,9 +155,9 @@ const WishList = () => {
                             type="button"
                             className="text-left rounded-md w-[262px]  py-2 text-sm font-semibold text-gray-900 shadow-sm "
                             id="menu-button"
-                            onClick={() => setShowSize(!showSize)} // Update the onClick handler
+                            onClick={() => handleClick(top.product.id)} // Update the onClick handler
                           >
-                            {size}
+                            {top.size ? top.size : "Select size: "}
                             <div className="absolute top-0 right-0 mr-2 mt-2">
                               <svg
                                 className="-mr-1 h-5 w-5 text-gray-400"
@@ -124,7 +175,13 @@ const WishList = () => {
                           </button>
                         </div>
                       </div>
-                      <div className={showSize ? "flex" : "hidden"}>
+                      <div
+                        className={
+                          top.product.id === productId && showSize
+                            ? "flex"
+                            : "hidden"
+                        }
+                      >
                         <div className="flex flex-col pb-3  mt-0 w-[262px] h-[200px] absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
                           {top.product.variants?.map((size) => (
                             <ul className="flex flex-col " key={size.id}>
@@ -132,6 +189,9 @@ const WishList = () => {
                                 <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
                                   <button
                                     onClick={() => {
+                                      handleSizeChange(top.product.id, size.displaySizeText, top.product)
+                                      setSelectedSize(size.displaySizeText);
+                                      setShowError(false);
                                       setSize(size.displaySizeText);
                                       setShowSize(false);
                                     }}
@@ -147,9 +207,17 @@ const WishList = () => {
                         </div>
                       </div>
                     </div>
-                    <button className="bg-gray-800 text-white w-[262px] py-1 rounded text-[16px]">
+                    <button
+                      className="bg-gray-800 text-white w-[262px] py-1 rounded text-[16px]"
+                      onClick={() => addFav(top.product.id, top.product)}
+                    >
                       Move to cart
                     </button>
+                    {!selectedSize && showError && (
+                      <p className="text-red-500 mt-2 text-sm px-2">
+                        Please select a size before adding to cart.
+                      </p>
+                    )}
                   </div>
                 </li>
               ))}

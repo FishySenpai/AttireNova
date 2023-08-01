@@ -1,30 +1,51 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
-import { doc, getDocs, collection, where, deleteDoc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  getDocs,
+  collection,
+  where,
+  deleteDoc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
-
+import CartPopUp from "./CartPopUp";
 const WishList = () => {
   const [data, setData] = useState([]); // data is returned back in []
   const [user, setUser] = useState({});
-    const [size, setSize] = useState("Select size:");
-    const [showSize, setShowSize] = useState(false);
+  const [size, setSize] = useState("Select size:");
+  const [showSize, setShowSize] = useState(false);
   const navigate = useNavigate();
-    const [selectedSize, setSelectedSize] = useState(null);
-    const [showError, setShowError] = useState(false);
-    const [productId, setProductId] = useState();
-      const [reFetch, setReFetch] = useState(0);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [showError, setShowError] = useState(false);
+  const [productId, setProductId] = useState();
+  const [reFetch, setReFetch] = useState(0);
   const [thumbnail, setThumbnail] = useState();
-    useEffect(() => {
-      onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-        console.log(user);
-      });
-    }, [user]);
+  const [popUp, setPopUp] = useState(false);
+
+  const [cartPopupVisible, setCartPopupVisible] = useState(false);
+  const cartPopupRef = useRef(null);
+  const showCartPopup = () => {
+    // Show the cart popup when the button is clicked
+    setCartPopupVisible(true);
+  };
+
+  const hideCartPopup = () => {
+    // Hide the cart popup when called
+    setCartPopupVisible(false);
+  };
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      console.log(user);
+    });
+  }, [user]);
   const handleClick = (id) => {
-    console.log(id)
-    console.log(productId)
+    console.log(id);
+    console.log(productId);
     if (id === productId) {
       setShowSize(!showSize);
     } else {
@@ -32,59 +53,61 @@ const WishList = () => {
     }
     setProductId(id);
   };
-    const addFav = async (id, product, size) => {
-      setProductId(id)
-      // Add a new document in collection "favs"
-          const idAsString = id.toString();
-          
-      if (selectedSize || size) {
-        if (user) {
-          console.log(size);
-          try {
-            await setDoc(doc(db, "users", user.uid, "products", idAsString), {
-              product, size, quantity:1
-            });
+  const addFav = async (id, product, size) => {
+    setProductId(id);
+    // Add a new document in collection "favs"
+    const idAsString = id.toString();
 
-          } catch (err) {
-            console.log(err);
-          }
-        } else {
-          navigate("/login");
+    if (selectedSize || size) {
+      if (user) {
+        console.log(size);
+        try {
+          await setDoc(doc(db, "users", user.uid, "products", idAsString), {
+            product,
+            size,
+            quantity: 1,
+          });
+          showCartPopup();
+        } catch (err) {
+          console.log(err);
         }
       } else {
-        setShowError(true);
+        navigate("/login");
       }
-    };
-const handleSizeChange = async (id, newSize, product) => {
-  const idAsString = id.toString();
-  if (user) {
-    try {
-      await updateDoc(doc(db, "users", user.uid, "wishlist", idAsString), {
-        product,
-       size: newSize,
-      });
-      setProductId(null);
-      setSelectedSize(null);
-      setShowSize(false);
-      setReFetch(reFetch + 1);
-    } catch (err) {
-      console.log(err);
+    } else {
+      setShowError(true);
     }
-  } else {
-    navigate("/login");
-  }
-};
-    const deleteFav = async (id) => {
-      // delete document in collection "products"
+  };
+  const handleSizeChange = async (id, newSize, product) => {
+    const idAsString = id.toString();
+    if (user) {
       try {
-        console.log(id);
-        const idAsString = id.toString(); //firebase expects id to be a string
-        const docRef = doc(db, "users", user.uid, "products", idAsString);
-        await deleteDoc(docRef);
+        await updateDoc(doc(db, "users", user.uid, "wishlist", idAsString), {
+          product,
+          size: newSize,
+        });
+        setProductId(null);
+        setSelectedSize(null);
+        setShowSize(false);
+        setReFetch(reFetch + 1);
       } catch (err) {
         console.log(err);
       }
-    };
+    } else {
+      navigate("/login");
+    }
+  };
+  const deleteFav = async (id) => {
+    // delete document in collection "products"
+    try {
+      console.log(id);
+      const idAsString = id.toString(); //firebase expects id to be a string
+      const docRef = doc(db, "users", user.uid, "products", idAsString);
+      await deleteDoc(docRef);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     if (user?.uid) {
@@ -106,7 +129,7 @@ const handleSizeChange = async (id, newSize, product) => {
   if (user) {
     return (
       <div className="px-6 items-center mx-auto container justify-between">
-        <div className="sm:p-6 pt-12 items-center container justify-between">
+        <div className="sm:p-6 pt-12 items-center container justify-between relative">
           <div className="text-gray-500 text-2xl py-4 capitalize">
             {localStorage.getItem("name") || user.email?.split("@")[0]}'s
             Wishlist
@@ -117,8 +140,8 @@ const handleSizeChange = async (id, newSize, product) => {
             </div>
           ) : (
             <ul className="flex flex-wrap">
-              {data.map((top) => (
-                <li className="mr-4 md:mr-8 pb-6" key={top.product.id}>
+              {data.map((top, index) => (
+                <li className="mr-4 md:mr-8 pb-6 " key={top.product.id}>
                   <div className="relative">
                     <div className=" ml-5 mt-4 h-[30px] absolute right-5 ">
                       <button onClick={() => deleteFav(top.product.id)}>
@@ -218,16 +241,16 @@ const handleSizeChange = async (id, newSize, product) => {
                     </div>
                     <button
                       className="bg-gray-800 text-white w-[262px] py-1 rounded text-[16px]"
-                      onClick={() => addFav(top.product.id, top.product, top.size)}
+                      onClick={() =>
+                        addFav(top.product.id, top.product, top.size)
+                      }
                     >
                       Move to cart
                     </button>
                     {!selectedSize && !top.size && showError && (
                       <div
                         className={
-                          top.product.id === productId
-                            ? "flex"
-                            : "hidden"
+                          top.product.id === productId ? "flex" : "hidden"
                         }
                       >
                         <p className="text-red-500 mt-2 text-sm px-2">
@@ -235,6 +258,25 @@ const handleSizeChange = async (id, newSize, product) => {
                         </p>
                       </div>
                     )}
+                  </div>
+                  <div className="absolute -top-[26px] right-[47px]">
+                    <div
+                      className={`${
+                        top.product &&
+                        cartPopupVisible &&
+                        top.product.id === productId
+                          ? "flex"
+                          : "hidden"
+                      }`}
+                    >
+                      {
+                        <CartPopUp
+                          product={top.product}
+                          quantityPrice={top.product.price?.current.value}
+                          hideCartPopup={hideCartPopup}
+                        />
+                      }
+                    </div>
                   </div>
                 </li>
               ))}

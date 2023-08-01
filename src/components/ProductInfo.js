@@ -37,6 +37,7 @@ const ProductInfo = () => {
     try {
       const response = await axios.request(options);
       setProduct(response.data);
+      console.log(response)
       console.log(product);
       setThumbnail(response.data.media?.images[0].url);
       setLoading(false);

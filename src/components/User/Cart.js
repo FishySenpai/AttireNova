@@ -34,6 +34,7 @@ const hideCartPopup = () => {
   // Hide the cart popup when called
   setCartPopupVisible(false);
 };
+
   useEffect(() => {
     setQuantityPrice(price * quantity);
   }, [price, quantity]);

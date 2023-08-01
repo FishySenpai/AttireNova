@@ -38,7 +38,7 @@ const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
                     <Link to={`/info/${product.id}`}>{product.name}</Link>
                   </button>
                   <div className="flex flex-row text-[14px] mt-2">
-                    <div className="text-gray-700 text-left mr-2">Black</div>
+                    <div className="text-gray-700 text-left mr-2">{product.variants[0].colour}</div>
                     <div className="text-gray-700 text-left">Qty: 1</div>
                   </div>
                   <div className="text-gray-700 text-left text-[14px] flex flex-row ">
@@ -48,13 +48,13 @@ const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
                 </div>
               </div>
 
-              <div className="py-2">
+              <div className="py-2 mt-2 ml-4">
                 <button className="bg-gray-600 p-2 rounded text-white w-[200px]">
                   <Link to="/cart">View Cart</Link>
                 </button>
               </div>
               <div>
-                <button className="bg-gray-600 p-2 rounded mt-2 text-white w-[200px]">
+                <button className="bg-gray-600 p-2 rounded mt-2 text-white w-[200px] ml-4">
                   <Link to="/checkout">Buy Now</Link>
                 </button>
               </div>

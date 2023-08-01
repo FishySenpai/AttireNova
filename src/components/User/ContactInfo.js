@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { db } from "../firebaseConfig";
+import { serverTimestamp } from 'firebase/firestore';
 import { Link, useNavigate } from "react-router-dom";
 import {
   doc,
@@ -9,7 +10,7 @@ import {
   deleteDoc,
   setDoc,
 } from "firebase/firestore";
-const ContactInfo = ({user, subTotal, onSuccessToggle}) => {
+const ContactInfo = ({user, subTotal, onSuccessToggle, data}) => {
       const [name, setName] = useState("");
       const [email, setEmail] = useState("");
       const [address, setAddress] = useState("");
@@ -18,6 +19,7 @@ const ContactInfo = ({user, subTotal, onSuccessToggle}) => {
       const [zip, setZip] = useState("");
       // State for payment information
       const [card, setCard] = useState("");
+      const [randomId, setRandomId] = useState(null);
         const navigate = useNavigate();
       // Function to handle form submission
       const handleSubmit = (e) => {
@@ -34,9 +36,16 @@ const ContactInfo = ({user, subTotal, onSuccessToggle}) => {
           card,
         });
       };
+const randomID = () => {
+  setRandomId(Math.floor(Math.random() * (100000 - 10000)) + 10000);
+};
+
+      
 
        const addFav = async () => {
          // Add a new document in collection "favs"
+         randomID();
+         const idAsString = randomId.toString();
          if (user) {
            try {
              await setDoc(doc(db, "users", user.uid, "info", user.uid), {
@@ -48,7 +57,12 @@ const ContactInfo = ({user, subTotal, onSuccessToggle}) => {
                zip,
                card,
              });
-             onSuccessToggle();
+             await setDoc(doc(db, "users", user.uid, "ordered", idAsString), {
+               data,
+               subTotal,
+               timestamp: serverTimestamp() 
+             });
+             
            } catch (err) {
              console.log(err);
            }

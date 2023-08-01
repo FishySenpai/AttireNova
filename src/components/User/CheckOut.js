@@ -137,6 +137,7 @@ quantityCheck();
         <div className="flex flex-row ml-96">
           <ContactInfo
             user={user}
+            data={data}
             subTotal={subTotal}
             onSuccessToggle={handleSuccessToggle}
           />

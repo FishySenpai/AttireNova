@@ -286,9 +286,9 @@ const CartUser = () => {
                     </div>
                   </div>
                   <div className="pb-4">
-                    <button className="bg-gray-800 rounded px-12 py-1 text-white">
+                    <a href="/checkout" className="bg-gray-800 rounded px-12 py-1 text-white">
                       Proceed to Checkout
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

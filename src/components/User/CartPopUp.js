@@ -10,12 +10,12 @@ const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
    // This callback will be executed when a click is detected outside of the cart popup
    // Hide the cart popup here
    hideCartPopup();
+   console.log("test")
  });
   useEffect(() => {
     console.log(product);
     console.log(product?.name);
   }, [product]);
-
 
   // Add a conditional check to ensure product is an array before mapping over it
   if (product) {
@@ -49,7 +49,7 @@ const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
               </div>
 
               <div className="py-2 mt-2 ml-4">
-                <button className="bg-gray-600 p-2 rounded text-white w-[200px]">
+                <button className="bg-gray-600 p-2 rounded text-white w-[200px]" >
                   <Link to="/cart">View Cart</Link>
                 </button>
               </div>

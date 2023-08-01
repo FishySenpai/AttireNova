@@ -21,7 +21,7 @@ const WishList = () => {
   const navigate = useNavigate();
   const [selectedSize, setSelectedSize] = useState(null);
   const [showError, setShowError] = useState(false);
-  const [productId, setProductId] = useState();
+  const [productId, setProductId] = useState(null);
   const [reFetch, setReFetch] = useState(0);
   const [thumbnail, setThumbnail] = useState();
   const [popUp, setPopUp] = useState(false);
@@ -102,7 +102,7 @@ const WishList = () => {
     try {
       console.log(id);
       const idAsString = id.toString(); //firebase expects id to be a string
-      const docRef = doc(db, "users", user.uid, "products", idAsString);
+      const docRef = doc(db, "users", user.uid, "wishlist", idAsString);
       await deleteDoc(docRef);
     } catch (err) {
       console.log(err);
@@ -269,6 +269,7 @@ const WishList = () => {
                           : "hidden"
                       }`}
                     >
+                      {console.log({top: top.product.id, product: productId})}
                       {
                         <CartPopUp
                           product={top.product}

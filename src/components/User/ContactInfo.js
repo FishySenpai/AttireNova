@@ -57,7 +57,7 @@ const randomID = () => {
                zip,
                card,
              });
-             await setDoc(doc(db, "users", user.uid, "ordered", idAsString), {
+             await setDoc(doc(db, "users", user.uid, "orders", idAsString), {
                data,
                subTotal,
                timestamp: serverTimestamp() 

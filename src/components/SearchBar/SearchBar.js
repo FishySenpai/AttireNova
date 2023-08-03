@@ -5,9 +5,7 @@ const SearchBar = () => {
   return (
     <div className="flex flex-row justify-center">
       <Search />
-      <div className="mt-[56px]">
-        <GetCategories />
-      </div>
+      
     </div>
   );
 }

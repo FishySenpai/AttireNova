@@ -12,6 +12,7 @@ import Test from "./components/test";
 import GetProductInfo from "./components/getProductInfo"
 import Products from "./components/Products";
 
+
 function App() {
   return (
     <div className="App">
@@ -23,10 +24,9 @@ function App() {
             path="/"
             element={
               <>
-                <SearchBar />
-                <Home />
+                {/* <Home />
                 {/* <Sneakers />
-                <Makeup /> */}
+                <Makeup /> */} 
               </>
             }
           />
@@ -34,7 +34,6 @@ function App() {
             path="/women"
             element={
               <>
-                <SearchBar />
                 <Dresses />
                 <Shoes />
                 <WorkWear />
@@ -52,7 +51,7 @@ function App() {
             }
           />
           <Route path="/info/:id" element={<ProductInfo />} />
-          <Route path="/search/:search" element={<SearchBar />} />
+          <Route path="/search/:search" element={<Search />} />
           <Route path="/categories" element={<SearchBar />} />
           <Route
             path="/login"

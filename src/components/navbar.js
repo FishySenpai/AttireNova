@@ -1,11 +1,21 @@
 import { useState, useContext } from "react";
-import {Link, useNavigate} from "react-router-dom"
+import {Link, useNavigate, useSearchParams} from "react-router-dom"
 import Profile from "./User/Profile";
 const Navbar = (props) => {
   const [toggle, setToggle] = useState(false);
+  const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(0);
+  };
+  const handleSearch = (e) => {
+    if (search) {
+navigate(`/search/${search}`);
+      e.preventDefault();
+    } else {
+      e.preventDefault();
+    }
   };
   return (
     <div>
@@ -14,6 +24,19 @@ const Navbar = (props) => {
           <div>
             <nav className="w-full flex py-6 justify-between items-center overflow-hidden">
               <ul className="list-none sm:flex hidden justify-end items-center flex-1 mr-10">
+                <div className="flex flex-col md:flex-row space-x-16 pt-12 justify-center">
+                  <form className="pt-2 h-[80px]" onSubmit={handleSearch}>
+                    <div className="flex flex-row ">
+                      <input
+                        className="inline-flex align-left gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                        type="search"
+                        placeholder="Search..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                      />
+                    </div>
+                  </form>
+                </div>
                 <button
                   onClick={handleClick}
                   className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mr-10"

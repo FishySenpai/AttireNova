@@ -66,26 +66,40 @@ useEffect(() => {
 
   fetchData();
 }, [user?.uid]);
+function formatTimestamp(timestamp) {
+  const seconds = timestamp?.seconds || 0;
+  const nanoseconds = timestamp?.nanoseconds || 0;
+
+  // Convert the timestamp to milliseconds
+  const timestampInMillis = seconds * 1000 + nanoseconds / 1000000;
+
+  // Create a new Date object using the milliseconds
+  const date = new Date(timestampInMillis);
+
+  // Convert the date to a localized string representation (e.g., "8/31/2023, 3:00:07 PM")
+  const dateString = date.toLocaleString();
+
+  return dateString;
+}
 
 if (user) {
   return (
     <div className="px-6 items-center mx-auto container justify-between">
       <div className="sm:p-6 pt-12 items-center container justify-between">
-        <div className="text-gray-500 text-2xl py-4 capitalize">
-          {localStorage.getItem("name") || user.email?.split("@")[0]}'s Cart
-        </div>
-
-        <div className="flex flex-col ml-44 mt-10">
+        <div className="flex flex-col ml-16 mt-10">
           {data.map((orders) => (
             <div key={orders.id}>
-              <div className="text-2xl font-semibold mb-2">
+              <div className="text-2xl text-left lg:text-3xl font-semibold leading-7 lg:leading-9 text-gray-800 mb-1">
                 Order ID: {orders.id}
               </div>
+              <div className="text-base text-left font-medium leading-6 text-gray-600 mb-4">
+                {formatTimestamp(orders?.timestamp)}
+              </div>
               <div className="flex flex-row">
-                <ul className="flex flex-col bg-white shadow w-[650px] divide-y pt-2">
+                <ul className="flex flex-col bg-white shadow w-[750px] divide-y-2  pt-2">
                   {orders.data.map((top) => (
                     <li
-                      className="mr-4 md:mr-8 pb-6 flex flex-row ml-4 "
+                      className="mr-4 md:mr-8 pb-6 flex flex-row  ml-4 "
                       key={top?.product.id}
                     >
                       <a href={`/info/${top?.product.id}`}>
@@ -96,19 +110,22 @@ if (user) {
                         />
                       </a>
                       <div className=" text-gray-700 text-[16px] text-left  font-normal ml-2">
-                        <div className="flex flex-row">
-                          <button className="text-left w-[400px]">
+                        <div className="flex flex-row justify-between">
+                          <button className="text-left  w-[350px]">
                             <Link to={`/info/${top.product.id}`}>
                               {top.product.name}
                             </Link>
                           </button>
-                          <div className="flex flex-row px-2 mb-2  mt-1">
-                            <div className="text-[16px] text-gray-800 ml-5 mr-1">
+                          <div className="flex flex-row px-2 mb-2 space-x-11 ml-6 ">
+                            <div className="text-gray-700 text-left font-bold ">
+                              ${top.product.price.current.value}
+                            </div>
+                            <div className="text-[16px] text-gray-800 ">
                               Qty:{top.quantity}
                             </div>
-                          </div>
-                          <div className="text-gray-700 text-left font-bold ml-2 mt-1">
-                            ${top.product.price.current.value * top.quantity}
+                            <div className="text-gray-700 text-left font-bold">
+                              ${top.product.price.current.value * top.quantity}
+                            </div>
                           </div>
                         </div>
                         <div className="flex flex-col relative">
@@ -121,7 +138,7 @@ if (user) {
                     </li>
                   ))}
                 </ul>
-                <div className="bg-gray-50 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
+                <div className="bg-white shadow ml-6 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
                   <h3 className="text-xl font-semibold leading-5 text-gray-800">
                     Customer Information
                   </h3>
@@ -191,7 +208,7 @@ if (user) {
                   )}
                 </div>
               </div>
-              <div className="flex flex-col text-[16px] w-[655px]">
+              <div className="flex flex-col text-[16px] w-[750px] mt-6 bg-white shadow">
                 <div className="flex flex-row px-4 py-2 relative">
                   Subtotal({quantity} items):
                   <div className="text-red-500 absolute right-5">

@@ -22,9 +22,9 @@ const Profile = () => {
     window.localStorage.clear();
   };
   return (
-    <div className="flex flex-row space-x-10 static">
-      <div className="flex flex-row justify-center items-center  absolute top-[90px] right-[40px] sm:top-[24px] z-50">
-        <button onClick={handleClick} className="px-1 flex flex-row">
+    <div className="flex flex-row ">
+      <div className="flex flex-row ">
+        <button onClick={handleClick} className=" flex flex-row">
           <h1 className="hover:text-red-400">
             {user ? (
               localStorage.getItem("name") || user.email?.split("@")[0]

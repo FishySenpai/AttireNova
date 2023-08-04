@@ -22,13 +22,13 @@ navigate(`/search/${search}`);
       <div className="bg-gray-700 w-full overflow-hidden">
         <div>
           <div>
-            <nav className="w-full flex py-6 justify-between items-center overflow-hidden">
+            <nav className="w-full flex py-5 justify-between items-center overflow-hidden">
               <ul className="list-none sm:flex hidden justify-end items-center flex-1 mr-10">
-                <div className="flex flex-col md:flex-row space-x-16 pt-12 justify-center">
-                  <form className="pt-2 h-[80px]" onSubmit={handleSearch}>
-                    <div className="flex flex-row ">
+                <div className="flex flex-col md:flex-row justify-center">
+                  <form className="" onSubmit={handleSearch}>
+                    <div className="flex flex-row mr-24 ">
                       <input
-                        className="inline-flex align-left gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                        className="w-[200px] md:w-[300px] lg:w-[600px] inline-flex align-left gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                         type="search"
                         placeholder="Search..."
                         value={search}
@@ -55,7 +55,7 @@ navigate(`/search/${search}`);
                 >
                   <Link to="/wishlist">Wishlist</Link>
                 </button>
-                <button className="mr-20">
+                <button className="mr-10">
                   <Link to="/cart">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -24,9 +24,9 @@ function App() {
             path="/"
             element={
               <>
-                {/* <Home />
+              <Home/>
                 {/* <Sneakers />
-                <Makeup /> */} 
+                <Makeup />  */}
               </>
             }
           />

@@ -1,60 +1,83 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import Products from "./Products";
-import { Link } from "react-router-dom";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { db } from "./firebaseConfig";
+import { auth } from "./firebaseConfig";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useFetch } from "./getData";
+import { useNavigate } from "react-router-dom";
 const Test = () => {
-    const [products, setProducts] = useState([]);
+  const [user, setUser] = useState();
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+  const id = 27110;
+  const navigate = useNavigate();
+
   useEffect(() => {
-    
-    const fetchData = async () => {
-    const options = {
-      method: "GET",
-      url: "https://asos10.p.rapidapi.com/api/v1/getCountries",
-      headers: {
-        "X-RapidAPI-Key": "325a7f72damshf16ffcb2c3ed7bep1f566djsn006db2e1a65a",
-        "X-RapidAPI-Host": "asos10.p.rapidapi.com",
-      },
-    };
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      console.log(user);
+    });
+  }, [user]);
+ useEffect(() => {
+   if (user?.uid) {
+     const menCollectionRef = doc(db, "categories/men/products", id.toString());
 
-    try {
-      const response = await axios.request(options);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-      
-    };
-    fetchData();
-  }, []);
+     const fetchData = async () => {
+       try {
+         const docSnapshot = await getDoc(menCollectionRef);
+         if (docSnapshot.exists()) {
+           setData(docSnapshot.data());
+           console.log(data)
+           setLoading(false)
+         } else {
+           console.log("Document not found.");
+         }
+       } catch (err) {
+         console.log(err);
+       }
+     };
 
+     fetchData();
+   }
+ }, [user?.uid, id]);
+
+ 
+if (loading) {
   return (
-    
-      <div>
-        <div className="px-6 items-center mx-auto container justify-between">
-          <div className="sm:p-6 pt-12 items-center container justify-between">
-            <ul className="flex flex-wrap">
-              {products?.map((top, index) => (
-                <li className="mr-4 md:mr-8 pb-6 " key={top.item.tcin}>
-                  <a href={`/info/${top.item.tcin}`}>
-                    <img
-                      className="w-[220px] h-[144px]  rounded hover:shadow-lg cursor-pointer hover:scale-105"
-                      src={top.item.enrichment.images.primary_image_url}
-                      alt="img"
-                    />
-                  </a>
-                  <div className="w-36 md:w-48 text-gray-500 text-lg hover:text-red-500 cursor-pointer">
-                    <button>
-                      <Link to={`/yh/${top.item.tcin}`}>{top.item.product_description.title}</Link>
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
+    <div>
+      <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
+        Men's New
+      </div>
+      <div className=" items-center mx-auto container justify-between">
+        <div className="sm:p-6 pt-12 items-center container justify-between">
+          <div className="flex flex-wrap">
+            {[...Array(10)].map((_, index) => (
+              <li
+                className="mr-4 md:mr-8 pb-6 rounded animate-pulse list-none"
+                key={index}
+              >
+                <div className="w-[265px] h-[339px] bg-gray-300 mb-2"></div>
+                <div className="mt-2">
+                  <div className="w-12 md:w-40  bg-gray-300 h-4 shadow"></div>
+                </div>
+              </li>
+            ))}
           </div>
         </div>
       </div>
-    
+    </div>
   );
+} else {
+  return (
+    <div>
+      <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
+        {data.name}
+      </div>
+      <Products products={data.products} />
+    </div>
+  );
+}
 };
 
 export default Test;

@@ -104,6 +104,7 @@ const WishList = () => {
       const idAsString = id.toString(); //firebase expects id to be a string
       const docRef = doc(db, "users", user.uid, "wishlist", idAsString);
       await deleteDoc(docRef);
+      setReFetch(reFetch + 1);
     } catch (err) {
       console.log(err);
     }

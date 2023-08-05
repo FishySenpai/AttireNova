@@ -1,18 +1,57 @@
 import React, { useState, useEffect } from "react";
 import Products from "../Products";
-import Search from "../Search";
-import { Link } from "react-router-dom";
-import GetCategories from "../Categories/GetCategories";
-import axios from "axios";
-import { useFetch } from "../getData";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { db } from "../firebaseConfig";
+import { auth } from "../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+
+
 const Shoes = () => {
-  const id = 4172;
-  const { loading, products } = useFetch(id);
+  const [user, setUser] = useState();
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+ const id = 4172;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      console.log(user);
+    });
+  }, [user]);
+  useEffect(() => {
+    if (user?.uid) {
+      const menCollectionRef = doc(
+        db,
+        "categories/women/products",
+        id.toString()
+      );
+
+      const fetchData = async () => {
+        try {
+          const docSnapshot = await getDoc(menCollectionRef);
+          if (docSnapshot.exists()) {
+            setData(docSnapshot.data());
+            console.log(data);
+            setLoading(false);
+          } else {
+            console.log("Document not found.");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      fetchData();
+    }
+  }, [user?.uid, id]);
+
   if (loading) {
     return (
       <div>
         <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
-          Women's Shoes
+          Men's New
         </div>
         <div className=" items-center mx-auto container justify-between">
           <div className="sm:p-6 pt-12 items-center container justify-between">
@@ -37,9 +76,9 @@ const Shoes = () => {
     return (
       <div>
         <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
-          Women's Shoes
+          {data.name}
         </div>
-        <Products products={products} />
+        <Products products={data.products} />
       </div>
     );
   }

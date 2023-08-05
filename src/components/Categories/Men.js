@@ -1,44 +1,55 @@
 import React, { useState, useEffect } from "react";
-import Products from "./Products";
+import Products from "../Products";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { db } from "./firebaseConfig";
-import { auth } from "./firebaseConfig";
-import { doc, setDoc } from "firebase/firestore";
-import { useFetch } from "./getData";
-import { useNavigate } from "react-router-dom";
-const Sneakers = () => {
+import { db } from "../firebaseConfig";
+import { auth } from "../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
+import { useNavigate, useParams } from "react-router-dom";
+const Men = () => {
   const [user, setUser] = useState();
-  const id = 4174;
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+  const {id} = useParams();;
   const navigate = useNavigate();
-  const { loading, products } = useFetch(id);
+
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log(user);
     });
   }, [user]);
-  const addFav = async () => {
-    // Add a new document in collection "favs"
-    const men = "women";
-    const idAsString = id.toString();
-    if (user && products) {
-      try {
-        await setDoc(doc(db, "categories", men, "products", idAsString), {
-          name: "Women's Accessories",
-          products,
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      navigate("/login");
+  useEffect(() => {
+    if (user?.uid) {
+      const menCollectionRef = doc(
+        db,
+        "categories/men/products",
+        id.toString()
+      );
+
+      const fetchData = async () => {
+        try {
+          const docSnapshot = await getDoc(menCollectionRef);
+          if (docSnapshot.exists()) {
+            setData(docSnapshot.data());
+            console.log(data);
+            setLoading(false);
+          } else {
+            console.log("Document not found.");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      fetchData();
     }
-  };
+  }, [user?.uid, id]);
+
   if (loading) {
     return (
       <div>
         <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
-          Women's New
+          Men's New
         </div>
         <div className=" items-center mx-auto container justify-between">
           <div className="sm:p-6 pt-12 items-center container justify-between">
@@ -61,15 +72,14 @@ const Sneakers = () => {
     );
   } else {
     return (
-      <div>
-        <button onClick={addFav}>Add</button>
+      <div className="pt-12">
         <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
-          Women's New
+          {data.name}
         </div>
-        <Products products={products} />
+        <Products products={data.products} />
       </div>
     );
   }
 };
 
-export default Sneakers;
+export default Men;

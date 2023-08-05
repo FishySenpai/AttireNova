@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import {Link, useNavigate, useSearchParams} from "react-router-dom"
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Profile from "./User/Profile";
 const Navbar = (props) => {
   const [toggle, setToggle] = useState(false);
@@ -11,7 +11,7 @@ const Navbar = (props) => {
   };
   const handleSearch = (e) => {
     if (search) {
-navigate(`/search/${search}`);
+      navigate(`/search/${search}`);
       e.preventDefault();
     } else {
       e.preventDefault();
@@ -19,10 +19,10 @@ navigate(`/search/${search}`);
   };
   return (
     <div>
-      <div className="bg-gray-700 w-full overflow-hidden">
+      <div className="bg-gray-700 w-full ">
         <div>
           <div>
-            <nav className="w-full flex py-5 justify-between items-center overflow-hidden">
+            <nav className="w-full flex  justify-between items-center">
               <ul className="list-none sm:flex hidden justify-end items-center flex-1 mr-10">
                 <div className="flex flex-col md:flex-row justify-center">
                   <form className="" onSubmit={handleSearch}>
@@ -37,18 +37,127 @@ navigate(`/search/${search}`);
                     </div>
                   </form>
                 </div>
-                <button
-                  onClick={handleClick}
-                  className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mr-10"
-                >
-                  <Link to="/"> Men</Link>
-                </button>
-                <button
-                  onClick={handleClick}
-                  className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mr-10"
-                >
-                  <Link to="/women">Women</Link>
-                </button>
+                <div className="">
+                  <div className="group inline-block relative ">
+                    <button
+                      onClick={handleClick}
+                      className="font-mono cursor-pointer text-[16px] text-white hover:text-gray-600 mr-10 hover:bg-gray-100 px-5 py-4"
+                    >
+                      <Link to="/"> Men</Link>
+                    </button>
+                    <ul className="absolute hidden text-gray-600 pt-1 group-hover:block z-50 shadow text-left w-[155px] bg-gray-100 space-y-2 px-3 py-4">
+                      <li className="">
+                        <Link
+                          className="rounded-t  hover:text-red-400"
+                          to="/categories/men/27110"
+                        >
+                          New in
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          className=" hover:text-red-400 "
+                          to="/categories/men/27111"
+                        >
+                          Designer Brands
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          className="rounded-b  hover:text-red-400"
+                          to="/categories/men/4209"
+                        >
+                          Shoes
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          className="rounded-t  hover:text-red-400"
+                          to="/categories/men/4210"
+                        >
+                          Accessories
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          className=" hover:text-red-400 "
+                          to="/categories/men/5678"
+                        >
+                          Suits
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          className="rounded-b  hover:text-red-400"
+                          to="/categories/men/26090"
+                        >
+                          Sportswear
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="group inline-block relative ">
+                    <button
+                      onClick={handleClick}
+                      className="font-mono cursor-pointer text-[16px] text-white hover:text-gray-600 mr-10 hover:bg-gray-100 px-5 py-4"
+                    >
+                      <Link to="/women"> Women</Link>
+                    </button>
+                    <ul className="absolute hidden text-gray-600 pt-1 group-hover:block z-50 shadow text-left w-[155px] bg-gray-100 space-y-2 px-3 py-4">
+                      <li className="">
+                        <Link
+                          className="rounded-t  hover:text-red-400"
+                          to="/categories/women/27108"
+                        >
+                          New in
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          className=" hover:text-red-400 "
+                          to="/categories/women/15210"
+                        >
+                          Designer Brands
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          className="rounded-b  hover:text-red-400"
+                          to="/categories/women/4172"
+                        >
+                          Shoes
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          className="rounded-t  hover:text-red-400"
+                          to="/categories/women/4174"
+                        >
+                          Accessories
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          className=" hover:text-red-400 "
+                          to="/categories/women/13491"
+                        >
+                          Dresses
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          className="rounded-b  hover:text-red-400"
+                          to="/categories/women/19645"
+                        >
+                          Workwear
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
                 <button
                   onClick={handleClick}
                   className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mr-10"

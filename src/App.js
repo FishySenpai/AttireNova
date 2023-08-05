@@ -5,9 +5,7 @@ import Home from "./components/home";
 import Search from "./components/Search";
 import "./App.css";
 import ProductInfo from "./components/ProductInfo";
-import GetCategories from "./components/Categories/GetCategories";
-import ShowCategories from "./components/Categories/ShowCategories"
-import { Makeup, SearchBar, Sneakers, Login, Registration, CartUser, CheckOut, Dresses, Shoes, WorkWear, WishList, OrderedItems } from "./components";
+import { Makeup, SearchBar, Sneakers, Login, Registration, CartUser, CheckOut, Dresses, Shoes, WorkWear, WishList, OrderedItems, Men, Women } from "./components";
 import Test from "./components/test";
 import GetProductInfo from "./components/getProductInfo"
 import Products from "./components/Products";
@@ -24,7 +22,8 @@ function App() {
             path="/"
             element={
               <>
-              <Home/>
+                <Home />
+
                 {/* <Sneakers />
                 <Makeup />  */}
               </>
@@ -40,7 +39,10 @@ function App() {
               </>
             }
           />
+
           <Route path="/yh/:tcin" element={<GetProductInfo />} />
+          <Route path="/categories/men/:id" element={<Men />} />
+          <Route path="/categories/women/:id" element={<Women />} />
           <Route
             path="/test"
             element={
@@ -74,7 +76,6 @@ function App() {
             element={
               <>
                 <SearchBar />
-                <ShowCategories />
               </>
             }
           />

@@ -14,6 +14,8 @@ const OrderedItems = () => {
   const [user, setUser] = useState({});
   const [subTotal, setSubTotal] = useState();
   const [quantity, setQuantity] = useState(0);
+  const [delivery, setDelivery] = useState();
+  const [date, setDate] = useState()
 const [info, setInfo] = useState();
   const navigate = useNavigate();
 
@@ -66,7 +68,7 @@ useEffect(() => {
 
   fetchData();
 }, [user?.uid]);
-function formatTimestamp(timestamp) {
+const formatTimestamp = (timestamp)=> {
   const seconds = timestamp?.seconds || 0;
   const nanoseconds = timestamp?.nanoseconds || 0;
 
@@ -81,12 +83,37 @@ function formatTimestamp(timestamp) {
 
   return dateString;
 }
+const formatDeliveryTimestamp = (timestamp) => {
+  const seconds = timestamp?.seconds || 0;
+
+  // Convert the timestamp to milliseconds
+  const timestampInMillis = seconds * 1000;
+
+  // Create a new Date object using the milliseconds
+  const date = new Date(timestampInMillis);
+  const futureDate = new Date(date);
+  futureDate.setDate(date.getDate() + 7);
+
+  // Get the abbreviated day, date, month, and day of the week
+  const dayOfWeek = futureDate.toLocaleString("en-US", { weekday: "short" });
+  const dayOfMonth = futureDate.getDate();
+  const month = futureDate.toLocaleString("en-US", { month: "short" });
+  const dayDateMonthDay = `${dayOfWeek}, ${month} ${dayOfMonth}`;
+
+  return dayDateMonthDay;
+};
+
+// Example usage:
+const timestamp = { seconds: 1678915200 }; // Replace this with your actual timestamp object
+const formattedString = formatDeliveryTimestamp(timestamp);
+console.log(formattedString);
+
 
 if (user) {
   return (
-    <div className="px-6 items-center mx-auto container justify-between">
+    <div className="px-3 sm:px-6 items-center mx-auto container justify-between">
       <div className="sm:p-6 pt-12 items-center container justify-between">
-        <div className="flex flex-col ml-16 mt-10">
+        <div className="flex flex-col sm:ml-16 mt-10">
           {data.map((orders) => (
             <div key={orders.id}>
               <div className="text-2xl text-left lg:text-3xl font-semibold leading-7 lg:leading-9 text-gray-800 mb-1">
@@ -95,50 +122,86 @@ if (user) {
               <div className="text-base text-left font-medium leading-6 text-gray-600 mb-4">
                 {formatTimestamp(orders?.timestamp)}
               </div>
-              <div className="flex flex-row">
-                <ul className="flex flex-col bg-white shadow w-[750px] divide-y-2  pt-2">
-                  {orders.data.map((top) => (
-                    <li
-                      className="mr-4 md:mr-8 pb-6 flex flex-row  ml-4 "
-                      key={top?.product.id}
-                    >
-                      <a href={`/info/${top?.product.id}`}>
-                        <img
-                          className="w-[100px] h-[180px] md:w-[100px] md:h-[150px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
-                          src={`https://${top.product?.media.images[0].url}`}
-                          alt="img"
-                        />
-                      </a>
-                      <div className=" text-gray-700 text-[16px] text-left  font-normal ml-2">
-                        <div className="flex flex-row justify-between">
-                          <button className="text-left  w-[350px]">
-                            <Link to={`/info/${top.product.id}`}>
-                              {top.product.name}
-                            </Link>
-                          </button>
-                          <div className="flex flex-row px-2 mb-2 space-x-11 ml-6 ">
-                            <div className="text-gray-700 text-left font-bold ">
-                              ${top.product.price.current.value}
-                            </div>
-                            <div className="text-[16px] text-gray-800 ">
-                              Qty:{top.quantity}
-                            </div>
-                            <div className="text-gray-700 text-left font-bold">
-                              ${top.product.price.current.value * top.quantity}
+              <div className=" text-left text-lg font-medium leading-6 text-gray-600 mb-4">
+                Arriving {formatDeliveryTimestamp(orders?.timestamp)}
+              </div>
+              <div className="flex flex-col sm:flex-row">
+                <div className="flex flex-col">
+                  <ul className="flex flex-wrap  sm:flex-col bg-white shadow sm:w-[750px] sm:divide-y-2  pt-2">
+                    {orders.data.map((top) => (
+                      <li
+                        className=" md:mr-8 pb-6 flex flex-col sm:flex-row mr-4 ml-2 sm:ml-4 "
+                        key={top?.product.id}
+                      >
+                        <a href={`/info/${top?.product.id}`}>
+                          <img
+                            className="w-[170px] h-[280px] md:w-[100px] md:h-[150px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
+                            src={`https://${top.product?.media.images[0].url}`}
+                            alt="img"
+                          />
+                        </a>
+                        <div className=" text-gray-700 text-[16px] text-left  font-normal sm:ml-2">
+                          <div className="flex flex-col sm:flex-row justify-between">
+                            <button className="text-left w-[150px]  sm:w-[350px]">
+                              <Link to={`/info/${top.product.id}`}>
+                                {top.product.name}
+                              </Link>
+                            </button>
+                            <div className="flex flex-row sm:px-2 mb-2 space-x-5 sm:space-x-11 sm:ml-6 w-[150px]">
+                              <div className="text-gray-700 text-left font-bold ">
+                                ${top.product.price.current.value}
+                              </div>
+                              <div className="text-[16px] text-gray-800 ">
+                                Qty:{top.quantity}
+                              </div>
+                              <div className="text-gray-700 text-left font-bold">
+                                $
+                                {top.product.price.current.value * top.quantity}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="flex flex-col relative">
-                          <div className="mt-1">
-                            Color: {top.product.variants[0]?.colour}
+                          <div className="flex flex-col relative">
+                            <div className="mt-1">
+                              Color: {top.product.variants[0]?.colour}
+                            </div>
+                            <div className=" mt-1">Size: {top.size}</div>
                           </div>
-                          <div className=" mt-1">Size: {top.size}</div>
                         </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex flex-col text-[16px] sm:w-[750px] mt-6 bg-white shadow">
+                    <div className="flex flex-row px-4 py-2 relative">
+                      Subtotal({quantity} items):
+                      <div className="text-red-500 absolute right-5">
+                        $
+                        {orders.data.reduce(
+                          (total, top) =>
+                            total +
+                            top.product.price.current.value * top.quantity,
+                          0
+                        )}
                       </div>
-                    </li>
-                  ))}
-                </ul>
-                <div className="bg-white shadow ml-6 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
+                    </div>
+                    <div className="flex flex-row px-4 pb-4 relative">
+                      Shipping:
+                      <div className="text-red-500 absolute right-5">$5.00</div>
+                    </div>
+                    <div className="flex flex-row px-4 pb-4 font-semibold text-[20px] relative">
+                      Total:
+                      <div className="text-red-500 absolute right-5">
+                        $
+                        {orders.data.reduce(
+                          (total, top) =>
+                            total +
+                            top.product.price.current.value * top.quantity,
+                          5
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-white shadow mt-6 sm:ml-6 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
                   <h3 className="text-xl font-semibold leading-5 text-gray-800">
                     Customer Information
                   </h3>
@@ -206,34 +269,6 @@ if (user) {
                   ) : (
                     <p>Loading...</p>
                   )}
-                </div>
-              </div>
-              <div className="flex flex-col text-[16px] w-[750px] mt-6 bg-white shadow">
-                <div className="flex flex-row px-4 py-2 relative">
-                  Subtotal({quantity} items):
-                  <div className="text-red-500 absolute right-5">
-                    $
-                    {orders.data.reduce(
-                      (total, top) =>
-                        total + top.product.price.current.value * top.quantity,
-                      0
-                    )}
-                  </div>
-                </div>
-                <div className="flex flex-row px-4 pb-4 relative">
-                  Shipping:
-                  <div className="text-red-500 absolute right-5">$5.00</div>
-                </div>
-                <div className="flex flex-row px-4 pb-4 font-semibold text-[20px] relative">
-                  Total:
-                  <div className="text-red-500 absolute right-5">
-                    $
-                    {orders.data.reduce(
-                      (total, top) =>
-                        total + top.product.price.current.value * top.quantity,
-                      5
-                    )}
-                  </div>
                 </div>
               </div>
             </div>

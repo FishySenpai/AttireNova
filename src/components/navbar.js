@@ -24,24 +24,11 @@ const Navbar = (props) => {
           <div>
             <nav className="w-full flex  justify-between items-center">
               <ul className="list-none sm:flex hidden justify-end items-center flex-1 mr-10">
-                <div className="flex flex-col md:flex-row justify-center">
-                  <form className="" onSubmit={handleSearch}>
-                    <div className="flex flex-row mr-24 ">
-                      <input
-                        className="w-[200px] md:w-[300px] lg:w-[600px] inline-flex align-left gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                        type="search"
-                        placeholder="Search..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                      />
-                    </div>
-                  </form>
-                </div>
-                <div className="">
+                <div className="hover:bg-gray-100 text-white hover:text-gray-600 ">
                   <div className="group inline-block relative ">
                     <button
                       onClick={handleClick}
-                      className="font-mono cursor-pointer text-[16px] text-white hover:text-gray-600 mr-10 hover:bg-gray-100 px-5 py-4"
+                      className="font-mono cursor-pointer text-[16px]  hover:text-red-400 mx-5  px-5 py-4"
                     >
                       <Link to="/"> Men</Link>
                     </button>
@@ -97,11 +84,11 @@ const Navbar = (props) => {
                     </ul>
                   </div>
                 </div>
-                <div className="">
+                <div className="hover:bg-gray-100 text-white hover:text-gray-600 ">
                   <div className="group inline-block relative ">
                     <button
                       onClick={handleClick}
-                      className="font-mono cursor-pointer text-[16px] text-white hover:text-gray-600 mr-10 hover:bg-gray-100 px-5 py-4"
+                      className="font-mono cursor-pointer text-[16px] hover:text-red-400 mx-5 px-5 py-4"
                     >
                       <Link to="/women"> Women</Link>
                     </button>
@@ -157,14 +144,33 @@ const Navbar = (props) => {
                     </ul>
                   </div>
                 </div>
+                <div className="flex flex-col md:flex-row justify-center">
+                  <form className="" onSubmit={handleSearch}>
+                    <div className="flex flex-row mr-10 ">
+                      <input
+                        className="w-[200px] md:w-[300px] lg:w-[500px]  xl:w-[800px] 2xl:w-[900px] inline-flex align-left gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                        type="search"
+                        placeholder="Search..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                      />
+                    </div>
+                  </form>
+                </div>
 
                 <button
                   onClick={handleClick}
-                  className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mr-10"
+                  className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mx-5"
+                >
+                  <Link to="/orders">Orders</Link>
+                </button>
+                <button
+                  onClick={handleClick}
+                  className="font-mono cursor-pointer text-[16px] text-white hover:text-red-400 mx-5"
                 >
                   <Link to="/wishlist">Wishlist</Link>
                 </button>
-                <button className="mr-10">
+                <button className="mx-5">
                   <Link to="/cart">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +187,7 @@ const Navbar = (props) => {
                   </Link>
                 </button>
 
-                <button className="font-mono cursor-pointer text-[16px] text-white  mr-10">
+                <button className="font-mono cursor-pointer text-[16px] text-white  mx-5">
                   <Profile />
                 </button>
               </ul>

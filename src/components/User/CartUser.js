@@ -32,7 +32,6 @@ const CartUser = () => {
           await setDoc(doc(db, "users", user.uid, "wishlist", idAsString), {
             product
           });
-          deleteFav(id)
         } catch (err) {
           console.log(err);
         }

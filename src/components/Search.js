@@ -44,7 +44,7 @@ const Search = () => {
 useEffect(() => {
   console.log(search)
   handleSearch()
-}, [searchParams])
+}, [search])
 
   const handleSearch = (e) => {
     if (search) {

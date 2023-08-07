@@ -10,17 +10,22 @@ const Products = ({products}) => {
         <div className="sm:p-6 pt-12 items-center container justify-between">
           <ul className="flex flex-wrap">
             {products?.slice(0, 10).map((top, index) => (
-              <li className="mr-4 md:mr-8 pb-6 relative" key={top.id}>
+              <li
+                className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-8 pb-6 relative"
+                key={top.id}
+              >
                 <a href={`/info/${top.id}`}>
                   <img
-                    className="w-[265px] h-[339px]  rounded hover:shadow-lg cursor-pointer "
+                    className="w-[180px] h-[239px] sm:w-[265px] sm:h-[339px]  rounded hover:shadow-lg cursor-pointer "
                     src={`https://${top.imageUrl}`}
                     alt="img"
                   />
                 </a>
-                <div className="w-36 md:w-[265px] text-gray-700 text-md hover:text-red-500 cursor-pointer">
-                  <button>
-                    <Link to={`/info/${top.id}`}>{top.name}</Link>
+                <div className=" w-36 md:w-[265px] text-gray-700 text-md hover:text-red-500 cursor-pointer">
+                  <button className="text-left">
+                    <Link className="truncate-2-lines" to={`/info/${top.id}`}>
+                      {top.name}
+                    </Link>
                   </button>
                   <div className="text-gray-700 text-left font-bold ml-2">
                     {top.price.current.text}

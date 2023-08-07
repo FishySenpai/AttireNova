@@ -111,26 +111,28 @@ console.log(formattedString);
 
 if (user) {
   return (
-    <div className="px-3 sm:px-6 items-center mx-auto container justify-between">
+    <div className="sm:px-6 items-center mx-auto container justify-between">
       <div className="sm:p-6 pt-12 items-center container justify-between">
         <div className="flex flex-col sm:ml-16 mt-10">
           {data.map((orders) => (
             <div key={orders.id}>
-              <div className="text-2xl text-left lg:text-3xl font-semibold leading-7 lg:leading-9 text-gray-800 mb-1">
-                Order ID: {orders.id}
-              </div>
-              <div className="text-base text-left font-medium leading-6 text-gray-600 mb-4">
-                {formatTimestamp(orders?.timestamp)}
-              </div>
-              <div className=" text-left text-lg font-medium leading-6 text-gray-600 mb-4">
-                Arriving {formatDeliveryTimestamp(orders?.timestamp)}
+              <div className="px-3">
+                <div className=" text-2xl text-left lg:text-3xl font-semibold leading-7 lg:leading-9 text-gray-800 mb-1">
+                  Order ID: {orders.id}
+                </div>
+                <div className="text-base text-left font-medium leading-6 text-gray-600 mb-4">
+                  {formatTimestamp(orders?.timestamp)}
+                </div>
+                <div className=" text-left text-lg font-medium leading-6 text-gray-600 mb-4">
+                  Arriving {formatDeliveryTimestamp(orders?.timestamp)}
+                </div>
               </div>
               <div className="flex flex-col sm:flex-row">
                 <div className="flex flex-col">
                   <ul className="flex flex-wrap  sm:flex-col bg-white shadow sm:w-[750px] sm:divide-y-2  pt-2">
                     {orders.data.map((top) => (
                       <li
-                        className=" md:mr-8 pb-6 flex flex-col sm:flex-row mr-4 ml-2 sm:ml-4 "
+                        className=" md:mr-8 pb-6 flex flex-col sm:flex-row mr-4 ml-4 sm:ml-4 "
                         key={top?.product.id}
                       >
                         <a href={`/info/${top?.product.id}`}>
@@ -201,7 +203,7 @@ if (user) {
                     </div>
                   </div>
                 </div>
-                <div className="bg-white shadow mt-6 sm:ml-6 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
+                <div className="bg-white sm:h-[550px] shadow mt-6 sm:mt-0 sm:ml-6 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
                   <h3 className="text-xl font-semibold leading-5 text-gray-800">
                     Customer Information
                   </h3>

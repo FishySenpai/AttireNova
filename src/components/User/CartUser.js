@@ -133,7 +133,7 @@ const CartUser = () => {
 
   if (user) {
     return (
-      <div className="px-6 items-center mx-auto container justify-between">
+      <div className="sm:px-6 items-center mx-auto container justify-between pb-4">
         <div className="sm:p-6 pt-12 items-center container justify-between">
           <div className="text-gray-500 text-2xl py-4 capitalize">
             {localStorage.getItem("name") || user.email?.split("@")[0]}'s Cart
@@ -143,8 +143,8 @@ const CartUser = () => {
               No Products have been added yet.
             </div>
           ) : (
-            <div className="flex flex-row ml-44 mt-10">
-              <ul className="flex flex-col bg-white shadow w-[650px] divide-y pt-2">
+            <div className="flex flex-col sm:flex-row sm:ml-44 mt-10">
+              <ul className="flex flex-col bg-white shadow w-[412px] sm:w-[650px] divide-y pt-2">
                 {data.map((top) => {
                   return (
                     <li
@@ -153,103 +153,123 @@ const CartUser = () => {
                     >
                       <a href={`/info/${top.product.id}`}>
                         <img
-                          className="w-[100px] h-[180px] md:w-[100px] md:h-[150px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
+                          className="w-[120px] h-[160px] md:w-[160px] md:h-[180px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
                           src={`https://${top.product?.media.images[0].url}`}
                           alt="img"
                         />
                       </a>
-                      <div className=" text-gray-700 text-[16px] text-left  font-normal ml-2">
-                        <button className="text-left">
-                          <Link to={`/info/${top.product.id}`}>
+                      <div className=" text-gray-700 text-[16px] w-[260px] sm:w-[650px] text-left  font-normal ml-2">
+                        <button className="text-left ">
+                          <Link
+                            className="truncate-2-lines"
+                            to={`/info/${top.product.id}`}
+                          >
                             {top.product.name}
                           </Link>
                         </button>
-                        <div className="flex flex-row relative">
+                        <div className="flex flex-row relative text-[16px] sm:text-[16px]">
                           <div className="mt-1">
                             {top.product.variants[0]?.colour}
                           </div>
                           <div className="ml-5 mt-1">{top.size}</div>
-                          <div className="flex flex-row px-2 mb-2  mt-1">
-                            <div className="text-[16px] text-gray-800 ml-5 mr-1">
-                              Qty:{" "}
-                            </div>
-                            <div className="relative pb-2">
-                              <button
-                                type="button"
-                                className="inline-flex align-left gap-x-1.5 rounded-md w-[52px] h-[28px] bg-white px-3 pt-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                id="menu-button"
-                                onClick={() => handleClick(top.product.id)} // Update the onClick handler
+                          <div className="flex flex-row absolute right-0 sm:relative px-2 mb-2  mt-1">
+                              <div className="text-[16px] text-gray-800 ml-5 mr-1">
+                                Qty:{" "}
+                              </div>
+                              <div className="relative pb-2">
+                                <button
+                                  type="button"
+                                  className="inline-flex align-left gap-x-1.5 rounded-md w-[52px] h-[28px] bg-white px-3 pt-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                  id="menu-button"
+                                  onClick={() => handleClick(top.product.id)} // Update the onClick handler
+                                >
+                                  {top.quantity}
+                                  <div className="absolute top-0 right-0 mr-2 mt-1">
+                                    <svg
+                                      className="-mr-1 h-5 w-5 text-gray-400"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      aria-hidden="true"
+                                    >
+                                      <path
+                                        fillRule="evenodd"
+                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                        clipRule="evenodd"
+                                      />
+                                    </svg>
+                                  </div>
+                                </button>
+                              </div>
+                              <div
+                                className={
+                                  top.product.id === productId && showQuantity
+                                    ? "flex"
+                                    : "hidden"
+                                }
                               >
-                                {top.quantity}
-                                <div className="absolute top-0 right-0 mr-2 mt-1">
-                                  <svg
-                                    className="-mr-1 h-5 w-5 text-gray-400"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    aria-hidden="true"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </div>
-                              </button>
-                            </div>
-                          </div>
-                          <div
-                            className={
-                              top.product.id === productId && showQuantity
-                                ? "flex"
-                                : "hidden"
-                            }
-                          >
-                            <div className="flex-col pb-3 mt-9 z-20 w-[52px] h-[200px] scrollbar absolute  right-[8px] overflow-y-auto  bg-white rounded font-normal text-left shadow-lg">
-                              {[...Array(10)].map((_, index) => (
-                                <ul className="flex flex-col" key={index + 1}>
-                                  <li className="px-4 py-2">
-                                    <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
-                                      <button
-                                        onClick={() =>
-                                          handleQuantityChange(
-                                            index + 1,
-                                            top.product.price.current.value,
-                                            top.product.id
-                                          )
-                                        }
-                                      >
-                                        <div className="capitalize">
-                                          {index + 1}
+                                <div className="flex-col pb-3 mt-9 z-20 w-[52px] h-[200px] scrollbar absolute  right-[8px] overflow-y-auto  bg-white rounded font-normal text-left shadow-lg">
+                                  {[...Array(10)].map((_, index) => (
+                                    <ul
+                                      className="flex flex-col"
+                                      key={index + 1}
+                                    >
+                                      <li className="px-4 py-2">
+                                        <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
+                                          <button
+                                            onClick={() =>
+                                              handleQuantityChange(
+                                                index + 1,
+                                                top.product.price.current.value,
+                                                top.product.id
+                                              )
+                                            }
+                                          >
+                                            <div className="capitalize">
+                                              {index + 1}
+                                            </div>
+                                          </button>
                                         </div>
-                                      </button>
-                                    </div>
-                                  </li>
-                                </ul>
-                              ))}
-                            </div>
+                                      </li>
+                                    </ul>
+                                  ))}
+                                </div>
+                              </div>
+                            
                           </div>
                         </div>
 
-                        <div className="text-gray-700 text-left font-bold ml-2 mt-1">
+                        <div className="text-gray-700 text-left font-bold  mt-1">
                           ${top.product.price.current.value * top.quantity}
                         </div>
-                        <div className=" ml-5 mt-4 text-[16px]">
+                        <div className=" mt-4 text-[16px] space-x-6 sm:space-x-5 flex flex-row">
                           <button
                             className="px-3 py-[1px]  text-white  tracking-wider bg-gray-700 rounded"
                             onClick={() => deleteFav(top.product.id)}
                           >
                             Delete
                           </button>
-                          <button className="px-3 py-[1px] ml-2 text-white tracking-wider bg-gray-700 rounded" onClick={()=>wishList(top.product.id, top.product)}>
+                          <button
+                            className="hidden sm:flex  px-3 py-[1px] ml-2 text-white tracking-wider bg-gray-700 rounded"
+                            onClick={() =>
+                              wishList(top.product.id, top.product)
+                            }
+                          >
                             Add to Wishlist
+                          </button>
+                          <button
+                            className="sm:hidden px-3 py-[1px] ml-2 text-white tracking-wider bg-gray-700 rounded"
+                            onClick={() =>
+                              wishList(top.product.id, top.product)
+                            }
+                          >
+                            Wishlist
                           </button>
                         </div>
                       </div>
                     </li>
                   );
                 })}
-                <div className="flex flex-col text-[16px]">
+                <div className="flex-col text-[16px] hidden sm:flex">
                   <div className="flex flex-row px-4 py-2 relative">
                     Subtotal({quantity} items):
                     <div className="text-red-500 absolute right-5">
@@ -269,25 +289,28 @@ const CartUser = () => {
                 </div>
               </ul>
               <div>
-                <div className="flex flex-col text-[16px] bg-white ml-10 w-[300px]">
-                  <div className="flex flex-row px-4 py-2 relative">
+                <div className="flex flex-col text-[16px] bg-white mt-4 sm:ml-10 w-full sm:w-[300px] px-2">
+                  <div className="flex flex-row sm:px-4 py-2 relative">
                     Subtotal({quantity} items):
                     <div className="text-red-500 absolute right-5">
                       ${subTotal}
                     </div>
                   </div>
-                  <div className="flex flex-row px-4 pb-4 relative">
+                  <div className="flex flex-row  sm:px-4 pb-4 relative">
                     Shipping:
                     <div className="text-red-500 absolute right-5">$5.00</div>
                   </div>
-                  <div className="flex flex-row px-4 pb-4 font-semibold text-[20px] relative">
+                  <div className="flex flex-row sm:px-4 pb-4 font-semibold text-[20px] relative">
                     Total:
                     <div className="text-red-500 absolute right-5">
                       ${subTotal + 5}
                     </div>
                   </div>
                   <div className="pb-4">
-                    <a href="/checkout" className="bg-gray-800 rounded px-12 py-1 text-white">
+                    <a
+                      href="/checkout"
+                      className="bg-gray-800 rounded px-12 py-1 text-white"
+                    >
                       Proceed to Checkout
                     </a>
                   </div>

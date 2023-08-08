@@ -103,10 +103,8 @@ const formatDeliveryTimestamp = (timestamp) => {
   return dayDateMonthDay;
 };
 
-// Example usage:
-const timestamp = { seconds: 1678915200 }; // Replace this with your actual timestamp object
-const formattedString = formatDeliveryTimestamp(timestamp);
-console.log(formattedString);
+
+
 
 
 if (user) {

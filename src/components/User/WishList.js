@@ -62,7 +62,7 @@ const WishList = () => {
           ) : (
             <ul className="flex flex-wrap">
               {data.map((top, index) => (
-                <WishlistItem
+                <WishlistItem    //the cartpop exists individually for each item state with wishlist item component
                   top={top}
                   key={top.product.id}
                   reFetch={reFetch}

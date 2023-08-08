@@ -152,7 +152,7 @@ quantityCheck();
                   No Products have been added yet.
                 </div>
               ) : (
-                <ul className="flex flex-col bg-white shadow w-[450px] divide-y pt-2">
+                <ul className="flex flex-col bg-white shadow w-[550px] divide-y pt-2">
                   {data.map((top) => {
                     return (
                       <li
@@ -161,26 +161,40 @@ quantityCheck();
                       >
                         <a href={`/info/${top.product.id}`}>
                           <img
-                            className="w-[100px] h-[180px] md:w-[100px] md:h-[150px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
+                            className="w-[120px] h-[160px] md:w-[160px] md:h-[180px]  rounded hover:shadow-lg cursor-pointer hover:scale-105"
                             src={`https://${top.product?.media.images[0].url}`}
                             alt="img"
                           />
                         </a>
-                        <div className="w-36 md:w-60 text-gray-700 text-[16px] text-left  font-normal ml-2">
-                          <button className="">
-                            <Link
-                              to={`/info/${top.product.id}`}
-                              className="text-left "
-                            >
-                              {top.product.name}
-                            </Link>
-                          </button>
+                        <div className="w-36 sm:w-full text-gray-700 text-[16px] text-left  font-normal ml-2">
+                          <div className="flex flex-row relative">
+                            <button className="text-left">
+                              <Link
+                                to={`/info/${top.product.id}`}
+                                className="text-left "
+                              >
+                                {top.product.name}
+                              </Link>
+                            </button>
+                            <div className=" ml-5 mt-4 h-[30px] absolute -right-3 -top-3 ">
+                              <button onClick={() => deleteFav(top.product.id)}>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  height="1em"
+                                  viewBox="0 0 448 512"
+                                >
+                                  <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
                           <div className="flex flex-row relative">
                             <div className="mt-1">
                               {top.product.variants[0]?.colour}
                             </div>
-                            <div className="flex flex-row px-2 mb-2  absolute right-[0px] mt-1">
-                              <div className="text-[16px] text-gray-800 ml-10 mr-1">
+                            <div className="mt-1 ml-6">{top.size}</div>
+                            <div className="flex flex-row absolute right-0 sm:relative px-2 mb-2  mt-1">
+                              <div className="text-[16px] text-gray-800 ml-5 mr-1">
                                 Qty:{" "}
                               </div>
                               <div className="relative pb-2">
@@ -207,55 +221,49 @@ quantityCheck();
                                   </div>
                                 </button>
                               </div>
-                            </div>
-                            <div
-                              className={
-                                top.product.id === productId && showQuantity
-                                  ? "flex"
-                                  : "hidden"
-                              }
-                            >
-                              <div className="flex-col pb-3 mt-9 z-20 w-[52px] h-[200px] scrollbar absolute  right-[8px] overflow-y-auto  bg-white rounded font-normal text-left shadow-lg">
-                                {[...Array(10)].map((_, index) => (
-                                  <ul className="flex flex-col" key={index + 1}>
-                                    <li className="px-4 py-2">
-                                      <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
-                                        <button
-                                          onClick={() =>
-                                            handleQuantityChange(
-                                              index + 1,
-                                              top.product.price.current.value,
-                                              top.product.id
-                                            )
-                                          }
-                                        >
-                                          <div className="capitalize">
-                                            {index + 1}
-                                          </div>
-                                        </button>
-                                      </div>
-                                    </li>
-                                  </ul>
-                                ))}
+                              <div
+                                className={
+                                  top.product.id === productId && showQuantity
+                                    ? "flex"
+                                    : "hidden"
+                                }
+                              >
+                                <div className="flex-col pb-3 mt-9 z-20 w-[52px] h-[200px] scrollbar absolute  right-[8px] overflow-y-auto  bg-white rounded font-normal text-left shadow-lg">
+                                  {[...Array(10)].map((_, index) => (
+                                    <ul
+                                      className="flex flex-col"
+                                      key={index + 1}
+                                    >
+                                      <li className="px-4 py-2">
+                                        <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
+                                          <button
+                                            onClick={() =>
+                                              handleQuantityChange(
+                                                index + 1,
+                                                top.product.price.current.value,
+                                                top.product.id
+                                              )
+                                            }
+                                          >
+                                            <div className="capitalize">
+                                              {index + 1}
+                                            </div>
+                                          </button>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  ))}
+                                </div>
                               </div>
                             </div>
                           </div>
-                          <div className="mt-1">{top.size}</div>
 
                           <div className="text-gray-700 text-left font-bold ml-2 mt-1">
-                            ${top.product.price.current.value * top.quantity}
+                            $
+                            {(
+                              top.product.price.current.value * top.quantity
+                            ).toFixed(2)}
                           </div>
-                        </div>
-                        <div className=" ml-5 mt-4 h-[30px] ">
-                          <button onClick={() => deleteFav(top.product.id)}>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              height="1em"
-                              viewBox="0 0 448 512"
-                            >
-                              <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
-                            </svg>
-                          </button>
                         </div>
                       </li>
                     );
@@ -264,7 +272,7 @@ quantityCheck();
                     <div className="flex flex-row px-4 py-2 relative">
                       Subtotal({quantity} items):
                       <div className="text-red-500 absolute right-5">
-                        ${subTotal}
+                        ${subTotal.toFixed(2)}
                       </div>
                     </div>
                     <div className="flex flex-row px-4 pb-4 relative">
@@ -274,7 +282,7 @@ quantityCheck();
                     <div className="flex flex-row px-4 pb-4 font-semibold text-[20px] relative">
                       Total:
                       <div className="text-red-500 absolute right-5">
-                        ${subTotal + 5}
+                        ${(subTotal + 5).toFixed(2)}
                       </div>
                     </div>
                   </div>
@@ -304,9 +312,7 @@ quantityCheck();
                 </p>
                 <p> Have a great day! </p>
                 <div class="py-10 text-center">
-                  <button
-                    class="px-12 bg-gray-900 hover:bg-gray-800 rounded text-white font-semibold py-3"
-                  >
+                  <button class="px-12 bg-gray-900 hover:bg-gray-800 rounded text-white font-semibold py-3">
                     <Link to="/">GO BACK</Link>
                   </button>
                 </div>

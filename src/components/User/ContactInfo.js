@@ -187,17 +187,15 @@ const randomID = () => {
             />
           </div>
 
-            <div class="mt-4">
-              <button
-                class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Pay: ${subTotal + 5}
-              </button>
-            </div>
-
-          
+          <div class="mt-4">
+            <button
+              class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Pay: ${(subTotal + 5).toFixed(2)}
+            </button>
+          </div>
         </form>
       </div>
     </div>

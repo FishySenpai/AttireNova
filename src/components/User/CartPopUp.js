@@ -10,7 +10,6 @@ const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
    // This callback will be executed when a click is detected outside of the cart popup
    // Hide the cart popup here
    hideCartPopup();
-   console.log("test")
  });
   useEffect(() => {
     console.log(product);

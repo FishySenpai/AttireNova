@@ -36,6 +36,7 @@ const WishList = () => {
   const hideCartPopup = () => {
     // Hide the cart popup when called
     setCartPopupVisible(false);
+    console.log(cartPopupVisible)
   };
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -166,7 +167,10 @@ const WishList = () => {
                   </div>
                   <div className="w-36 md:w-[265px] text-gray-500 text-left text-sm ml-1  ">
                     <button className="text-left text-sm">
-                      <Link className="" to={`/info/${top.product.id}`}>
+                      <Link
+                        className="truncate-1-lines"
+                        to={`/info/${top.product.id}`}
+                      >
                         {top.product.name}
                       </Link>
                     </button>
@@ -260,7 +264,7 @@ const WishList = () => {
                       </div>
                     )}
                   </div>
-                  <div className="absolute -top-[26px] right-[47px]">
+                  <div className="absolute -top-[26px] right-[47px] z-50">
                     <div
                       className={`${
                         top.product &&
@@ -270,7 +274,7 @@ const WishList = () => {
                           : "hidden"
                       }`}
                     >
-                      {console.log({top: top.product.id, product: productId})}
+                      {console.log({ top: top.product.id, product: productId })}
                       {
                         <CartPopUp
                           product={top.product}

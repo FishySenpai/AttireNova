@@ -127,7 +127,7 @@ if (user) {
                   Arriving {formatDeliveryTimestamp(orders?.timestamp)}
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row">
+              <div className="flex flex-col xl:flex-row">
                 <div className="flex flex-col">
                   <ul className="flex flex-wrap  sm:flex-col bg-white shadow sm:w-[750px] sm:divide-y-2  pt-2">
                     {orders.data.map((top) => (
@@ -203,7 +203,7 @@ if (user) {
                     </div>
                   </div>
                 </div>
-                <div className="bg-white sm:h-[550px] shadow mt-6 sm:mt-0 sm:ml-6 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
+                <div className="bg-white sm:h-[520px] shadow mt-6 sm:mt-0 sm:ml-6 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
                   <h3 className="text-xl font-semibold leading-5 text-gray-800">
                     Customer Information
                   </h3>
@@ -233,7 +233,7 @@ if (user) {
                         </div>
                       </div>
                       <div className="flex justify-between xl:h-full items-stretch w-full flex-col mt-6 md:mt-0">
-                        <div className="flex justify-center md:justify-start xl:flex-col flex-col md:space-x-6 lg:space-x-8 xl:space-x-0 space-y-4 xl:space-y-12 md:space-y-0 md:flex-row items-center md:items-start">
+                        <div className="flex justify-center md:justify-start xl:flex-col flex-col md:space-x-6 lg:space-x-8 xl:space-x-0 space-y-4 xl:space-y-9 md:space-y-0 md:flex-row items-center md:items-start">
                           <div className="flex  justify-center md:justify-start items-center md:items-start flex-col space-y-4 xl:mt-8">
                             <p className="text-base font-semibold leading-4 text-center md:text-left text-gray-800">
                               Shipping Address

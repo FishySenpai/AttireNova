@@ -1,12 +1,25 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Profile from "./User/Profile";
-import {newin, accesories, brands, shoes, sportswear, suits} from "./index.js"
+import {
+  newin,
+  accesories,
+  brands,
+  shoes,
+  sportswear,
+  suits,
+  womenShoes,
+  womenDresses,
+  womenAccesories,
+  womenBrands,
+  womenWorkwear,
+  womenNewin,
+} from "./index.js";
 const Navbar = (props) => {
   const [search, setSearch] = useState("");
   const [toggle, setToggle] = useState(false);
   const [womenToggle, setWomenToggle] = useState(false);
-  const [menToggle, setMenToggle] = useState(false);
+  const [menToggle, setMenToggle] = useState(true);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -257,40 +270,108 @@ const Navbar = (props) => {
         </div>
       </div>
       <div className="">
-        <div className={toggle ? "flex flex-col" : "hidden"}>
+        <div className={toggle ? "flex flex-col overscroll-none" : "hidden"}>
           <div className="bg-gray-900/50 h-screen w-full absolute text-gray-500 hover:text-gray-600 z-50">
             <div className=" border-4 border-gray-600 bg-gray-100 divide-y-8 w-[329px]">
-              <button className=" cursor-pointer text-2xl font-semibold text-left text-gray-800  py-4 flex flex-row">
-                <Link className="hover:text-red-400 ml-6" to="/">
-                  {" "}
-                  Men
-                </Link>
-                <div className="ml-52 mt-1">
-                  {menToggle ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="1em"
-                      viewBox="0 0 448 512"
+              <div className="flex flex-row ml-12 space-x-14">
+                <button
+                  className=" cursor-pointer text-2xl font-semibold text-left text-gray-800  py-4 flex flex-row"
+                  onClick={() => {
+                    setWomenToggle(false);
+                    setMenToggle(true);
+                  }}
+                >
+                  <div className={menToggle ? "text-red-500 " : null}>Men</div>
+                </button>
+
+                <button
+                  className=" cursor-pointer text-2xl font-semibold text-left text-gray-800  py-4 flex flex-row"
+                  onClick={() => {
+                    setWomenToggle(true);
+                    setMenToggle(false);
+                  }}
+                >
+                  <div className={womenToggle ? "text-red-500 " : null}>
+                    Women
+                  </div>
+                </button>
+              </div>
+              <div className={womenToggle ? "flex" : "hidden"}>
+                <ul className=" text-gray-800 font-medium text-left   w-full divide-y-8">
+                  <li className="h-[110px]">
+                    <Link
+                      className="rounded-t hover:text-red-400 text-xl  flex flex-row"
+                      to="/categories/women/27108"
                       onClick={() => {
-                        setMenToggle(false);
+                        setToggle(false);
                       }}
                     >
-                      <path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z" />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="1em"
-                      viewBox="0 0 448 512"
+                      <div className="absolute pt-8 pl-4">New in</div>
+                      <img className="" src={womenNewin} />
+                    </Link>
+                  </li>
+                  <li className="h-[115px]">
+                    <Link
+                      className="rounded-t hover:text-red-400 text-xl  flex flex-row"
+                      to="/categories/women/15210"
                       onClick={() => {
-                        setMenToggle(true);
+                        setToggle(false);
                       }}
                     >
-                      <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                    </svg>
-                  )}
-                </div>
-              </button>
+                      <div className="absolute pt-8 pl-4">Designer Brands</div>
+                      <img src={womenBrands} />
+                    </Link>
+                  </li>
+                  <li className="h-[110px]">
+                    <Link
+                      className="rounded-b hover:text-red-400 text-xl  flex flex-row"
+                      to="/categories/women/4172"
+                      onClick={() => {
+                        setToggle(false);
+                      }}
+                    >
+                      <div className="absolute pt-8 pl-4">Shoes</div>
+                      <img src={womenShoes} />
+                    </Link>
+                  </li>
+                  <li className="h-[115px]">
+                    <Link
+                      className="rounded-t hover:text-red-400 text-xl  flex flex-row"
+                      to="/categories/women/4174"
+                      onClick={() => {
+                        setToggle(false);
+                      }}
+                    >
+                      <div className="absolute pt-8 pl-4">Accessories</div>
+                      <img src={womenAccesories} alt="" />
+                    </Link>
+                  </li>
+                  <li className="h-[115px]">
+                    <Link
+                      className="hover:text-red-400 text-xl  flex flex-row"
+                      to="/categories/women/13491"
+                      onClick={() => {
+                        setToggle(false);
+                      }}
+                    >
+                      <div className="absolute pt-8 pl-4">Dresses</div>
+                      <img src={womenDresses} alt="" />
+                    </Link>
+                  </li>
+                  <li className="h-[115px]">
+                    <Link
+                      className="rounded-t hover:text-red-400 text-xl  flex flex-row"
+                      to="/categories/women/19645"
+                      onClick={() => {
+                        setToggle(false);
+                      }}
+                    >
+                      <div className="absolute pt-8 pl-4">Workwear</div>
+                      <img src={womenWorkwear} alt="" />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
               <div className={menToggle ? "flex" : "hidden"}>
                 <ul className=" text-gray-800 font-medium text-left   w-full divide-y-8">
                   <li className="h-[110px]">
@@ -369,7 +450,6 @@ const Navbar = (props) => {
               </div>
             </div>
           </div>
-          
         </div>
       </div>
       <div className="flex sm:hidden flex-col  justify-center">

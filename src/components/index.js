@@ -14,12 +14,18 @@ import WishList from "./User/WishList";
 import OrderedItems from "./User/OrderedItems";
 import Men from "./Categories/Men";
 import Women from "./Categories/Women";
-import shoes from "./Assets/men/shoes.png"
+import shoes from "./Assets/men/shoes.png";
 import suits from "./Assets/men/suits.png";
 import accesories from "./Assets/men/accesories.png";
 import brands from "./Assets/men/brands.png";
 import sportswear from "./Assets/men/sportswear.png";
-import newin from "./Assets/men/newin.png"
+import newin from "./Assets/men/newin.png";
+import womenShoes from "./Assets/women/womenShoes.png";
+import womenDresses from "./Assets/women/womenDresses.png";
+import womenAccesories from "./Assets/women/womenAccessories.png";
+import womenBrands from "./Assets/women/womenBrands.png";
+import womenWorkwear from "./Assets/women/womenWorkwear.png";
+import womenNewin from "./Assets/women/womenNewin.png";
 export {
   SearchBar,
   Search,
@@ -42,4 +48,10 @@ export {
   shoes,
   sportswear,
   suits,
+  womenShoes,
+  womenDresses,
+  womenAccesories,
+  womenBrands,
+  womenWorkwear,
+  womenNewin,
 };

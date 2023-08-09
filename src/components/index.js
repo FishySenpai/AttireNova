@@ -14,20 +14,32 @@ import WishList from "./User/WishList";
 import OrderedItems from "./User/OrderedItems";
 import Men from "./Categories/Men";
 import Women from "./Categories/Women";
+import shoes from "./Assets/men/shoes.png"
+import suits from "./Assets/men/suits.png";
+import accesories from "./Assets/men/accesories.png";
+import brands from "./Assets/men/brands.png";
+import sportswear from "./Assets/men/sportswear.png";
+import newin from "./Assets/men/newin.png"
 export {
-    SearchBar,
-    Search,
-    Sneakers,
-    Makeup,
-    Login,
-    Registration,
-    CartUser,
-    CheckOut,
-    WorkWear,
-    Shoes,
-    Dresses,
-    WishList,
-    OrderedItems,
-    Men,
-    Women
-}
+  SearchBar,
+  Search,
+  Sneakers,
+  Makeup,
+  Login,
+  Registration,
+  CartUser,
+  CheckOut,
+  WorkWear,
+  Shoes,
+  Dresses,
+  WishList,
+  OrderedItems,
+  Men,
+  Women,
+  newin,
+  accesories,
+  brands,
+  shoes,
+  sportswear,
+  suits,
+};

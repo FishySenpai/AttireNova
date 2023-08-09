@@ -72,7 +72,7 @@ if (loading) {
 } else {
   return (
     <div>
-      <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
+      <div className="flex text-left pt-5 ml-4 sm:ml-52 font-mono text-2xl text-gray-600">
         {data.name}
       </div>
       <Products products={data.products} />

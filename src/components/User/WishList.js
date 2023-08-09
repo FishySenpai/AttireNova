@@ -3,16 +3,11 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
 import {
-  doc,
   getDocs,
   collection,
-  where,
-  deleteDoc,
-  setDoc,
-  updateDoc,
+
 } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
-import CartPopUp from "./CartPopUp";
 import WishlistItem from "./WishlistItem";
 const WishList = () => {
   const [data, setData] = useState([]); // data is returned back in []

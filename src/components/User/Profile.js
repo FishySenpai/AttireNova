@@ -60,7 +60,7 @@ const Profile = () => {
                       setProfileToggle(!profileToggle);
                     }}
                   >
-                    <Link to="/fav">Favourites</Link>
+                    <Link to="/orders">Orders</Link>
                   </button>
                 ) : (
                   <div className="hidden">adf</div>

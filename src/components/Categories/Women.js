@@ -59,7 +59,7 @@ const Women = () => {
                   className="mr-4 md:mr-8 pb-6 rounded animate-pulse list-none"
                   key={index}
                 >
-                  <div className="w-[265px] h-[339px] bg-gray-300 mb-2"></div>
+                  <div className="w-[180px] h-[239px] sm:w-[265px] sm:h-[339px]  bg-gray-300 mb-2"></div>
                   <div className="mt-2">
                     <div className="w-12 md:w-40  bg-gray-300 h-4 shadow"></div>
                   </div>

@@ -135,8 +135,8 @@ const CartUser = () => {
   if (user) {
     return (
       <div className="sm:px-6 items-center mx-auto container justify-between pb-4">
-        <div className="sm:p-6 pt-12 items-center container justify-between">
-          <div className="text-gray-500 text-2xl py-4 capitalize">
+        <div className="sm:p-6 sm:pt-12 items-center container justify-between">
+          <div className="text-gray-500 text-2xl text-left px-2 py-4 sm:py-4 capitalize">
             {localStorage.getItem("name") || user.email?.split("@")[0]}'s Cart
           </div>
           {data.length === 0 ? (
@@ -144,7 +144,7 @@ const CartUser = () => {
               No Products have been added yet.
             </div>
           ) : (
-            <div className="flex flex-col sm:flex-row sm:ml-44 mt-10">
+            <div className="flex flex-col sm:flex-row sm:ml-44 sm:mt-10">
               <ul className="flex flex-col bg-white shadow w-[412px] sm:w-[650px] divide-y pt-2">
                 {data.map((top) => {
                   return (

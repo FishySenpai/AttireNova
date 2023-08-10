@@ -183,10 +183,10 @@ setIndex((prevIndex) => prevIndex + 1);
   }
    else {
     return (
-      <div className="flex flex-col">
-        <div className="flex flex-row">
-          <div className="ml-72 mt-28 ">
-            <div className="relative">
+      <div className="flex flex-col overflow-y-hidden">
+        <div className="flex sm:flex-row flex-col">
+          <div className="sm:ml-72 sm:mt-28 ">
+            <div className="relative ">
               <button onClick={handleImageBack}>
                 <img
                   src={arrowLeft}
@@ -194,7 +194,7 @@ setIndex((prevIndex) => prevIndex + 1);
                 />
               </button>
               <img
-                className="h-[450px] w-[350px]"
+                className=" w-[100vw] sm:w-full"
                 src={`https://${thumbnail}`}
                 alt="image"
               />
@@ -205,7 +205,7 @@ setIndex((prevIndex) => prevIndex + 1);
                 />
               </button>
             </div>
-            <div className="flex flex-row justify-center align-middle items-center">
+            <div className="hidden sm:flex flex-row justify-center align-middle items-center">
               {media?.images.map((image) => (
                 <ul className="flex flex-row" key={image.url}>
                   <li>
@@ -222,7 +222,7 @@ setIndex((prevIndex) => prevIndex + 1);
             </div>
           </div>
           <div className="flex-col">
-            <div className="text-left ml-12 mt-32 text-2xl font-mono text-gray-700 w-[500px]">
+            <div className="text-left ml-4 sm:ml-12 sm:mt-32 text-2xl font-mono text-gray-700 w-[400px] sm:w-[500px]">
               {name}
               <div className="flex flex-row font-normal pt-2 mb-2">
                 <div className="text-[20px] text-gray-800">Price:</div>
@@ -230,7 +230,7 @@ setIndex((prevIndex) => prevIndex + 1);
               </div>
             </div>
             <div className="flex flex-col">
-              <div className=" flex flex-row ml-12 mb-2">
+              <div className=" flex flex-row ml-4 sm:ml-12 mb-2">
                 <div className="capitalize text-[20px] text-gray-800 font-mono">
                   color:
                 </div>
@@ -240,8 +240,10 @@ setIndex((prevIndex) => prevIndex + 1);
                 </div>
               </div>
               <div>
-                <div className="flex flex-row px-2 mb-2 font-mono">
-                  <div className="text-[20px] text-gray-800 ml-10">Size: </div>
+                <div className="flex flex-row px-2 font-mono">
+                  <div className="text-[20px] text-gray-800 ml-2 sm:ml-10">
+                    Size:{" "}
+                  </div>
                   <div className="relative">
                     <button
                       type="button"
@@ -268,7 +270,7 @@ setIndex((prevIndex) => prevIndex + 1);
                   </div>
                 </div>
                 <div className={showSize ? "flex" : "hidden"}>
-                  <div className="flex flex-col pb-3 ml-[102px] mt-0 w-[152px]  absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
+                  <div className="z-50 flex flex-col pb-3 ml-[72px] sm:ml-[102px] mt-0 w-[152px]  absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
                     {variants?.map((size) => (
                       <ul className="flex flex-col " key={size.id}>
                         <li className="px-4 py-2">
@@ -295,7 +297,20 @@ setIndex((prevIndex) => prevIndex + 1);
                 </div>
               </div>
             </div>
-            <div className="ml-16 py-2 text-lg font-mono text-left ">
+            <div className=" sm:hidden">
+              {product && (
+                <Cart
+                  price={price}
+                  brand={brand}
+                  product={product}
+                  size={size}
+                  selectedSize={selectedSize}
+                  showError={showError}
+                  setShowError={setShowError}
+                />
+              )}
+            </div>
+            <div className="ml-10 sm:ml-16 py-2 text-lg font-mono text-left ">
               <div
                 className="list-item"
                 dangerouslySetInnerHTML={{
@@ -311,7 +326,7 @@ setIndex((prevIndex) => prevIndex + 1);
               />
             </div>
           </div>
-          <div className=" mt-32">
+          <div className="hidden sm:flex mt-32">
             {product && (
               <Cart
                 price={price}
@@ -325,9 +340,9 @@ setIndex((prevIndex) => prevIndex + 1);
             )}
           </div>
         </div>
-        {/* <div className="ml-72 mt-12">
+        {/* <div className="ml-7 mt-6 sm:ml-72 sm:mt-12">
           <Similar />
-        </div> */}
+        </div>  */}
       </div>
     );
   }

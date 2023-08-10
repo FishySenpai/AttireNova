@@ -86,19 +86,22 @@ setShowError(true)
 
   return (
     <div>
-      <div className="flex flex-col shadow-lg w-[265px] h-[300px] font-mono ">
-        <div className="flex flex-row text-gray-700">
+      <div className="flex flex-col sm:shadow-lg sm:w-[265px] mb-10 sm:mb-0 sm:h-[300px] font-mono ">
+        <div className=" hidden sm:flex flex-row text-gray-700">
           <div className="text-[20px] text-red-700 ml-4">${quantityPrice}</div>
           <div className="text-[20px] ml-24">Wishlist</div>
         </div>
         <div>
-          <div className="text-[16px] py-4 text-left ml-14">
+          <div className="hidden sm:flex text-[16px] py-4 text-left ml-14">
             Sold by {brand?.name}
           </div>
-          <div>
+          <div className="relative">
+           
             <div className="flex flex-row px-2 mb-2 font-mono">
-              <div className="text-[20px] text-gray-800 ml-10">Quantity: </div>
-              <div className="relative pb-2">
+              <div className="text-[20px] text-gray-800 ml-2 mt-3 sm:ml-10">
+                Quantity:{" "}
+              </div>
+              <div className="relative pb-2 mt-3">
                 <button
                   type="button"
                   className="inline-flex align-left gap-x-1.5 rounded-md w-[52px] bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -124,8 +127,8 @@ setShowError(true)
               </div>
             </div>
             <div className={showQuantity ? "flex" : "hidden"}>
-              <div className="flex flex-col pb-3 ml-[102px] mt-0 w-[52px] absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
-                {[...Array(10)].map((_, index) => (
+              <div className="flex flex-col pb-3 ml-[115px] sm:ml-[148px] w-[52px] top-12 absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
+                {[...Array(8)].map((_, index) => (
                   <ul className="flex flex-col" key={index + 1}>
                     <li className="px-4 py-2">
                       <div className="text-gray-500 text-md hover:text-red-500 cursor-pointer">
@@ -139,9 +142,9 @@ setShowError(true)
               </div>
             </div>
           </div>
-          <div className="py-2">
+          <div className="py-2  px-6 sm:px-0">
             <button
-              className="bg-gray-600 p-2 rounded text-white w-[200px]"
+              className="bg-gray-600 p-2 rounded text-white w-full sm:w-[200px]"
               onClick={addFav}
             >
               Add to Cart
@@ -152,14 +155,14 @@ setShowError(true)
               </p>
             )}
           </div>
-          <div>
-            <button className="bg-gray-600 p-2 rounded mt-2 text-white w-[200px]">
+          <div className="px-6 sm:px-0">
+            <button className="bg-gray-600 p-2 rounded mt-2 text-white w-full sm:w-[200px]">
               <Link to="/checkout">Buy Now</Link>
             </button>
           </div>
         </div>
       </div>
-      <div className="absolute top-[45px] right-[115px] ">
+      <div className="hidden sm:absolute top-[45px] right-[115px] ">
         <div className={`${product && cartPopupVisible ? "flex" : "hidden"}`}>
           {
             <CartPopUp

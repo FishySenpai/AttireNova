@@ -1,6 +1,7 @@
-import { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Profile from "./User/Profile";
+import logo from "./Assets/logo.png"
 import {
   newin,
   accesories,
@@ -22,10 +23,20 @@ const Navbar = (props) => {
   const [menToggle, setMenToggle] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (menToggle || womenToggle) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [menToggle, womenToggle])
+  
   const handleClick = () => {
     navigate(0);
   };
   const handleSearch = (e) => {
+    setMenToggle(false);
+    setWomenToggle(false);
     if (search) {
       navigate(`/search/${search}`);
       e.preventDefault();
@@ -35,36 +46,32 @@ const Navbar = (props) => {
   };
   return (
     <div className="relative">
-      <div className="bg-gray-700 w-full py-3 ">
+      <div className="bg-gray-800 w-full py-3 ">
         <div>
           <div>
             <nav className="w-full flex  justify-between items-center">
               <ul className="list-none flex flex-col sm:hidden space-x-4 z-20 ">
-                <div className="flex flex-row ">
-                  <li className="ml-2">
+                <div className="flex flex-row">
+                  
+                  <li className="text-[22px] font-bold text-white ml-5  ">
                     <button
-                      className="h-[25px]"
-                      onClick={(prev) => setToggle(!toggle)}
+                      onClick={() => {
+                        setMenToggle(false);
+                        setWomenToggle(false);
+                      }}
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="25px"
-                        width="25px"
-                        viewBox="0 0 448 512"
-                      >
-                        <path
-                          d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
-                          fill="white"
-                        />
-                      </svg>
+                      <Link to="/"><img src={logo} className="h-[45px] w-[160px]" /></Link>
                     </button>
-                  </li>
-                  <li className="text-2xl font-bold text-white absolute left-[50px] top-[6px] ">
-                    <Link to="/">Clothing</Link>
                   </li>
 
                   <li>
-                    <button className=" absolute right-[60px] top-[8px]">
+                    <button
+                      className=" absolute right-[60px] top-[20px]"
+                      onClick={() => {
+                        setMenToggle(false);
+                        setWomenToggle(false);
+                      }}
+                    >
                       <Link to="/cart">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -81,8 +88,15 @@ const Navbar = (props) => {
                       </Link>
                     </button>
                   </li>
-                  <li className="ml-2 absolute right-4 top-[9px]">
-                    <Profile />
+                  <li className="ml-2 absolute right-4 top-[20px]">
+                    <button
+                      onClick={() => {
+                        setMenToggle(false);
+                        setWomenToggle(false);
+                      }}
+                    >
+                      <Profile />
+                    </button>
                   </li>
                 </div>
                 <div className="flex sm:hidden flex-col  justify-center">
@@ -121,12 +135,38 @@ const Navbar = (props) => {
                       <div>Women</div>
                     </button>
                   </div>
-                  <div>Wishlist</div>
-                  <div>Orders</div>
+                  <div>
+                    <button
+                      onClick={() => {
+                        setMenToggle(false);
+                        setWomenToggle(false);
+                      }}
+                    >
+                      {" "}
+                      <Link to="/wishlist">Wishlist</Link>
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      onClick={() => {
+                        setMenToggle(false);
+                        setWomenToggle(false);
+                      }}
+                    >
+                      {" "}
+                      <Link to="/orders">Orders</Link>
+                    </button>
+                  </div>
                 </div>
               </ul>
               <ul className="list-none sm:flex hidden justify-end items-center flex-1 mr-10">
                 <div className="group hover:bg-gray-100 text-white hover:text-gray-600 ">
+                  <button
+                    onClick={handleClick}
+                    className="font-medium cursor-pointer text-[16px] hover:text-red-400 mx-5 px-5 py-4"
+                  >
+                    <Link to="/">Men</Link>
+                  </button>
                   <div className="absolute hidden text-gray-600 pt-1 group-hover:block z-50 shadow text-left bg-gray-100 space-y-2 px-3 py-4">
                     <ul className=" text-gray-800 font-medium text-left   w-full  divide-y-2">
                       <li className="h-[80px]">
@@ -516,7 +556,6 @@ const Navbar = (props) => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

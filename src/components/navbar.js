@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Profile from "./User/Profile";
 import logo from "./Assets/logo.png"
+import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
 import {
   newin,
   accesories,
@@ -22,6 +23,31 @@ const Navbar = (props) => {
   const [womenToggle, setWomenToggle] = useState(false);
   const [menToggle, setMenToggle] = useState(false);
   const navigate = useNavigate();
+const [user, setUser] = useState();
+
+const auth = getAuth();
+useEffect(() => {
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+    console.log(user);
+  });
+},);
+useEffect(() => {
+  
+  if(user===null){
+signInAnonymously(auth)
+  .then(() => {
+    // Signed in..
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+  });
+  }
+  
+}, [user])
+
 
   useEffect(() => {
     if (menToggle || womenToggle) {

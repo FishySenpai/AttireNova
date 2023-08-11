@@ -44,7 +44,7 @@ const CartUser = () => {
     try {
       console.log(id);
       const idAsString = id.toString(); //firebase expects id to be a string
-      const docRef = doc(db, "users", user.uid, "products", idAsString);
+      const docRef = doc(db, "users", user.uid, "cart", idAsString);
       await deleteDoc(docRef);
       setReFetch(reFetch+1)
     } catch (err) {
@@ -64,7 +64,7 @@ const CartUser = () => {
     const idAsString = id.toString();
     if (user) {
       try {
-        await updateDoc(doc(db, "users", user.uid, "products", idAsString), {
+        await updateDoc(doc(db, "users", user.uid, "cart", idAsString), {
           quantity: newQuantity,
         });
         setShowQuantity(false);
@@ -113,7 +113,7 @@ const CartUser = () => {
   useEffect(() => {
     if (user?.uid) {
       try {
-        const docRef = collection(db, "users", user.uid, "products");
+        const docRef = collection(db, "users", user.uid, "cart");
 
         const docSnap = async () => {
           const fav = await getDocs(docRef);
@@ -307,12 +307,22 @@ const CartUser = () => {
                     </div>
                   </div>
                   <div className="pb-4">
-                    <a
-                      href="/checkout"
-                      className="bg-gray-800 rounded px-12 py-1 text-white"
-                    >
-                      Proceed to Checkout
-                    </a>
+                    {user?.isAnonymous ? (
+                      <a
+                        href="/login"
+                        className="bg-gray-800 rounded px-12 py-1 text-white"
+                      >
+                        Proceed to Checkout
+                      </a>
+                    ) : (
+                      <a
+                        href="/checkout"
+                        className="bg-gray-800 rounded px-12 py-1 text-white"
+                      >
+                        Proceed to Checkout
+                      </a>
+                    )}
+                   
                   </div>
                 </div>
               </div>

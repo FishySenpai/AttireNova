@@ -40,7 +40,7 @@ const handleSuccessToggle = () => {
     try {
       console.log(id);
       const idAsString = id.toString(); //firebase expects id to be a string
-      const docRef = doc(db, "users", user.uid, "products", idAsString);
+      const docRef = doc(db, "users", user.uid, "cart", idAsString);
       await deleteDoc(docRef);
       setReFetch(reFetch+1)
     } catch (err) {
@@ -60,7 +60,7 @@ const handleClick = (id) => {
   const idAsString = id.toString();
    if (user) {
      try {
-       await updateDoc(doc(db, "users", user.uid, "products", idAsString), {
+       await updateDoc(doc(db, "users", user.uid, "cart", idAsString), {
          quantity: newQuantity,
        });
        setShowQuantity(false);
@@ -112,7 +112,7 @@ quantityCheck();
   useEffect(() => {
     if (user?.uid) {
       try {
-        const docRef = collection(db, "users", user.uid, "products");
+        const docRef = collection(db, "users", user.uid, "cart");
 
         const docSnap = async () => {
           const fav = await getDocs(docRef);

@@ -13,7 +13,7 @@ const Profile = () => {
   }, []);
 
   const handleClick = () => {
-    if (user) {
+    if (user && !user.isAnonymous) {
       setProfileToggle((prev) => !prev);
     }
   };
@@ -33,6 +33,7 @@ const Profile = () => {
                 Login
               </Link>
             )}
+            <Link to="/login">{user?.isAnonymous ? "Login" : ""}</Link>
           </h1>
           <div className={user ? "flex" : "hidden"}></div>
         </button>
@@ -51,7 +52,7 @@ const Profile = () => {
         </button>
         <div className={`${profileToggle ? "flex " : "hidden"}`}>
           <div className={`${user ? "flex " : "hidden"}`}>
-            <div className="h-[200px] absolute right-0 top-10 ">
+            <div className="h-[200px] absolute right-0 top-10 z-20">
               <div className="flex flex-col w-[150px] bg-white rounded font-normal p-2">
                 {user ? (
                   <button
@@ -70,7 +71,7 @@ const Profile = () => {
                   <button
                     onClick={logOut}
                     className={`${
-                      !user ? "hidden" : "flex hover:text-red-400 text-black "
+                      user===null ? "hidden" : "flex hover:text-red-400 text-black pt-2 pb-4"
                     }`}
                   >
                     Log Out

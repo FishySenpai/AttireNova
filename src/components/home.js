@@ -21,6 +21,7 @@ useEffect(() => {
     console.log(user);
   });
 }, [user]);
+
 useEffect(() => {
   if (user?.uid) {
     const menCollectionRef = doc(db, "categories/men/products", id.toString());

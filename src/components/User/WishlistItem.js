@@ -58,7 +58,7 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
       if (user) {
         console.log(size);
         try {
-          await setDoc(doc(db, "users", user.uid, "products", idAsString), {
+          await setDoc(doc(db, "users", user.uid, "cart", idAsString), {
             product,
             size,
             quantity: 1,

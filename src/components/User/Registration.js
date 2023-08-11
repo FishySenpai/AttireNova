@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { EmailAuthProvider, getAuth, linkWithCredential } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 const Registration = () => {
   const [emailReg, setEmailReg] = useState();
@@ -12,12 +13,17 @@ const Registration = () => {
     if(passwordReg === checkPass){
       setPassErr(null)
       try {
-        const user = await createUserWithEmailAndPassword(
-          auth,
-          emailReg,
-          passwordReg
-        );
-        console.log(user);
+        const credential = EmailAuthProvider.credential(emailReg, passwordReg);
+        linkWithCredential(auth.currentUser, credential)
+          .then((usercred) => {
+            const user = usercred.user;
+            console.log("Anonymous account successfully upgraded", user);
+
+          })
+          .catch((error) => {
+            console.log("Error upgrading anonymous account", error);
+          });
+        
         navigate("/");
       } catch (error) {
         console.log(error.message);

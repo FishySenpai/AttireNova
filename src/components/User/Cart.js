@@ -67,7 +67,7 @@ const hideCartPopup = () => {
     if(selectedSize){
       if (user) {
         try {
-          await setDoc(doc(db, "users", user.uid, "products", id), {
+          await setDoc(doc(db, "users", user.uid, "cart", id), {
             product,
             size,
             quantity,
@@ -162,7 +162,7 @@ setShowError(true)
           </div>
         </div>
       </div>
-      <div className="hidden sm:absolute top-[45px] right-[115px] ">
+      <div className="hidden sm:flex absolute top-[45px] right-[115px] ">
         <div className={`${product && cartPopupVisible ? "flex" : "hidden"}`}>
           {
             <CartPopUp

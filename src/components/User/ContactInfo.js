@@ -74,18 +74,23 @@ const randomID = () => {
   return (
     <div>
       {" "}
-      <div class="leading-loose relative">
+      <div class="leading-loose relative text-left w-full sm:w-[500px]">
         <div className="text-gray-500 text-2xl py-4 capitalize">
           Contact Information
         </div>
-        <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
-          <p class="text-gray-800 font-medium">Customer information</p>
+        <form class="max-w-xl m-4 py-5 px-10 bg-white rounded shadow-md">
+          <p class="text-gray-800 text-xl font-medium text-center">
+            Customer information
+          </p>
           <div class="">
-            <label class="block text-sm text-gray-00" for="cus_name">
+            <label
+              class="block text-md font-medium text-gray-600"
+              for="cus_name"
+            >
               Name
             </label>
             <input
-              class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+              class="w-full px-5 py-1 text-gray-700 bg-gray-200  rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
               id="cus_name"
               name="cus_name"
               type="text"
@@ -96,11 +101,14 @@ const randomID = () => {
             />
           </div>
           <div class="mt-2">
-            <label class="block text-sm text-gray-600" for="cus_email">
+            <label
+              class="block text-md font-medium text-gray-600"
+              for="cus_email"
+            >
               Email
             </label>
             <input
-              class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
+              class="w-full px-5  py-1 text-gray-700 bg-gray-200 rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -111,11 +119,14 @@ const randomID = () => {
             />
           </div>
           <div class="mt-2">
-            <label class=" block text-sm text-gray-600" for="cus_email">
+            <label
+              class=" block text-md font-medium text-gray-600"
+              for="cus_email"
+            >
               Address
             </label>
             <input
-              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -126,11 +137,14 @@ const randomID = () => {
             />
           </div>
           <div class="mt-2">
-            <label class="hidden text-sm  text-gray-600" for="cus_email">
+            <label
+              class="hidden text-md font-medium  text-gray-600"
+              for="cus_email"
+            >
               City
             </label>
             <input
-              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -141,11 +155,14 @@ const randomID = () => {
             />
           </div>
           <div class="inline-block mt-2 w-1/2 pr-1">
-            <label class="hidden  text-sm text-gray-600" for="cus_email">
+            <label
+              class="hidden  text-md font-medium text-gray-600"
+              for="cus_email"
+            >
               Country
             </label>
             <input
-              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -156,11 +173,14 @@ const randomID = () => {
             />
           </div>
           <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
-            <label class="hidden  text-sm text-gray-600" for="cus_email">
+            <label
+              class="hidden  text-md font-medium text-gray-600"
+              for="cus_email"
+            >
               Zip
             </label>
             <input
-              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -170,26 +190,86 @@ const randomID = () => {
               onChange={(e) => setZip(e.target.value)}
             />
           </div>
-          <p class="mt-4 text-gray-800 font-medium">Payment information</p>
+          <p class="mt-4 text-gray-800 text-xl font-medium text-center">
+            Payment information
+          </p>
           <div class="">
-            <label class="block text-sm text-gray-600" for="cus_name">
-              Card
+            <label
+              class="block text-md font-medium text-gray-600"
+              for="cus_name"
+            >
+              Card Number
             </label>
             <input
-              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
               id="cus_name"
               name="cus_name"
               type="text"
               required=""
-              placeholder="Card Number MM/YY CVC"
+              placeholder="Card Number"
               aria-label="Name"
               onChange={(e) => setCard(e.target.value)}
             />
           </div>
-
-          <div class="mt-4">
+          <div class="">
+            <label
+              class="block text-md font-medium text-gray-600"
+              for="cus_name"
+            >
+              Name on card
+            </label>
+            <input
+              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
+              id="cus_name"
+              name="cus_name"
+              type="text"
+              required=""
+              placeholder="Name on card"
+              aria-label="Name"
+              onChange={(e) => setCard(e.target.value)}
+            />
+          </div>
+          <div class="flex flex-row">
+            <div class="">
+              <label
+                class="block text-md font-medium text-gray-600"
+                for="cus_name"
+              >
+                Expiry Date (MM/YY)
+              </label>
+              <input
+                class="w-[150px] sm:w-[250px] px-2 py-2 text-gray-700 bg-gray-200 rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
+                id="cus_name"
+                name="cus_name"
+                type="text"
+                required=""
+                placeholder="MM/YY"
+                aria-label="Name"
+                onChange={(e) => setCard(e.target.value)}
+              />
+            </div>
+            <div class="ml-4">
+              <label
+                class="block text-md font-medium text-gray-600"
+                for="cus_name"
+              >
+                CVC
+              </label>
+              <input
+                class="w-[120px] px-2 py-2 text-gray-700 bg-gray-200 rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
+                id="cus_name"
+                name="cus_name"
+                type="text"
+                required=""
+                placeholder="CVC"
+                aria-label="Name"
+                onChange={(e) => setCard(e.target.value)}
+              />
+            </div>
+          </div>
+          <div class="mt-6 ml-[49px] sm:ml-24 ">
             <button
-              class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
+              class="px-4 py-1 text-white w-[200px]  font-light tracking-wider bg-gray-900 rounded focus:border-gray-800 focus:ring-gray-700 focus:outline-none focus:ring focus:ring-opacity-80"
               type="submit"
               onClick={handleSubmit}
             >

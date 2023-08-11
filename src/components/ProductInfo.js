@@ -29,7 +29,7 @@ const ProductInfo = () => {
         currency: "USD",
       },
       headers: {
-        "X-RapidAPI-Key": "a5555e8425msh0e3b2d01db9ba61p17c64djsn379b3aceaaa4",
+        "X-RapidAPI-Key": "325a7f72damshf16ffcb2c3ed7bep1f566djsn006db2e1a65a",
         "X-RapidAPI-Host": "asos2.p.rapidapi.com",
       },
     };
@@ -101,12 +101,12 @@ setIndex((prevIndex) => prevIndex + 1);
   if (loading) {
     return (
       <div className="flex flex-col">
-        <div className="flex flex-row">
-          <div className="ml-72 mt-32 ">
+        <div className="flex flex-col sm:flex-row">
+          <div className="sm:ml-72 sm:mt-32 ">
             {/* Dummy box */}
-            <div className="h-[450px] w-[350px] bg-gray-200 animate-pulse"></div>
+            <div className="w-[100vw] h-[450px] sm:w-[350px] bg-gray-200 animate-pulse"></div>
             {/* Dummy box */}
-            <div className="flex flex-row justify-center align-middle items-center">
+            <div className=" hidden sm:flex flex-row justify-center align-middle items-center">
               <ul className="flex flex-row">
                 <li>
                   <button
@@ -139,43 +139,57 @@ setIndex((prevIndex) => prevIndex + 1);
           </div>
           <div className="flex flex-col">
             {/* Dummy text */}
-            <div className="text-left ml-12 mt-32 text-2xl font-mono ">
+            <div className="text-left ml-4 sm:ml-12 sm:mt-32 text-2xl font-mono ">
               <div className="flex flex-row font-normal pt-2 mb-2">
                 <div className="w-[400px] h-[15px] mb-5 bg-gray-200 animate-pulse"></div>
               </div>
             </div>
             {/* Dummy text */}
             <div className="flex flex-col">
-              <div className="flex flex-row ml-12 mb-2">
+              <div className="flex flex-row ml-4 sm:ml-12 mb-2">
                 <div className="capitalize mb-5 w-[200px] h-[15px] font-mono bg-gray-200 animate-pulse"></div>
               </div>
               <div>
-                <div className="flex flex-row px-2  font-mono mb-5">
-                  <div className="w-[200px] h-[15px] ml-10 bg-gray-200 animate-pulse rounded-sm"></div>
+                <div className="flex flex-row px-2 font-mono mb-5">
+                  <div className="w-[200px] h-[15px] ml-2 sm:ml-10 bg-gray-200 animate-pulse rounded-sm"></div>
                 </div>
               </div>
             </div>
             {/* Dummy text */}
-            <div className="mt-4">
-              <div className="ml-12 py-2 text-lg font-mono text-left">
+            <div className=" hidden sm:flex mt-4">
+              <div className="ml-4 sm:ml-12 py-2 text-lg font-mono text-left">
                 <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
               </div>
-              <div className="ml-12 py-2 text-lg font-mono text-left">
+              <div className="ml-4 sm:ml-12 py-2 text-lg font-mono text-left">
                 <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
               </div>
-              <div className="ml-12 py-2 text-lg font-mono text-left">
+              <div className="ml-4 sm:ml-12 py-2 text-lg font-mono text-left">
                 <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
               </div>
-              <div className="ml-12 py-2 text-lg font-mono text-left">
+              <div className="ml-4 sm:ml-12 py-2 text-lg font-mono text-left">
                 <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
               </div>
             </div>
           </div>
-          <div className="ml-24 mt-32">
+          <div className="sm:ml-24 sm:mt-32">
             <Cart />
           </div>
+          <div className=" mb-4 sm:hidden mt-4">
+            <div className="ml-4 sm:ml-12 py-2 text-lg font-mono text-left">
+              <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
+            </div>
+            <div className="ml-4 sm:ml-12 py-2 text-lg font-mono text-left">
+              <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
+            </div>
+            <div className="ml-4 sm:ml-12 py-2 text-lg font-mono text-left">
+              <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
+            </div>
+            <div className="ml-4 sm:ml-12 py-2 text-lg font-mono text-left">
+              <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
+            </div>
+          </div>
         </div>
-        {/* <div className="ml-72 mt-12">
+        {/* <div className="sm:ml-72 ml-6 sm:mt-12">
           <Similar />
         </div> */}
       </div>

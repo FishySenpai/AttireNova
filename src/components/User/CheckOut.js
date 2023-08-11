@@ -135,28 +135,28 @@ quantityCheck();
   if (user && subTotal !== 0) {
     return (
       <div className="relative">
-        <div className="flex flex-row ml-96">
+        <div className="flex flex-col sm:flex-row sm:ml-96">
           <ContactInfo
             user={user}
             data={data}
             subTotal={subTotal}
             onSuccessToggle={handleSuccessToggle}
           />
-          <div className="px-6 items-center  container justify-between ">
+          <div className="px-4 sm:px-6 items-center  container justify-between ">
             <div className="sm:px-6 pb-6 pt-4 items-center container justify-between">
-              <div className="text-gray-500 text-2xl pb-7 capitalize w-[450px] ">
-                Order History
+              <div className="text-gray-500 text-2xl pb-8 text-left capitalize sm:w-[450px] ">
+                Order Summary
               </div>
               {data.length === 0 ? (
                 <div className="flex flex-wrap">
                   No Products have been added yet.
                 </div>
               ) : (
-                <ul className="flex flex-col bg-white shadow w-[550px] divide-y pt-2">
+                <ul className="flex flex-col bg-white shadow-sm w-full sm:w-[550px] divide-y pt-2">
                   {data.map((top) => {
                     return (
                       <li
-                        className="mr-4 md:mr-8 pb-6 flex flex-row ml-4 "
+                        className="mr-4 md:mr-8 pb-6 flex flex-row ml-2 sm:ml-4 "
                         key={top.product.id}
                       >
                         <a href={`/info/${top.product.id}`}>
@@ -166,17 +166,17 @@ quantityCheck();
                             alt="img"
                           />
                         </a>
-                        <div className="w-36 sm:w-full text-gray-700 text-[16px] text-left  font-normal ml-2">
+                        <div className="w-[190px] sm:w-full text-gray-700 text-[16px] text-left  font-normal ml-2">
                           <div className="flex flex-row relative">
                             <button className="text-left">
                               <Link
                                 to={`/info/${top.product.id}`}
-                                className="text-left "
+                                className="text-left truncate-2-lines"
                               >
                                 {top.product.name}
                               </Link>
                             </button>
-                            <div className=" ml-5 mt-4 h-[30px] absolute -right-3 -top-3 ">
+                            <div className=" ml-5 mt-4 h-[30px] absolute sm:-right-3 sm:-top-3 -right-[34px] -top-3">
                               <button onClick={() => deleteFav(top.product.id)}>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +193,7 @@ quantityCheck();
                               {top.product.variants[0]?.colour}
                             </div>
                             <div className="mt-1 ml-6">{top.size}</div>
-                            <div className="flex flex-row absolute right-0 sm:relative px-2 mb-2  mt-1">
+                            <div className="flex flex-row absolute -right-12 sm:right-0 sm:relative px-2 mb-2  mt-1">
                               <div className="text-[16px] text-gray-800 ml-5 mr-1">
                                 Qty:{" "}
                               </div>

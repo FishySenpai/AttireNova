@@ -22,7 +22,7 @@ function App() {
             path="/"
             element={
               <>
-                <Home />
+                <Sneakers />
 
                 {/* <Sneakers />
                 <Makeup />  */}

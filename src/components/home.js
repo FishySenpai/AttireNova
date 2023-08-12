@@ -8,6 +8,9 @@ import {
   getDoc
 } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
+import MenSale from './Men/MenSale';
+import MenPopular from './Men/MenPopular';
+import MenCategories from './Men/MenCategories';
 const Home = () => {
 const [user, setUser] = useState();
 const [data, setData] = useState();
@@ -22,64 +25,14 @@ useEffect(() => {
   });
 }, [user]);
 
-useEffect(() => {
-  if (user?.uid) {
-    const menCollectionRef = doc(db, "categories/men/products", id.toString());
 
-    const fetchData = async () => {
-      try {
-        const docSnapshot = await getDoc(menCollectionRef);
-        if (docSnapshot.exists()) {
-          setData(docSnapshot.data());
-          console.log(data);
-          setLoading(false);
-        } else {
-          console.log("Document not found.");
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchData();
-  }
-}, [user?.uid, id]);
-
-if (loading) {
-  return (
-    <div>
-      <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
-        Men's New
-      </div>
-      <div className=" items-center mx-auto container justify-between">
-        <div className="sm:p-6 pt-12 items-center container justify-between">
-          <div className="flex flex-wrap">
-            {[...Array(10)].map((_, index) => (
-              <li
-                className="mr-4 md:mr-8 pb-6 rounded animate-pulse list-none"
-                key={index}
-              >
-                <div className="w-[180px] h-[239px] sm:w-[265px] sm:h-[339px]  bg-gray-300 mb-2"></div>
-                <div className="mt-2">
-                  <div className="w-12 md:w-40  bg-gray-300 h-4 shadow"></div>
-                </div>
-              </li>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-} else {
-  return (
-    <div>
-      <div className="flex text-left pt-5 ml-4 sm:ml-52 font-mono text-2xl text-gray-600">
-        {data.name}
-      </div>
-      <Products products={data.products} />
-    </div>
-  );
-}
+return (
+  <div>
+    <MenSale/>
+    <MenPopular/>
+    <MenCategories />
+  </div>
+);
 }
 
 export default Home

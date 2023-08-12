@@ -5,7 +5,7 @@ import { auth } from "./firebaseConfig";
 import { doc, deleteDoc, setDoc } from "firebase/firestore";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-const Products = ({ products }) => {
+const Products = ({ products, view }) => {
   const [fillColor, setFillColor] = useState("black");
   const [user, setUser] = useState({});
   const [productId, setProductId] = useState([]);
@@ -101,7 +101,7 @@ useEffect(() => {
         <div className=" items-center mx-auto container justify-between">
           <div className="sm:p-6 pt-12 items-center container justify-between">
             <ul className="flex flex-wrap">
-              {products?.slice(0, 10).map((top, index) => (
+              {products?.slice(0, view).map((top, index) => (
                 <li
                   className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-8 pb-6 relative"
                   key={top.id}
@@ -141,8 +141,13 @@ useEffect(() => {
                         {top.name}
                       </Link>
                     </button>
-                    <div className="text-gray-700 text-left font-bold ml-2">
-                      {top.price.current.text}
+                    <div className="flex flex-row">
+                      <div className="text-gray-500 text-left text-sm mt-1 line-through">
+                        {top.price?.rrp.text}
+                      </div>
+                      <div className="text-gray-700 text-left font-bold ml-2">
+                        {top.price.current.text}
+                      </div>
                     </div>
                   </div>
                 </li>

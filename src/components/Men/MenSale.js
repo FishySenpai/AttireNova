@@ -1,45 +1,56 @@
 import React, { useState, useEffect } from "react";
-import Products from "./Products";
+import Products from "../Products";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { db } from "./firebaseConfig";
-import { auth } from "./firebaseConfig";
-import { doc, setDoc } from "firebase/firestore";
-import { useFetch } from "./getData";
+import { db } from "../firebaseConfig";
+import { auth } from "../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-const Sneakers = () => {
+const MenSale = () => {
   const [user, setUser] = useState();
-  const id = 16691;
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+  const id = 8409;
   const navigate = useNavigate();
-  const { loading, products } = useFetch(id);
+
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log(user);
     });
   }, [user]);
-  const addFav = async () => {
-    // Add a new document in collection "favs"
-    const men = "men";
-    const idAsString = id.toString();
-    if (user && products) {
-      try {
-        await setDoc(doc(db, "categories", men, "products", idAsString), {
-          name: "Men's Sale",
-          products,
-        });
-        console.log("success")
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      navigate("/login");
+
+  useEffect(() => {
+    if (user?.uid) {
+      const menCollectionRef = doc(
+        db,
+        "categories/men/products",
+        id.toString()
+      );
+
+      const fetchData = async () => {
+        try {
+          const docSnapshot = await getDoc(menCollectionRef);
+          if (docSnapshot.exists()) {
+            setData(docSnapshot.data());
+            console.log(data);
+            setLoading(false);
+          } else {
+            console.log("Document not found.");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      fetchData();
     }
-  };
+  }, [user?.uid, id]);
+
   if (loading) {
     return (
       <div>
         <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
-          Women's New
+          Men's Sale
         </div>
         <div className=" items-center mx-auto container justify-between">
           <div className="sm:p-6 pt-12 items-center container justify-between">
@@ -49,7 +60,7 @@ const Sneakers = () => {
                   className="mr-4 md:mr-8 pb-6 rounded animate-pulse list-none"
                   key={index}
                 >
-                  <div className="w-[265px] h-[339px] bg-gray-300 mb-2"></div>
+                  <div className="w-[180px] h-[239px] sm:w-[265px] sm:h-[339px]  bg-gray-300 mb-2"></div>
                   <div className="mt-2">
                     <div className="w-12 md:w-40  bg-gray-300 h-4 shadow"></div>
                   </div>
@@ -63,14 +74,13 @@ const Sneakers = () => {
   } else {
     return (
       <div>
-        <button onClick={addFav}>Add</button>
-        <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
-          Women's New
+        <div className="flex text-left pt-5 ml-4 sm:ml-52 font-mono text-2xl text-gray-600">
+          {data.name}
         </div>
-        <Products products={products} />
+        <Products products={data.products} view={5} />
       </div>
     );
   }
 };
 
-export default Sneakers;
+export default MenSale;

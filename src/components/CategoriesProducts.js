@@ -132,17 +132,17 @@ const CategoriesProducts = ({ products, view }) => {
       <div>
         <div className=" items-center mx-auto container justify-between">
           <div className="sm:p-7 pt-12 items-center container justify-between relative ">
-            <div className="overflow-x-hidden " ref={scrollContainerRef}>
-              <button onClick={handleLeft}>
+            <div className="overflow-x-scroll sm:overflow-x-hidden " ref={scrollContainerRef}>
+              <button className="hidden sm:block" onClick={handleLeft}>
                 <img
                   src={arrowLeft}
                   className="absolute top-[170px] left-4 w-[50px] h-[50px] z-20 bg-gray-800/20 rounded-full "
                 />
               </button>
-              <ul className="flex flex-row pl-4  ">
+              <ul className="flex flex-row sm:pl-4  ">
                 {products?.slice(3, 40).map((top, index) => (
                   <li
-                    className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-8 pb-6 relative"
+                    className="ml-3  mr-3 sm:ml-0 sm:mr-4 md:mr-8 pb-6 relative  "
                     key={top.id}
                   >
                     <button
@@ -170,16 +170,16 @@ const CategoriesProducts = ({ products, view }) => {
 
                     <a href={`/info/${top.id}`}>
                       <img
-                        className="w-[180px] h-[239px] sm:w-[265px] sm:h-[339px]  rounded hover:shadow-lg cursor-pointer "
+                        className="w-[250px] h-[219px] sm:w-[265px] sm:h-[339px]  rounded hover:shadow-lg cursor-pointer "
                         src={`https://${top.imageUrl}`}
                         alt="img"
                       />
                     </a>
 
-                    <div className=" w-36 md:w-[265px] text-gray-700 text-md hover:text-red-500 cursor-pointer">
+                    <div className=" w-[160px] md:w-[265px] text-gray-700 text-md hover:text-red-500 cursor-pointer">
                       <button className="text-left">
                         <Link
-                          className="truncate-2-lines"
+                          className="truncate-2-lines text-left"
                           to={`/info/${top.id}`}
                         >
                           {top.name}
@@ -197,7 +197,7 @@ const CategoriesProducts = ({ products, view }) => {
                   </li>
                 ))}
               </ul>
-              <button onClick={handleRight}>
+              <button className="hidden sm:block" onClick={handleRight}>
                 <img
                   src={arrowRight}
                   className="absolute top-[170px] right-4 w-[50px] h-[50px] z-20 bg-gray-800/20 rounded-full"

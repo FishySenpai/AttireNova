@@ -205,7 +205,7 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
           className="bg-gray-800 text-white w-[262px] py-1 rounded text-[16px]"
           onClick={() => addFav(top.product.id, top.product, top.size)}
         >
-          Move to cart
+          Add to cart
         </button>
         {!selectedSize && !top.size && showError && (
           <div className={top.product.id === productId ? "flex" : "hidden"}>
@@ -215,7 +215,7 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
           </div>
         )}
       </div>
-      <div className="absolute -top-[20px] -right-[116px] z-50">
+      <div className="hidden sm:flex absolute -top-[20px] -right-[116px] z-50">
         <div
           className={`${
             top.product && cartPopupVisible && top.product.id === productId

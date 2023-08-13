@@ -26,6 +26,8 @@ import womenAccesories from "./Assets/women/womenAccessories.png";
 import womenBrands from "./Assets/women/womenBrands.png";
 import womenWorkwear from "./Assets/women/womenWorkwear.png";
 import womenNewin from "./Assets/women/womenNewin.png";
+import womenHome from "./Assets/women/womenHome.png";
+import home from "./Assets/men/home.png"
 import WomenHome from "./WomenHome";
 import Footer from "./Footer";
 export {
@@ -57,5 +59,7 @@ export {
   womenWorkwear,
   womenNewin,
   Footer,
-  WomenHome
+  WomenHome,
+  home,
+  womenHome
 };

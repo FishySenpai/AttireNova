@@ -134,10 +134,10 @@ const CartUser = () => {
 
   if (user) {
     return (
-      <div className="sm:px-6 items-center mx-auto container justify-between pb-4">
+      <div className="sm:px-6 items-center mx-auto container justify-between pb-4 min-h-screen">
         <div className="sm:p-6 sm:pt-12 items-center container justify-between">
           <div className="text-gray-500 text-2xl text-left px-2 py-4 sm:py-4 capitalize">
-            {localStorage.getItem("name") || user.email?.split("@")[0]}'s Cart
+            My Cart
           </div>
           {data.length === 0 ? (
             <div className="flex flex-wrap">
@@ -168,11 +168,11 @@ const CartUser = () => {
                             {top.product.name}
                           </Link>
                         </button>
-                        <div className="flex flex-row relative text-[16px] sm:text-[16px]">
+                        <div className="flex flex-col sm:flex-row relative text-[16px] sm:text-[16px]">
                           <div className="mt-1">
                             {top.product.variants[0]?.colour}
                           </div>
-                          <div className="ml-5 mt-1">{top.size}</div>
+                          <div className="sm:ml-5 mt-1">{top.size}</div>
                           <div className="flex flex-row absolute right-0 sm:relative px-2 mb-2  mt-1">
                             <div className="text-[16px] text-gray-800 ml-5 mr-1">
                               Qty:{" "}

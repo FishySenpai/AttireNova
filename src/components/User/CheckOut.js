@@ -134,7 +134,7 @@ quantityCheck();
 
   if (user && subTotal !== 0) {
     return (
-      <div className="relative">
+      <div className="relative min-h-screen pb-8">
         <div className="flex flex-col sm:flex-row sm:ml-96">
           <ContactInfo
             user={user}
@@ -188,11 +188,12 @@ quantityCheck();
                               </button>
                             </div>
                           </div>
-                          <div className="flex flex-row relative">
+                          <div className="flex flex-col sm:flex-row relative">
+                            
                             <div className="mt-1">
                               {top.product.variants[0]?.colour}
                             </div>
-                            <div className="mt-1 ml-6">{top.size}</div>
+                            <div className="mt-1 sm:ml-6">{top.size}</div>
                             <div className="flex flex-row absolute -right-12 sm:right-0 sm:relative px-2 mb-2  mt-1">
                               <div className="text-[16px] text-gray-800 ml-5 mr-1">
                                 Qty:{" "}
@@ -292,8 +293,8 @@ quantityCheck();
           </div>
         </div>
         <div className={!success ? "hidden" : "flex"}>
-          <div class="absolute inset-0 pt-[196px]  h-full  bg-gray-900/50  z-50">
-            <div class="bg-white p-6  md:mx-auto w-[500px] shadow-xl rounded">
+          <div class="absolute inset-0 pt-[450px] sm:pt-[196px]  h-full  bg-gray-900/50  z-50">
+            <div class="bg-white p-6  md:mx-auto w-full sm:w-[500px] shadow-xl rounded">
               <svg
                 viewBox="0 0 24 24"
                 class="text-green-600 w-16 h-16 mx-auto my-6"
@@ -313,7 +314,7 @@ quantityCheck();
                 <p> Have a great day! </p>
                 <div class="py-10 text-center">
                   <button class="px-12 bg-gray-900 hover:bg-gray-800 rounded text-white font-semibold py-3">
-                    <Link to="/">GO BACK</Link>
+                    <Link to="/orders">Check Orders</Link>
                   </button>
                 </div>
               </div>
@@ -323,7 +324,7 @@ quantityCheck();
       </div>
     );
   } else {
-    return <div>Loading...</div>;
+    return <div className="min-h-screen">Loading...</div>;
   }
 };
 

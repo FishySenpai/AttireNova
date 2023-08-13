@@ -48,8 +48,8 @@ const Women = () => {
   if (loading) {
     return (
       <div>
-        <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
-          Men's New
+        <div className="flex text-left ml-4 sm:ml-52 font-mono text-2xl text-gray-600">
+          Women's New
         </div>
         <div className=" items-center mx-auto container justify-between">
           <div className="sm:p-6 pt-12 items-center container justify-between">

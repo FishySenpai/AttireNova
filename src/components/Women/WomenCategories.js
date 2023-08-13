@@ -11,12 +11,12 @@ import CategoryWomenAccessories from "../Assets/CategoryWomen/CategoryWomenAcces
 const WomenCategories = () => {
   return (
     <div>
-      <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
+      <div className="flex text-left ml-4 sm:ml-52 font-mono text-2xl text-gray-600">
         Categories
       </div>
-      <div className=" items-center mx-auto container justify-between">
+      <div className=" items-center mx-auto container justify-between pb-8">
         <div className="sm:p-6 pt-12 items-center container justify-between">
-          <ul className="flex flex-wrap pl-[80px]  ">
+          <ul className="flex flex-wrap ml-4 sm:ml-0 sm:pl-[80px]  ">
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
               <a href={`/info`}>
                 <img
@@ -25,7 +25,7 @@ const WomenCategories = () => {
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-36 md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link className="truncate-2-lines" to={`/info`}>
                     Newin
@@ -41,7 +41,7 @@ const WomenCategories = () => {
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-36 md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link className="truncate-2-lines" to={`/info`}>
                     Designer Brands
@@ -57,7 +57,7 @@ const WomenCategories = () => {
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-36 md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link className="truncate-2-lines" to={`/info`}>
                     Accessories
@@ -73,10 +73,10 @@ const WomenCategories = () => {
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-36 md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link className="truncate-2-lines" to={`/info`}>
-                    Suits
+                    Dresses
                   </Link>
                 </button>
               </div>
@@ -89,7 +89,7 @@ const WomenCategories = () => {
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-36 md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link className="truncate-2-lines" to={`/info`}>
                     Sports
@@ -105,7 +105,7 @@ const WomenCategories = () => {
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-36 md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link className="truncate-2-lines" to={`/info`}>
                     Shoes
@@ -121,7 +121,7 @@ const WomenCategories = () => {
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-36 md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link className="truncate-2-lines" to={`/info`}>
                     Jacekts & Coats
@@ -137,7 +137,7 @@ const WomenCategories = () => {
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-36 md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link className="truncate-2-lines" to={`/info`}>
                     Workwear

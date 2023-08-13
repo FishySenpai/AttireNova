@@ -98,10 +98,10 @@ useEffect(() => {
   if (products) {
     return (
       <div>
-        <div className=" items-center mx-auto container justify-between">
+        <div className=" items-center mx-auto container justify-between pb-8">
           <div className="sm:p-6 pt-12 items-center container justify-between">
             <ul className="flex flex-wrap">
-              {products?.slice(0, view).map((top, index) => (
+              {products?.slice(0, 45).map((top, index) => (
                 <li
                   className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-8 pb-6 relative"
                   key={top.id}

@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import arrow from "../Assets/arrow.png"
 const Profile = () => {
   const [user, setUser] = useState({});
   const [profileToggle, setProfileToggle] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -15,6 +17,8 @@ const Profile = () => {
   const handleClick = () => {
     if (user && !user.isAnonymous) {
       setProfileToggle((prev) => !prev);
+    } else {
+      navigate("/login")
     }
   };
   const logOut = async () => {
@@ -22,7 +26,7 @@ const Profile = () => {
     window.localStorage.clear();
   };
   return (
-    <div className="flex flex-row ">
+    <div className="flex flex-row relative">
       <div className="flex flex-row ">
         <button onClick={handleClick} className="hidden sm:flex flex-row">
           <h1 className="hover:text-red-400">
@@ -52,30 +56,72 @@ const Profile = () => {
         </button>
         <div className={`${profileToggle ? "flex " : "hidden"}`}>
           <div className={`${user ? "flex " : "hidden"}`}>
-            <div className="h-[200px] absolute right-0 top-10 z-20">
-              <div className="flex flex-col w-[150px] bg-white rounded font-normal p-2">
-                {user ? (
-                  <button
-                    className="font-mono cursor-pointer text-left text-black hover:text-red-400 pb-1"
-                    onClick={() => {
-                      setProfileToggle(!profileToggle);
-                    }}
-                  >
-                    <Link to="/orders">Orders</Link>
-                  </button>
-                ) : (
-                  <div className="hidden">adf</div>
-                )}
+            <div>
+              <img src={arrow} className="absolute top-5 right-2 h-3 w-5" />
+            </div>
+            <div className="absolute z-30 top-8 -right-4">
+              <button
+                onClick={() => {
+                  setProfileToggle(false);
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="40px"
+                  height="38px"
+                  class="bi bi-x"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                    fill="black"
+                  />{" "}
+                </svg>
+              </button>
+            </div>
+            <div className="absolute top-20   sm:-right-4 sm:top-8 z-20">
+              <div className="flex flex-col w-[175px] bg-white rounded  p-2 text-gray-800 font-normal text-left">
+                <div className="space-y-2 ml-2">
+                  <div className="hover:text-red-500 ">
+                    <button
+                      onClick={() => {
+                        setProfileToggle(!profileToggle);
+                      }}
+                    >
+                      <Link to="/orders">My Orders</Link>
+                    </button>
+                  </div>
 
-                <div>
-                  <button
-                    onClick={logOut}
-                    className={`${
-                      user===null ? "hidden" : "flex hover:text-red-400 text-black pt-2 pb-4"
-                    }`}
-                  >
-                    Log Out
-                  </button>
+                  <div className="hover:text-red-500 ">
+                    <button
+                      onClick={() => {
+                        setProfileToggle(!profileToggle);
+                      }}
+                    >
+                      <Link to="/cart">My Cart</Link>
+                    </button>
+                  </div>
+                  <div className="hover:text-red-500 ">
+                    <button
+                      onClick={() => {
+                        setProfileToggle(!profileToggle);
+                      }}
+                    >
+                      <Link to="/wishlist">My Wishlist</Link>
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      onClick={logOut}
+                      className={`${
+                        user === null
+                          ? "hidden"
+                          : "flex hover:text-red-500  pb-2"
+                      }`}
+                    >
+                      Log Out
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

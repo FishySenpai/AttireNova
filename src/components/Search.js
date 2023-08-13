@@ -56,7 +56,7 @@ useEffect(() => {
     }
   };
   return (
-    <div>
+    <div className="min-h-screen">
       
       <Products products={products}/>
     </div>

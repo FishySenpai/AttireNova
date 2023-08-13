@@ -2,11 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
-import {
-  getDocs,
-  collection,
-
-} from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import WishlistItem from "./WishlistItem";
 const WishList = () => {
@@ -15,15 +11,12 @@ const WishList = () => {
   const navigate = useNavigate();
   const [reFetch, setReFetch] = useState(0);
 
-
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log(user);
     });
   }, [user]);
-
-
 
   useEffect(() => {
     if (user?.uid) {
@@ -44,11 +37,10 @@ const WishList = () => {
 
   if (user) {
     return (
-      <div className="px-6 items-center mx-auto container justify-between">
+      <div className="px-6 items-center mx-auto container justify-between min-h-screen pb-8">
         <div className="sm:p-6 pt-12 items-center container justify-between relative">
-          <div className="text-gray-500 text-2xl py-4 capitalize">
-            {localStorage.getItem("name") || user.email?.split("@")[0]}'s
-            Wishlist
+          <div className="text-gray-500 text-2xl py-4 text-left capitalize">
+            My Wishlist
           </div>
           {data.length === 0 ? (
             <div className="flex flex-wrap">
@@ -57,7 +49,7 @@ const WishList = () => {
           ) : (
             <ul className="flex flex-wrap">
               {data.map((top, index) => (
-                <WishlistItem    //the cartpop exists individually for each item state with wishlist item component
+                <WishlistItem //the cartpop exists individually for each item state with wishlist item component
                   top={top}
                   key={top.product.id}
                   reFetch={reFetch}

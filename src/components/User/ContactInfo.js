@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { db } from "../firebaseConfig";
 import { serverTimestamp } from 'firebase/firestore';
 import { Link, useNavigate } from "react-router-dom";
@@ -23,6 +23,7 @@ const ContactInfo = ({user, subTotal, onSuccessToggle, data}) => {
         const navigate = useNavigate();
       // Function to handle form submission
       const handleSubmit = (e) => {
+        
         addFav();
         e.preventDefault();
         // Do something with the form data, e.g., send it to a server
@@ -39,12 +40,17 @@ const ContactInfo = ({user, subTotal, onSuccessToggle, data}) => {
 const randomID = () => {
   setRandomId(Math.floor(Math.random() * (100000 - 10000)) + 10000);
 };
+useEffect(() => {
+  randomID();
+}, [])
+
+
 
       
 
        const addFav = async () => {
-         // Add a new document in collection "favs"
-         randomID();
+         // Add a new document in collection "users"
+         
          const idAsString = randomId.toString();
          if (user) {
            try {
@@ -62,7 +68,7 @@ const randomID = () => {
                subTotal,
                timestamp: serverTimestamp() 
              });
-             
+             onSuccessToggle();
            } catch (err) {
              console.log(err);
            }

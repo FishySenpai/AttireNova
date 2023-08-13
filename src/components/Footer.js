@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className=" relative">
-      <div className="bg-gray-800 h-[220px] font-mono text-[16px] text-gray-300 flex justify-center  absolute left-0 right-0 top-20  pt-12">
+      <div className="bg-gray-800 h-[220px] font-mono text-[16px] text-gray-300 flex justify-center  absolute left-0 right-0 top-0  pt-12">
         <div className="flex-col">
           <div className="py-2">Website is still a work in progress...</div>
           <div className="">

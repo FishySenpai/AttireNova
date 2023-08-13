@@ -26,6 +26,7 @@ import womenAccesories from "./Assets/women/womenAccessories.png";
 import womenBrands from "./Assets/women/womenBrands.png";
 import womenWorkwear from "./Assets/women/womenWorkwear.png";
 import womenNewin from "./Assets/women/womenNewin.png";
+import WomenHome from "./WomenHome";
 import Footer from "./Footer";
 export {
   SearchBar,
@@ -55,5 +56,6 @@ export {
   womenBrands,
   womenWorkwear,
   womenNewin,
-  Footer
+  Footer,
+  WomenHome
 };

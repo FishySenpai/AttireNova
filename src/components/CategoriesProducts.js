@@ -140,7 +140,7 @@ const CategoriesProducts = ({ products, view }) => {
                 />
               </button>
               <ul className="flex flex-row pl-4  ">
-                {products?.map((top, index) => (
+                {products?.slice(3, 40).map((top, index) => (
                   <li
                     className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-8 pb-6 relative"
                     key={top.id}

@@ -5,7 +5,7 @@ import Home from "./components/home";
 import Search from "./components/Search";
 import "./App.css";
 import ProductInfo from "./components/ProductInfo";
-import { Makeup, SearchBar, Sneakers, Login, Registration, CartUser, CheckOut, Dresses, Shoes, WorkWear, WishList, OrderedItems, Men, Women, Footer } from "./components";
+import { Makeup, SearchBar, Sneakers, Login, Registration, CartUser, CheckOut, Dresses, Shoes, WorkWear, WishList, OrderedItems, Men, Women, Footer, WomenHome } from "./components";
 import Test from "./components/test";
 import GetProductInfo from "./components/getProductInfo"
 import Products from "./components/Products";
@@ -34,9 +34,7 @@ function App() {
               path="/women"
               element={
                 <>
-                  <Dresses />
-                  <Shoes />
-                  <WorkWear />
+                  <WomenHome/>
                 </>
               }
             />

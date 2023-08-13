@@ -18,7 +18,7 @@ const MenCategories = () => {
         <div className="sm:p-6 pt-12 items-center container justify-between">
           <ul className="flex flex-wrap sm:pl-[80px]  ">
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
-              <a href={`/info`}>
+              <a href="/categories/men/27110">
                 <img
                   className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
                   src={CategoryMenNewin}
@@ -27,14 +27,14 @@ const MenCategories = () => {
               </a>
               <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
-                  <Link className="truncate-2-lines" to={`/info`}>
+                  <Link className="truncate-2-lines" to="/categories/men/27110">
                     Newin
                   </Link>
                 </button>
               </div>
             </li>
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
-              <a href={`/info`}>
+              <a href="/categories/men/27111">
                 <img
                   className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
                   src={CategoryMenBrands}
@@ -43,14 +43,14 @@ const MenCategories = () => {
               </a>
               <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
-                  <Link className="truncate-2-lines" to={`/info`}>
+                  <Link className="truncate-2-lines" to="/categories/men/27111">
                     Designer Brands
                   </Link>
                 </button>
               </div>
             </li>
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
-              <a href={`/info`}>
+              <a href="/categories/men/4210">
                 <img
                   className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
                   src={CategoryMenAccessories}
@@ -59,14 +59,14 @@ const MenCategories = () => {
               </a>
               <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
-                  <Link className="truncate-2-lines" to={`/info`}>
+                  <Link className="truncate-2-lines" to="/categories/men/4210">
                     Accessories
                   </Link>
                 </button>
               </div>
             </li>
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
-              <a href={`/info`}>
+              <a href="/categories/men/5678">
                 <img
                   className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
                   src={CategoryMenSuits}
@@ -75,14 +75,14 @@ const MenCategories = () => {
               </a>
               <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
-                  <Link className="truncate-2-lines" to={`/info`}>
+                  <Link className="truncate-2-lines" to="/categories/men/5678">
                     Suits
                   </Link>
                 </button>
               </div>
             </li>
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
-              <a href={`/info`}>
+              <a href="/categories/men/26090">
                 <img
                   className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
                   src={CategoryMenSports}
@@ -91,14 +91,14 @@ const MenCategories = () => {
               </a>
               <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
-                  <Link className="truncate-2-lines" to={`/info`}>
+                  <Link className="truncate-2-lines" to="/categories/men/26090">
                     Sports
                   </Link>
                 </button>
               </div>
             </li>
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
-              <a href={`/info`}>
+              <a href="/categories/men/4209">
                 <img
                   className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
                   src={CategoryMenShoes}
@@ -107,14 +107,14 @@ const MenCategories = () => {
               </a>
               <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
-                  <Link className="truncate-2-lines" to={`/info`}>
+                  <Link className="truncate-2-lines" to="/categories/men/4209">
                     Shoes
                   </Link>
                 </button>
               </div>
             </li>
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
-              <a href={`/info`}>
+              <a href="/categories/men/3606">
                 <img
                   className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
                   src={CategoryMenJackets}
@@ -123,14 +123,14 @@ const MenCategories = () => {
               </a>
               <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
-                  <Link className="truncate-2-lines" to={`/info`}>
+                  <Link className="truncate-2-lines" to="/categories/men/3606">
                     Jacekts & Coats
                   </Link>
                 </button>
               </div>
             </li>
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
-              <a href={`/info`}>
+              <a href="/categories/men/5668">
                 <img
                   className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
                   src={CategoryMenHoodies}
@@ -139,12 +139,12 @@ const MenCategories = () => {
               </a>
               <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="hidden sm:block">
-                  <Link className="truncate-2-lines" to={`/info`}>
+                  <Link className="truncate-2-lines" to="/categories/men/5668">
                     Hoodies & Sweatshirts
                   </Link>
                 </button>
                 <button className="sm:hidden">
-                  <Link className="truncate-2-lines" to={`/info`}>
+                  <Link className="truncate-2-lines" to="/categories/men/5668">
                     Hoodies
                   </Link>
                 </button>

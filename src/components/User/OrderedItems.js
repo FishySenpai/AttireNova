@@ -112,7 +112,7 @@ if (user) {
     <div className="sm:px-6 items-center mx-auto container justify-between min-h-screen">
       <div className="sm:p-6 pt-12 items-center container justify-between ">
         {data.length === 0 ? (
-          <div className="flex flex-wrap">No Products have been added yet.</div>
+          <div className="flex flex-wrap ml-4">No Orders have been placed yet.</div>
         ) : (
           <div className="flex flex-col sm:ml-16 mt-10">
             {data.map((orders) => (
@@ -133,24 +133,27 @@ if (user) {
                     <ul className="flex flex-wrap  sm:flex-col bg-white shadow  sm:w-[750px] sm:divide-y-2  pt-2">
                       {orders.data.map((top) => (
                         <li
-                          className=" md:mr-8 pb-6 flex flex-col sm:flex-row mr-4 ml-4 sm:ml-4 "
-                          key={top?.product.id}
+                          className="mr-4 md:mr-8 pb-6 flex flex-row ml-4 "
+                          key={top.product.id}
                         >
-                          <a href={`/info/${top?.product.id}`}>
+                          <a href={`/info/${top.product.id}`}>
                             <img
-                              className="w-[170px] h-[280px] md:w-[100px] md:h-[150px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
+                              className="w-[120px] h-[160px] md:w-[160px] md:h-[180px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
                               src={`https://${top.product?.media.images[0].url}`}
                               alt="img"
                             />
                           </a>
-                          <div className=" text-gray-700 text-[16px] text-left  font-normal sm:ml-2">
-                            <div className="flex flex-col sm:flex-row justify-between">
-                              <button className="text-left w-[150px]  sm:w-[350px]">
-                                <Link to={`/info/${top.product.id}`}>
+                          <div className=" text-gray-700 text-[16px] w-[260px] sm:w-[650px] text-left  font-normal ml-2">
+                            <div className="flex flex-row">
+                              <button className="text-left w-[320px] ">
+                                <Link
+                                  className="truncate-2-lines"
+                                  to={`/info/${top.product.id}`}
+                                >
                                   {top.product.name}
                                 </Link>
                               </button>
-                              <div className="flex flex-row sm:px-2 mb-2 space-x-5 sm:space-x-11 sm:ml-6 w-[150px]">
+                              <div className=" hidden sm:flex flex-row sm:px-2 mb-2 space-x-5 sm:space-x-11 sm:ml-6 w-[150px]">
                                 <div className="text-gray-700 text-left font-bold ">
                                   ${top.product.price.current.value}
                                 </div>
@@ -164,11 +167,28 @@ if (user) {
                                 </div>
                               </div>
                             </div>
-                            <div className="flex flex-col relative">
-                              <div className="mt-1">
-                                Color: {top.product.variants[0]?.colour}
+                            <div className="flex flex-col sm:flex-row relative text-[16px] sm:text-[16px]">
+                              <div className="mt-1 flex flex-row">
+                                <div className="text-gray-400 mr-1">Colour: </div>
+                                {top.product.variants[0]?.colour}
                               </div>
-                              <div className=" mt-1">Size: {top.size}</div>
+                              <div className="sm:ml-5 mt-1 flex flex-row">
+                                <div className="text-gray-400 mr-1">Size: </div>{" "}
+                                 {top.size}
+                              </div>
+                            </div>
+
+                            <div className="sm:hidden flex flex-row sm:px-2 mb-2 space-x-14 sm:ml-6 w-[150px] pt-2">
+                              <div className="text-gray-700 text-left font-bold ">
+                                ${top.product.price.current.value}
+                              </div>
+                              <div className="text-[16px] text-gray-800 ">
+                                Qty:{top.quantity}
+                              </div>
+                              <div className="text-gray-700 text-left font-bold">
+                                $
+                                {top.product.price.current.value * top.quantity}
+                              </div>
                             </div>
                           </div>
                         </li>
@@ -176,7 +196,7 @@ if (user) {
                     </ul>
                     <div className="flex flex-col text-[16px] sm:w-[750px] mt-6 bg-white shadow">
                       <div className="flex flex-row px-4 py-2 relative">
-                        Subtotal({quantity} items):
+                        Subtotal:
                         <div className="text-red-500 absolute right-5">
                           $
                           {orders.data.reduce(

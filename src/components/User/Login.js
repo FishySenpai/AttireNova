@@ -27,7 +27,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="relative flex flex-col font-medium text-left justify-center sm:min-h-screen text-gray-800/90 px-4 sm:px-0">
+    <div className="relative flex flex-col font-medium text-left justify-center min-h-screen text-gray-800/90 px-4 sm:px-0">
       <div className="w-full sm:w-[500px] p-6 m-auto mt-12 sm:mt-36 bg-white rounded-md shadow-md lg:max-w-xl">
         <h1 className="text-3xl  cursor-pointer e underline">Login</h1>
         <div className="mb-2">
@@ -104,7 +104,7 @@ const Login = () => {
               />
             </svg>
             <p className="text-base font-medium ml-4 text-white ">
-              Continue with Google
+              Login with Google
             </p>
           </button>
         </div>

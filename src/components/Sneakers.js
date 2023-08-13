@@ -8,7 +8,7 @@ import { useFetch } from "./getData";
 import { useNavigate } from "react-router-dom";
 const Sneakers = () => {
   const [user, setUser] = useState();
-  const id = 16661;
+  const id = 5668;
   const navigate = useNavigate();
   const { loading, products } = useFetch(id);
   useEffect(() => {
@@ -19,12 +19,12 @@ const Sneakers = () => {
   }, [user]);
   const addFav = async () => {
     // Add a new document in collection "favs"
-    const men = "women";
+    const men = "men";
     const idAsString = id.toString();
     if (user && products) {
       try {
         await setDoc(doc(db, "categories", men, "products", idAsString), {
-          name: "Women's Popular",
+          name: "Men's Hoodies & Sweatshirts",
           products,
         });
         console.log("success")

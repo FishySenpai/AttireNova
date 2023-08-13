@@ -156,7 +156,7 @@ setIndex((prevIndex) => prevIndex + 1);
               </div>
             </div>
             {/* Dummy text */}
-            <div className=" hidden sm:flex mt-4">
+            <div className=" hidden sm:flex flex-col mt-4">
               <div className="ml-4 sm:ml-12 py-2 text-lg font-mono text-left">
                 <div className="pt-2 w-[300px] h-[15px] bg-gray-200 animate-pulse"></div>
               </div>
@@ -189,17 +189,17 @@ setIndex((prevIndex) => prevIndex + 1);
             </div>
           </div>
         </div>
-        {/* <div className="sm:ml-72 ml-6 sm:mt-12">
+        <div className="sm:ml-72 ml-6 sm:mt-12">
           <Similar />
-        </div> */}
+        </div>
       </div>
     );
   }
    else {
     return (
-      <div className="flex flex-col overflow-y-hidden">
+      <div className="flex flex-col overflow-hidden">
         <div className="flex sm:flex-row flex-col">
-          <div className="sm:ml-72 sm:mt-28 ">
+          <div className="sm:ml-72 sm:mt-20 ">
             <div className="relative ">
               <button onClick={handleImageBack}>
                 <img
@@ -236,7 +236,7 @@ setIndex((prevIndex) => prevIndex + 1);
             </div>
           </div>
           <div className="flex-col">
-            <div className="text-left ml-4 sm:ml-12 sm:mt-32 text-2xl font-mono text-gray-700 w-[400px] sm:w-[500px]">
+            <div className="text-left ml-4 sm:ml-12 sm:mt-24 text-2xl font-mono text-gray-700 w-[380px] sm:w-[500px] ">
               {name}
               <div className="flex flex-row font-normal pt-2 mb-2">
                 <div className="text-[20px] text-gray-800">Price:</div>
@@ -332,7 +332,7 @@ setIndex((prevIndex) => prevIndex + 1);
                 }}
               />
               <div className="pt-2 text-[20px] text-gray-800">
-                Model's Size:{" "}
+                {info.sizeAndFit ? "Model's Size:" : null}
               </div>
               <div
                 className=""
@@ -340,7 +340,7 @@ setIndex((prevIndex) => prevIndex + 1);
               />
             </div>
           </div>
-          <div className="hidden sm:flex mt-32">
+          <div className="hidden sm:flex mt-24">
             {product && (
               <Cart
                 price={price}
@@ -354,9 +354,9 @@ setIndex((prevIndex) => prevIndex + 1);
             )}
           </div>
         </div>
-        {/* <div className="ml-7 mt-6 sm:ml-72 sm:mt-12">
+        <div className="ml-7 mt-6 sm:ml-72 sm:mt-12">
           <Similar />
-        </div>  */}
+        </div> 
       </div>
     );
   }

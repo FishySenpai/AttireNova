@@ -24,6 +24,7 @@ const Profile = () => {
   const logOut = async () => {
     await signOut(auth);
     window.localStorage.clear();
+    setProfileToggle(false)
   };
   return (
     <div className="flex flex-row relative">
@@ -57,9 +58,9 @@ const Profile = () => {
         <div className={`${profileToggle ? "flex " : "hidden"}`}>
           <div className={`${user ? "flex " : "hidden"}`}>
             <div>
-              <img src={arrow} className="absolute top-5 right-2 h-3 w-5" />
+              <img src={arrow} className="absolute top-6 right-1 sm:top-5 sm:right-2 h-3 w-5" />
             </div>
-            <div className="absolute z-30 top-8 -right-4">
+            <div className="absolute z-30 top-8 right-0  sm:-right-4">
               <button
                 onClick={() => {
                   setProfileToggle(false);
@@ -79,7 +80,7 @@ const Profile = () => {
                 </svg>
               </button>
             </div>
-            <div className="absolute top-20   sm:-right-4 sm:top-8 z-20">
+            <div className="absolute top-8 right-0   sm:-right-4 sm:top-8 z-20">
               <div className="flex flex-col w-[175px] bg-white rounded  p-2 text-gray-800 font-normal text-left">
                 <div className="space-y-2 ml-2">
                   <div className="hover:text-red-500 ">

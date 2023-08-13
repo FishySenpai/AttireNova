@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Products from "../Products";
+import CategoriesProducts from "../CategoriesProducts";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
@@ -77,7 +77,7 @@ const MenPopular = () => {
         <div className="flex text-left pt-5 ml-4 sm:ml-52 font-mono text-2xl text-gray-600">
           {data.name}
         </div>
-        <Products products={data.products} view={5} />
+        <CategoriesProducts products={data.products}  />
       </div>
     );
   }

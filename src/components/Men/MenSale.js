@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Products from "../Products";
+import CategoriesProducts from "../CategoriesProducts";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
@@ -55,7 +55,7 @@ const MenSale = () => {
         <div className=" items-center mx-auto container justify-between">
           <div className="sm:p-6 pt-12 items-center container justify-between">
             <div className="flex flex-wrap">
-              {[...Array(10)].map((_, index) => (
+              {[...Array(5)].map((_, index) => (
                 <li
                   className="mr-4 md:mr-8 pb-6 rounded animate-pulse list-none"
                   key={index}
@@ -77,7 +77,7 @@ const MenSale = () => {
         <div className="flex text-left pt-5 ml-4 sm:ml-52 font-mono text-2xl text-gray-600">
           {data.name}
         </div>
-        <Products products={data.products} view={5} />
+        <CategoriesProducts products={data.products}  />
       </div>
     );
   }

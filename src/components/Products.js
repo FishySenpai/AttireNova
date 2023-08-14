@@ -32,7 +32,7 @@ const Products = ({ products, view }) => {
         currency: "USD",
       },
       headers: {
-        "X-RapidAPI-Key": "325a7f72damshf16ffcb2c3ed7bep1f566djsn006db2e1a65a",
+        "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key,
         "X-RapidAPI-Host": "asos2.p.rapidapi.com",
       },
     };

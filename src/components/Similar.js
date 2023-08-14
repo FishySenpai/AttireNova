@@ -20,7 +20,7 @@ const Similar = () => {
         currency: "USD",
       },
       headers: {
-        "X-RapidAPI-Key": "a5555e8425msh0e3b2d01db9ba61p17c64djsn379b3aceaaa4",
+        "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key_Similar,
         "X-RapidAPI-Host": "asos-com1.p.rapidapi.com",
       },
     };

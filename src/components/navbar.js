@@ -76,23 +76,30 @@ const Navbar = (props) => {
           <div>
             <nav className="w-full flex  justify-between items-center">
               <ul className="list-none flex flex-col sm:hidden space-x-4 z-20 ">
-                <div className="flex flex-row">
-                  <li className="text-[22px] font-bold text-white ml-5  ">
+                <div className="flex flex-row relative">
+                  <li className="text-[22px] font-bold text-white ml-5 ">
                     <button
+                      className="flex flex-row "
                       onClick={() => {
                         setMenToggle(false);
                         setWomenToggle(false);
                       }}
                     >
                       <Link to="/">
-                        <img src={logo} className="h-[45px] w-[160px]" />
+                        <img
+                          src={logo}
+                          className="h-[50px] w-[50px] absolute -top-4 left-1"
+                        />
                       </Link>
+                      <div className="italic font-semibold ml-8">
+                        ttireNova
+                      </div>
                     </button>
                   </li>
 
                   <li>
                     <button
-                      className=" absolute right-[60px] top-[20px]"
+                      className=" absolute right-[50px] top-[2px]"
                       onClick={() => {
                         setMenToggle(false);
                         setWomenToggle(false);
@@ -114,7 +121,7 @@ const Navbar = (props) => {
                       </Link>
                     </button>
                   </li>
-                  <li className="ml-2 absolute right-4 top-[20px]">
+                  <li className="ml-2 absolute right-0 top-[2px]">
                     <button
                       onClick={() => {
                         setMenToggle(false);
@@ -186,6 +193,27 @@ const Navbar = (props) => {
                 </div>
               </ul>
               <ul className="list-none sm:flex hidden justify-end items-center flex-1 mr-10">
+                {" "}
+                <div className="text-[22px] font-bold text-white ml-5 ">
+                  <button
+                    className="flex flex-row "
+                    onClick={() => {
+                      setMenToggle(false);
+                      setWomenToggle(false);
+                    }}
+                  >
+                    <Link to="/">
+                      <img
+                        src={logo}
+                        className="h-[50px] w-[50px] absolute -top-4 left-[120px] sm:top-2 sm:left-[175px]"
+                      />
+
+                      <div className="italic font-semibold ml-12 sm:absolute sm:top-6 sm:left-44">
+                        ttireNova
+                      </div>
+                    </Link>
+                  </button>
+                </div>
                 <div className="group hover:bg-gray-100 text-white hover:text-gray-600 ">
                   <button
                     onClick={handleClick}
@@ -370,7 +398,7 @@ const Navbar = (props) => {
                   <form className="" onSubmit={handleSearch}>
                     <div className="flex flex-row mr-10 ">
                       <input
-                        className="w-[200px] md:w-[300px] lg:w-[500px]  xl:w-[800px] 2xl:w-[900px] inline-flex align-left gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                        className="w-[200px] md:w-[300px] lg:w-[500px]  xl:w-[800px] 2xl:w-[850px] inline-flex align-left gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                         type="search"
                         placeholder="Search..."
                         value={search}
@@ -379,7 +407,6 @@ const Navbar = (props) => {
                     </div>
                   </form>
                 </div>
-
                 <button
                   onClick={handleClick}
                   className="font-medium cursor-pointer text-[16px] text-white hover:text-red-400 mx-5"
@@ -408,7 +435,6 @@ const Navbar = (props) => {
                     </svg>
                   </Link>
                 </button>
-
                 <button className="font-medium cursor-pointer text-[16px] text-white  mx-5">
                   <Profile />
                 </button>

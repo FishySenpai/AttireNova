@@ -5,7 +5,7 @@ import { auth } from "./firebaseConfig";
 import { doc, deleteDoc, setDoc } from "firebase/firestore";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-const Products = ({ products, view }) => {
+const Products = ({ products, view, name }) => {
   const [fillColor, setFillColor] = useState("black");
   const [user, setUser] = useState({});
   const [productId, setProductId] = useState([]);
@@ -98,16 +98,16 @@ useEffect(() => {
   if (products) {
     return (
       <div>
-        <div className=" items-center mx-auto container justify-between pb-8">
-          <div className="sm:p-6 pt-12 items-center container justify-between">
-            <ul className="flex flex-wrap">
+        <div className="flex justify-center pt-12">
+          <div className="w-full max-w-screen-2xl px-4">
+            <div className="flex text-left pb-5 ml-4  font-mono text-2xl text-gray-600">
+              {name}
+            </div>
+            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-8">
               {products?.slice(0, 45).map((top, index) => (
-                <li
-                  className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-8 pb-6 relative"
-                  key={top.id}
-                >
+                <li className="relative" key={top.id}>
                   <button
-                    className="absolute top-0 right-0 p-3 "
+                    className="absolute top-0 right-1 p-3"
                     onClick={() => handleClick(top.id, top)}
                   >
                     {wish && productId.includes(top.id) ? (
@@ -130,22 +130,22 @@ useEffect(() => {
                   </button>
                   <a href={`/info/${top.id}`}>
                     <img
-                      className="w-[180px] h-[239px] sm:w-[265px] sm:h-[339px]  rounded hover:shadow-lg cursor-pointer "
+                      className="w-full h-auto rounded hover:shadow-lg cursor-pointer"
                       src={`https://${top.imageUrl}`}
                       alt="img"
                     />
                   </a>
-                  <div className=" w-36 md:w-[265px] text-gray-700 text-md hover:text-red-500 cursor-pointer">
+                  <div className="mt-2 text-gray-700 hover:text-red-500 cursor-pointer">
                     <button className="text-left">
                       <Link className="truncate-2-lines" to={`/info/${top.id}`}>
                         {top.name}
                       </Link>
                     </button>
-                    <div className="flex flex-row">
-                      <div className="text-gray-500 text-left text-sm mt-1 line-through">
+                    <div className="flex items-center">
+                      <div className="text-gray-500 text-sm line-through">
                         {top.price?.rrp.text}
                       </div>
-                      <div className="text-gray-700 text-left font-bold ml-2">
+                      <div className="text-gray-700 font-bold ml-2">
                         {top.price.current.text}
                       </div>
                     </div>

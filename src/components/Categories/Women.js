@@ -70,11 +70,8 @@ const Women = () => {
     );
   } else {
     return (
-      <div className="pt-12">
-        <div className="flex text-left pt-5 ml-4 sm:ml-52  font-mono text-2xl text-gray-600">
-          {data.name}
-        </div>
-        <Products products={data.products} />
+      <div className="">        
+        <Products products={data.products} name={data.name}/>
       </div>
     );
   }

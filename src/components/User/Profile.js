@@ -29,7 +29,10 @@ const Profile = () => {
   return (
     <div className="flex flex-row relative">
       <div className="flex flex-row ">
-        <button onClick={handleClick} className="hidden sm:flex flex-row">
+        <button
+          onClick={handleClick}
+          className="hidden 2xl:flex flex-row font-medium cursor-pointer text-[16px] text-white  mx-5"
+        >
           <h1 className="hover:text-red-400">
             {user ? (
               localStorage.getItem("name") || user.email?.split("@")[0]
@@ -42,7 +45,7 @@ const Profile = () => {
           </h1>
           <div className={user ? "flex" : "hidden"}></div>
         </button>
-        <button onClick={handleClick} className="flex sm:hidden flex-row">
+        <button onClick={handleClick} className="flex 2xl:hidden flex-row lg:w-[20px]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="25px"
@@ -58,7 +61,10 @@ const Profile = () => {
         <div className={`${profileToggle ? "flex " : "hidden"}`}>
           <div className={`${user ? "flex " : "hidden"}`}>
             <div>
-              <img src={arrow} className="absolute top-6 right-1 sm:top-5 sm:right-2 h-3 w-5" />
+              <img
+                src={arrow}
+                className="absolute top-6 right-1 sm:top-5 sm:right-2 h-3 w-5"
+              />
             </div>
             <div className="absolute z-30 top-8 right-0  sm:-right-4">
               <button

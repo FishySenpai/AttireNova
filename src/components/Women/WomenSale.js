@@ -74,10 +74,8 @@ const MenPopular = () => {
   } else {
     return (
       <div>
-        <div className="flex text-left pt-5 ml-4 sm:ml-52 font-mono text-2xl text-gray-600">
-          {data.name}
-        </div>
-        <CategoriesProducts products={data.products} />
+        
+        <CategoriesProducts products={data.products} name={data.name} />
       </div>
     );
   }

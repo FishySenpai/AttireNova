@@ -55,6 +55,15 @@ body {
   overflow: hidden;
 }
 
+.overflow {
+    overflow-x: scroll;
+    
+  }
+  .overflow::-webkit-scrollbar {
+    width: 0px; /* Set the width of the scrollbar */
+
+  }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

@@ -66,7 +66,7 @@ const DesktopNav = ({
         <div className="group hover:bg-gray-100 text-white hover:text-gray-600 ">
           <button
             onClick={handleClick}
-            className="font-medium cursor-pointer text-[16px] hover:text-red-400 mx-3 px-3 xl:mx-5 xl:px-5 py-4"
+            className="font-medium cursor-pointer text-[16px] hover:text-red-400  lg:px-2 lg:mx-3  2xl:mx-2 2xl:px-5 py-4"
           >
             <Link to="/">Men</Link>
           </button>
@@ -132,7 +132,7 @@ const DesktopNav = ({
         <div className="group hover:bg-gray-100 text-white hover:text-gray-600 ">
           <button
             onClick={handleClick}
-            className="font-medium cursor-pointer text-[16px] hover:text-red-400 mx-3 px-3 xl:mx-5 xl:px-5 py-4"
+            className="font-medium cursor-pointer text-[16px] hover:text-red-400  lg:px-2 lg:mx-3 2xl:mx-0 2xl:px-5 py-4"
           >
             <Link to="/women">Women</Link>
           </button>

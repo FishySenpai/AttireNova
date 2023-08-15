@@ -50,7 +50,7 @@ const MenPopular = () => {
     return (
       <div>
         <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
-          Men's Sale
+          Women's Popular
         </div>
         <div className=" items-center mx-auto container justify-between">
           <div className="sm:p-6 pt-12 items-center container justify-between">
@@ -74,10 +74,8 @@ const MenPopular = () => {
   } else {
     return (
       <div>
-        <div className="flex text-left pt-5 ml-4 sm:ml-52 font-mono text-2xl text-gray-600">
-          {data.name}
-        </div>
-        <CategoriesProducts products={data.products} />
+        
+        <CategoriesProducts products={data.products} name={data.name}/>
       </div>
     );
   }

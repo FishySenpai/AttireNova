@@ -7,7 +7,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import arrowLeft from "./Assets/arrowLeft.png";
 import arrowRight from "./Assets/arrowRight.png";
-const CategoriesProducts = ({ products, view }) => {
+const CategoriesProducts = ({ products, view, name }) => {
   const [fillColor, setFillColor] = useState("black");
   const [user, setUser] = useState({});
   const [productId, setProductId] = useState([]);
@@ -131,15 +131,21 @@ const CategoriesProducts = ({ products, view }) => {
     return (
       <div>
         <div className=" items-center mx-auto container justify-between">
-          <div className="sm:p-7 pt-12 items-center container justify-between relative ">
-            <div className="overflow-x-scroll sm:overflow-x-hidden " ref={scrollContainerRef}>
-              <button className="hidden sm:block" onClick={handleLeft}>
+          <div className="flex text-left pt-5 ml-4  font-mono text-2xl text-gray-600">
+            {name}
+          </div>
+          <div className="sm:p-7 pt-6 items-center container justify-between relative ">
+            <div
+              className="overflow  md:overflow-x-hidden "
+              ref={scrollContainerRef}
+            >
+              <button className="hidden md:block" onClick={handleLeft}>
                 <img
                   src={arrowLeft}
                   className="absolute top-[170px] left-4 w-[50px] h-[50px] z-20 bg-gray-800/20 rounded-full "
                 />
               </button>
-              <ul className="flex flex-row sm:pl-4  ">
+              <ul className="flex flex-row sm:pl-4 ">
                 {products?.slice(3, 40).map((top, index) => (
                   <li
                     className="ml-3  mr-3 sm:ml-0 sm:mr-4 md:mr-8 pb-6 relative  "
@@ -170,7 +176,7 @@ const CategoriesProducts = ({ products, view }) => {
 
                     <a href={`/info/${top.id}`}>
                       <img
-                        className="w-[250px] h-[219px] sm:w-[265px] sm:h-[339px]  rounded hover:shadow-lg cursor-pointer "
+                        className="w-[250px] h-[219px]  md:w-[265px] md:h-[339px]  rounded hover:shadow-lg cursor-pointer "
                         src={`https://${top.imageUrl}`}
                         alt="img"
                       />
@@ -197,7 +203,7 @@ const CategoriesProducts = ({ products, view }) => {
                   </li>
                 ))}
               </ul>
-              <button className="hidden sm:block" onClick={handleRight}>
+              <button className="hidden md:block" onClick={handleRight}>
                 <img
                   src={arrowRight}
                   className="absolute top-[170px] right-4 w-[50px] h-[50px] z-20 bg-gray-800/20 rounded-full"

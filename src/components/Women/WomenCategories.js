@@ -11,21 +11,21 @@ import CategoryWomenAccessories from "../Assets/CategoryWomen/CategoryWomenAcces
 const WomenCategories = () => {
   return (
     <div>
-      <div className="flex text-left ml-4 sm:ml-52 font-mono text-2xl text-gray-600">
-        Categories
-      </div>
       <div className=" items-center mx-auto container justify-between pb-8">
-        <div className="sm:p-6 pt-12 items-center container justify-between">
-          <ul className="flex flex-wrap ml-4 sm:ml-0 sm:pl-[80px]  ">
+        <div className="flex text-left ml-4 font-mono text-2xl text-gray-600">
+          Categories
+        </div>
+        <div className=" pt-12 items-center container justify-between">
+          <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6 sm:gap-8">
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
               <a href="/categories/women/27108">
                 <img
-                  className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
+                  className="w-full h-full  hover:shadow-lg cursor-pointer "
                   src={CategoryWomenNewin}
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0  w-full bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link
                     className="truncate-2-lines"
@@ -39,12 +39,12 @@ const WomenCategories = () => {
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
               <a href="/categories/women/15210">
                 <img
-                  className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
+                  className="w-full h-full hover:shadow-lg cursor-pointer "
                   src={CategoryWomenBrands}
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-full  bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link
                     className="truncate-2-lines"
@@ -58,12 +58,12 @@ const WomenCategories = () => {
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
               <a href="/categories/women/4174">
                 <img
-                  className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
+                  className="w-full h-full hover:shadow-lg cursor-pointer "
                   src={CategoryWomenAccessories}
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-full  bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link
                     className="truncate-2-lines"
@@ -77,12 +77,12 @@ const WomenCategories = () => {
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
               <a href="/categories/women/13491">
                 <img
-                  className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
+                  className="w-full h-full hover:shadow-lg cursor-pointer "
                   src={CategoryWomenDresses}
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-full  bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link
                     className="truncate-2-lines"
@@ -96,12 +96,12 @@ const WomenCategories = () => {
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
               <a href="/categories/women/26091">
                 <img
-                  className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
+                  className="w-full h-full hover:shadow-lg cursor-pointer "
                   src={CategoryWomenSports}
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-full  bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link
                     className="truncate-2-lines"
@@ -115,12 +115,12 @@ const WomenCategories = () => {
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
               <a href="/categories/women/4172">
                 <img
-                  className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
+                  className="w-full h-full hover:shadow-lg cursor-pointer "
                   src={CategoryWomenShoes}
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-full  bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link
                     className="truncate-2-lines"
@@ -134,18 +134,18 @@ const WomenCategories = () => {
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
               <a href="/categories/women/2641">
                 <img
-                  className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
+                  className="w-full h-full hover:shadow-lg cursor-pointer "
                   src={CategoryWomenJackets}
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-full  bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link
                     className="truncate-2-lines"
                     to="/categories/women/2641"
                   >
-                    Jacekts & Coats
+                    Jackets & Coats
                   </Link>
                 </button>
               </div>
@@ -153,12 +153,12 @@ const WomenCategories = () => {
             <li className="ml-3 mr-1 sm:ml-0 sm:mr-4 md:mr-14 pb-6 relative">
               <a href="/categories/women/19645">
                 <img
-                  className="w-[180px] h-[239px] sm:w-[280px] sm:h-[360px]  hover:shadow-lg cursor-pointer "
+                  className="w-full h-full hover:shadow-lg cursor-pointer "
                   src={CategoryWomenWork}
                   alt="img"
                 />
               </a>
-              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-[180px] md:w-[280px] bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
+              <div className="absolute bottom-6 flex flex-col py-2 left-0 w-full  bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link
                     className="truncate-2-lines"

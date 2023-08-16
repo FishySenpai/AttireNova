@@ -47,7 +47,7 @@ const WishList = () => {
               No Products have been added yet.
             </div>
           ) : (
-            <ul className="flex flex-wrap">
+            <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
               {data.map((top, index) => (
                 <WishlistItem //the cartpop exists individually for each item state with wishlist item component
                   top={top}

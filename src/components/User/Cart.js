@@ -19,7 +19,8 @@ const Cart = ({ price, brand, product, size, selectedSize, showError, setShowErr
   const [showQuantity, setShowQuantity] = useState(false);
   const [quantityPrice, setQuantityPrice] = useState(price);
   const [user, setUser] = useState({});
-
+  const [cartSuccess, setCartSuccess] = useState(false)
+  const [wishSuccess, setWishSuccess] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const hideCartPopup = () => {
       setUser(currentUser);
     });
   });
+
   useEffect(() => {
     const userFav = async () => {
       // Make sure user is defined and has a valid uid property
@@ -62,6 +64,25 @@ const hideCartPopup = () => {
 
     userFav();
   });
+  const wishList = async (id) => {
+    const idAsString = id.toString();
+
+    console.log(product);
+    if (user) {
+      try {
+        console.log(product);
+        await setDoc(doc(db, "users", user.uid, "wishlist", idAsString), {
+          product,
+        });
+        setWishSuccess((prevMap) => ({ ...prevMap, [id]: true }));
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+
   const addFav = async () => {
     // Add a new document in collection "favs"
     if(selectedSize){
@@ -72,6 +93,7 @@ const hideCartPopup = () => {
             size,
             quantity,
           });
+         setCartSuccess((prevMap) => ({ ...prevMap, [id]: true }));
           showCartPopup();
         } catch (err) {
           console.log(err);
@@ -86,17 +108,25 @@ setShowError(true)
 
   return (
     <div>
-      <div className="flex flex-col sm:shadow-lg sm:w-[265px] mb-10 sm:mb-0 sm:h-[300px] font-mono ">
+      <div className="flex flex-col sm:shadow-lg sm:w-[265px] mb-10 sm:mb-0 sm:h-auto pb-4 font-mono ">
         <div className=" hidden sm:flex flex-row text-gray-700">
           <div className="text-[20px] text-red-700 ml-4">${quantityPrice}</div>
-          <div className="text-[20px] ml-24">Wishlist</div>
+          <div className="text-[20px]  ml-auto pr-4">
+            <button
+              className=""
+              onClick={() => {
+                wishList(id);
+              }}
+            >
+              {wishSuccess[id] ? "Wishlisted" : "Wishlist"}
+            </button>
+          </div>
         </div>
         <div>
           <div className="hidden sm:flex text-[16px] py-4 text-left ml-14">
             Sold by {brand?.name}
           </div>
           <div className="relative">
-           
             <div className="flex flex-row px-2 mb-2 font-mono">
               <div className="text-[20px] text-gray-800 ml-2 mt-3 sm:ml-10">
                 Quantity:{" "}
@@ -147,7 +177,7 @@ setShowError(true)
               className="bg-gray-600 p-2 rounded text-white w-full sm:w-[200px]"
               onClick={addFav}
             >
-              Add to Cart
+              {cartSuccess[id] ? "Added to Cart" : "Add to Cart"}
             </button>
             {!selectedSize && showError && (
               <p className="text-red-500 mt-2 text-sm px-2">
@@ -162,7 +192,7 @@ setShowError(true)
           </div>
         </div>
       </div>
-      <div className="hidden sm:flex absolute top-[45px] right-[115px] ">
+      <div className="hidden 2xl:flex absolute top-[52px] right-[110px] ">
         <div className={`${product && cartPopupVisible ? "flex" : "hidden"}`}>
           {
             <CartPopUp

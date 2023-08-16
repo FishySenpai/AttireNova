@@ -144,8 +144,8 @@ const CartUser = () => {
               No Products have been added yet.
             </div>
           ) : (
-            <div className="flex flex-col sm:flex-row sm:ml-44 sm:mt-10">
-              <ul className="flex flex-col bg-white shadow w-[412px] sm:w-[650px] divide-y pt-2">
+            <div className="flex flex-col lg:flex-row xl:ml-12 2xl:ml-44 lg:mt-10">
+              <ul className="flex flex-col bg-white shadow w-full lg:w-[650px] divide-y pt-2">
                 {data.map((top) => {
                   return (
                     <li
@@ -154,13 +154,13 @@ const CartUser = () => {
                     >
                       <a href={`/info/${top.product.id}`}>
                         <img
-                          className="w-[120px] h-[160px] md:w-[160px] md:h-[180px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
+                          className="w-[220px] h-[170px] md:w-[160px] md:h-[180px] rounded hover:shadow-lg cursor-pointer hover:scale-105"
                           src={`https://${top.product?.media.images[0].url}`}
                           alt="img"
                         />
                       </a>
-                      <div className=" text-gray-700 text-[16px] w-[260px] sm:w-[650px] text-left  font-normal ml-2">
-                        <button className="text-left ">
+                      <div className=" text-gray-700 text-sm sm:text-[16px] w-full sm:w-[650px] text-left  font-normal ml-2">
+                        <button className="text-left  ">
                           <Link
                             className="truncate-2-lines"
                             to={`/info/${top.product.id}`}
@@ -173,7 +173,7 @@ const CartUser = () => {
                             {top.product.variants[0]?.colour}
                           </div>
                           <div className="sm:ml-5 mt-1">{top.size}</div>
-                          <div className="flex flex-row absolute right-0 sm:relative px-2 mb-2  mt-1">
+                          <div className="flex flex-row absolute right-2 sm:relative px-2 mb-2  mt-1">
                             <div className="text-[16px] text-gray-800 ml-5 mr-1">
                               Qty:{" "}
                             </div>
@@ -269,7 +269,7 @@ const CartUser = () => {
                     </li>
                   );
                 })}
-                <div className="flex-col text-[16px] hidden sm:flex">
+                <div className="flex-col text-[16px] hidden lg:flex">
                   <div className="flex flex-row px-4 py-2 relative">
                     Subtotal({quantity} items):
                     <div className="text-red-500 absolute right-5">
@@ -289,18 +289,18 @@ const CartUser = () => {
                 </div>
               </ul>
               <div>
-                <div className="flex flex-col text-[16px] bg-white mt-4 sm:ml-10 w-full sm:w-[300px] px-2">
-                  <div className="flex flex-row sm:px-4 py-2 relative">
+                <div className="flex flex-col text-[16px] bg-white mt-4 lg:ml-10 w-full lg:w-[300px] px-2">
+                  <div className="flex flex-row lg:px-4 py-2 relative">
                     Subtotal({quantity} items):
                     <div className="text-red-500 absolute right-5">
                       ${subTotal.toFixed(2)}
                     </div>
                   </div>
-                  <div className="flex flex-row  sm:px-4 pb-4 relative">
+                  <div className="flex flex-row  lg:px-4 pb-4 relative">
                     Shipping:
                     <div className="text-red-500 absolute right-5">$5.00</div>
                   </div>
-                  <div className="flex flex-row sm:px-4 pb-4 font-semibold text-[20px] relative">
+                  <div className="flex flex-row lg:px-4 pb-4 font-semibold text-[20px] relative">
                     Total:
                     <div className="text-red-500 absolute right-5">
                       ${(subTotal + 5).toFixed(2)}

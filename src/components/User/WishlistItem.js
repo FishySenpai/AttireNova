@@ -109,7 +109,7 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
   // ... Rest of the code for handling size change, adding to cart, etc.
 
   return (
-    <li className="mr-4 md:mr-8 pb-6 " key={top.product.id}>
+    <li className=" pb-6 " key={top.product.id}>
       <div className="relative">
         <div className=" ml-5 mt-4 h-[30px] absolute right-5 ">
           <button onClick={() => deleteFav(top.product.id)}>
@@ -125,13 +125,13 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
         </div>
         <a href={`/info/${top.product.id}`}>
           <img
-            className="w-[265px] h-[339px]  rounded cursor-default"
+            className="w-full h-auto  rounded cursor-default"
             src={`https://${top.product?.media.images[0].url}`}
             alt="img"
           />
         </a>
       </div>
-      <div className="w-36 md:w-[265px] text-gray-500 text-left text-sm ml-1  ">
+      <div className="w-full text-gray-500 text-left text-sm ml-1  ">
         <button className="text-left text-sm">
           <Link className="truncate-1-lines" to={`/info/${top.product.id}`}>
             {top.product.name}
@@ -143,16 +143,15 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
             {top.product.price.current.text}
           </div>
           <div className="py-2">{top.product.variants[0].colour}</div>
-          <div className="flex mb-2 font-mono">
-            <div className="relative">
+          <div className="flex mb-2 font-mono  relative">
               <button
                 type="button"
-                className="text-left rounded-md w-[262px]  py-2 text-sm font-semibold text-gray-900 shadow-sm "
+                className="text-left rounded-md w-full py-2 text-sm font-semibold text-gray-900 shadow-sm "
                 id="menu-button"
                 onClick={() => handleClick(top.product.id)} // Update the onClick handler
               >
                 {top.size ? top.size : "Select size: "}
-                <div className="absolute top-0 right-0 mr-2 mt-2">
+                <div className="absolute  top-0 right-[0px] mr-2 mt-2">
                   <svg
                     className="-mr-1 h-5 w-5 text-gray-400"
                     viewBox="0 0 20 20"
@@ -166,15 +165,14 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
                     />
                   </svg>
                 </div>
-              </button>
-            </div>
+              </button>       
           </div>
           <div
             className={
               top.product.id === productId && showSize ? "flex" : "hidden"
             }
           >
-            <div className="flex flex-col pb-3  mt-0 w-[262px] h-[200px] absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
+            <div className="flex flex-col pb-3  mt-0 w-[262px] h-[200px] absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg z-50">
               {top.product.variants?.map((size) => (
                 <ul className="flex flex-col " key={size.id}>
                   <li className="px-4 py-2">
@@ -202,7 +200,7 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
           </div>
         </div>
         <button
-          className="bg-gray-800 text-white w-[262px] py-1 rounded text-[16px]"
+          className="bg-gray-800 text-white w-full py-1 rounded text-[16px]"
           onClick={() => addFav(top.product.id, top.product, top.size)}
         >
           Add to cart
@@ -215,7 +213,7 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
           </div>
         )}
       </div>
-      <div className="hidden sm:flex absolute -top-[20px] -right-[116px] z-50">
+      <div className="hidden 2xl:flex absolute -top-[30px] -right-[96px] z-50">
         <div
           className={`${
             top.product && cartPopupVisible && top.product.id === productId

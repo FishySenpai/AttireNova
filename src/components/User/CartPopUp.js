@@ -33,11 +33,18 @@ const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
                   />
                 </a>
                 <div className="flex flex-col">
-                  <button className="text-[14px] text-left w-28 flex-wrap text-gray-700 text-md hover:text-red-500 cursor-pointer whitespace-pre-line font-sans">
-                    <Link to={`/info/${product.id}`}>{product.name}</Link>
+                  <button className="text-[14px] text-left w-28 flex-wrap text-gray-700 text-md hover:text-red-500 cursor-pointer whitespace-pre-line font-sans ">
+                    <Link
+                      className="truncate-3-lines"
+                      to={`/info/${product.id}`}
+                    >
+                      {product.name}
+                    </Link>
                   </button>
                   <div className="flex flex-row text-[14px] mt-2">
-                    <div className="text-gray-700 text-left mr-2">{product.variants[0].colour}</div>
+                    <div className="text-gray-700 text-left mr-2">
+                      {product.variants[0].colour}
+                    </div>
                     <div className="text-gray-700 text-left">Qty: 1</div>
                   </div>
                   <div className="text-gray-700 text-left text-[14px] flex flex-row ">
@@ -48,7 +55,7 @@ const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
               </div>
 
               <div className="py-2 mt-2 ml-4">
-                <button className="bg-gray-600 p-2 rounded text-white w-[200px]" >
+                <button className="bg-gray-600 p-2 rounded text-white w-[200px]">
                   <Link to="/cart">View Cart</Link>
                 </button>
               </div>

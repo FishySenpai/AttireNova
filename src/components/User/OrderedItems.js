@@ -104,17 +104,16 @@ const formatDeliveryTimestamp = (timestamp) => {
 };
 
 
-
-
-
 if (user) {
   return (
-    <div className="sm:px-6 items-center mx-auto container justify-between min-h-screen">
-      <div className="sm:p-6 pt-12 items-center container justify-between ">
+    <div className="lg:px-6 items-center mx-auto container justify-between min-h-screen ">
+      <div className="lg:p-6 pt-12 items-center container justify-between ">
         {data.length === 0 ? (
-          <div className="flex flex-wrap ml-4">No Orders have been placed yet.</div>
+          <div className="flex flex-wrap ml-4">
+            No Orders have been placed yet.
+          </div>
         ) : (
-          <div className="flex flex-col sm:ml-16 mt-10">
+          <div className="flex flex-col ml-0 lg:ml-16 xl:ml-0  mt-10">
             {data.map((orders) => (
               <div key={orders.id}>
                 <div className="px-3">
@@ -128,12 +127,12 @@ if (user) {
                     Arriving {formatDeliveryTimestamp(orders?.timestamp)}
                   </div>
                 </div>
-                <div className="flex flex-col xl:flex-row">
+                <div className="flex flex-col xl:flex-row ">
                   <div className="flex flex-col">
-                    <ul className="flex flex-wrap  sm:flex-col bg-white shadow  sm:w-[750px] sm:divide-y-2  pt-2">
+                    <ul className="flex flex-wrap  sm:flex-col bg-white shadow w-full md:w-[750px] divide-y-2 sm:divide-y-0 md:divide-y-2  pt-2">
                       {orders.data.map((top) => (
                         <li
-                          className="mr-4 md:mr-8 pb-6 flex flex-row ml-4 "
+                          className="mr-4 md:mr-8 pb-6 flex flex-row ml-4  "
                           key={top.product.id}
                         >
                           <a href={`/info/${top.product.id}`}>
@@ -153,7 +152,7 @@ if (user) {
                                   {top.product.name}
                                 </Link>
                               </button>
-                              <div className=" hidden sm:flex flex-row sm:px-2 mb-2 space-x-5 sm:space-x-11 sm:ml-6 w-[150px]">
+                              <div className=" hidden md:flex flex-row sm:px-2 mb-2 space-x-5 sm:space-x-11 sm:ml-6 w-[150px]">
                                 <div className="text-gray-700 text-left font-bold ">
                                   ${top.product.price.current.value}
                                 </div>
@@ -167,18 +166,20 @@ if (user) {
                                 </div>
                               </div>
                             </div>
-                            <div className="flex flex-col sm:flex-row relative text-[16px] sm:text-[16px]">
+                            <div className="flex flex-col md:flex-row relative text-[16px] sm:text-[16px]">
                               <div className="mt-1 flex flex-row">
-                                <div className="text-gray-400 mr-1">Colour: </div>
+                                <div className="text-gray-400 mr-1">
+                                  Colour:{" "}
+                                </div>
                                 {top.product.variants[0]?.colour}
                               </div>
-                              <div className="sm:ml-5 mt-1 flex flex-row">
+                              <div className="md:ml-5 mt-1 flex flex-row">
                                 <div className="text-gray-400 mr-1">Size: </div>{" "}
-                                 {top.size}
+                                {top.size}
                               </div>
                             </div>
 
-                            <div className="sm:hidden flex flex-row sm:px-2 mb-2 space-x-14 sm:ml-6 w-[150px] pt-2">
+                            <div className="md:hidden flex flex-row md:px-2 mb-2 space-x-14 md:ml-6 w-[150px] pt-2">
                               <div className="text-gray-700 text-left font-bold ">
                                 ${top.product.price.current.value}
                               </div>
@@ -194,7 +195,7 @@ if (user) {
                         </li>
                       ))}
                     </ul>
-                    <div className="flex flex-col text-[16px] sm:w-[750px] mt-6 bg-white shadow">
+                    <div className="flex flex-col text-[16px] w-full md:w-[750px] mt-6 bg-white shadow">
                       <div className="flex flex-row px-4 py-2 relative">
                         Subtotal:
                         <div className="text-red-500 absolute right-5">
@@ -227,13 +228,13 @@ if (user) {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-white sm:h-[520px] shadow mt-6 sm:mt-0 sm:ml-6 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
+                  <div className="bg-white h-auto xl:h-[520px] w-full  md:w-[750px] 2xl:w-[450px] shadow mt-6 xl:mt-0 xl:ml-6  flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
                     <h3 className="text-xl font-semibold leading-5 text-gray-800">
                       Customer Information
                     </h3>
                     {info ? (
-                      <div className="flex flex-col md:flex-row xl:flex-col justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-8 xl:space-x-0">
-                        <div className="flex flex-col justify-start items-start flex-shrink-0">
+                      <div className="flex flex-col md:flex-row xl:flex-col justify-start items-stretch h-auto xl:h-[520px] w-full ">
+                        <div className="flex flex-col  justify-start items-start flex-shrink-0">
                           <div className="flex justify-center w-full md:justify-start items-center space-x-4 py-8 border-b border-gray-200">
                             <div className="flex justify-start items-start flex-col space-y-2">
                               <p className="text-base font-semibold leading-4 text-left text-gray-800">
@@ -256,17 +257,17 @@ if (user) {
                             </p>
                           </div>
                         </div>
-                        <div className="flex justify-between xl:h-full items-stretch w-full flex-col mt-6 md:mt-0">
-                          <div className="flex justify-center md:justify-start xl:flex-col flex-col md:space-x-6 lg:space-x-8 xl:space-x-0 space-y-4 xl:space-y-9 md:space-y-0 md:flex-row items-center md:items-start">
+                        <div className="flex justify-between xl:h-full mt-6  items-stretch w-full flex-col  xl:mt-0">
+                          <div className="flex flex-col md:flex-row xl:flex-col  justify-center ">
                             <div className="flex  justify-center md:justify-start items-center md:items-start flex-col space-y-4 xl:mt-8">
                               <p className="text-base font-semibold leading-4 text-center md:text-left text-gray-800">
                                 Shipping Address
                               </p>
                               <div className="flex flex-col">
-                                <p className="w-48 lg:w-full text-center md:text-left text-sm leading-5 text-gray-600">
+                                <p className="w-48 xl:w-full text-center md:text-left text-sm leading-5 text-gray-600">
                                   {info.address},
                                 </p>
-                                <p className="w-48 lg:w-full text-center md:text-left text-sm leading-5 text-gray-600">
+                                <p className="w-48 xl:w-full text-center md:text-left text-sm leading-5 text-gray-600">
                                   {info.city} {info.country} {info.zip}
                                 </p>
                               </div>
@@ -276,17 +277,17 @@ if (user) {
                                 Billing Address
                               </p>
                               <div className="flex flex-col">
-                                <p className="w-48 lg:w-full text-center md:text-left text-sm leading-5 text-gray-600">
+                                <p className="w-48 xl:w-full text-center md:text-left text-sm leading-5 text-gray-600">
                                   {info.address},
                                 </p>
-                                <p className="w-48 lg:w-full text-center md:text-left text-sm leading-5 text-gray-600">
+                                <p className="w-48 xl:w-full text-center md:text-left text-sm leading-5 text-gray-600">
                                   {info.city} {info.country} {info.zip}
                                 </p>
                               </div>
                             </div>
                           </div>
-                          <div className="flex w-full justify-center items-center md:justify-start md:items-start ">
-                            <button className="mt-6 md:mt-0 bg-gray-800 text-white border hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border-gray-800 font-medium w-96 2xl:w-full text-base py-2  leading-4 ">
+                          <div className="flex w-full justify-center items-center 2xl:justify-start 2xl:items-start ">
+                            <button className="mt-16 2xl:mt-0 bg-gray-800 text-white border hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border-gray-800 font-medium w-96 2xl:w-full text-base py-2  leading-4 ">
                               Edit Details
                             </button>
                           </div>

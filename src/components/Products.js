@@ -98,7 +98,7 @@ useEffect(() => {
   if (products) {
     return (
       <div>
-        <div className="flex justify-center pt-12">
+        <div className="flex justify-center pt-12 pb-12">
           <div className="w-full max-w-screen-2xl px-4">
             <div className="flex text-left pb-5 ml-4  font-mono text-2xl text-gray-600">
               {name}

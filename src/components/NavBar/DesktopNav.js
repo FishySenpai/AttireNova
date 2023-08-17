@@ -54,10 +54,10 @@ const DesktopNav = ({
             <Link to="/">
               <img
                 src={logo}
-                className="h-[50px] w-[50px] absolute  sm:top-2 sm:left-[78px]"
+                className="h-[50px] w-[50px] absolute  sm:top-2 sm:left-[78px] 2xl:left-[176px]"
               />
 
-              <div className="italic font-semibold ml-12 sm:absolute sm:top-6 sm:left-20">
+              <div className="italic font-semibold ml-12 sm:absolute sm:top-6 sm:left-20 2xl:top-6 2xl:left-44">
                 ttireNova
               </div>
             </Link>
@@ -199,7 +199,7 @@ const DesktopNav = ({
           <form className="" onSubmit={handleSearch}>
             <div className="flex flex-row mr-10 ">
               <input
-                className="w-[30vw]  xl:w-[35vw] 2xl:w-[40vw] inline-flex align-left gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                className="w-[30vw] xl:w-[40vw] 2xl:w-[40vw] 3xl:w-[45vw] inline-flex align-left gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                 type="search"
                 placeholder="Search..."
                 value={search}

@@ -107,7 +107,7 @@ const WomenCategories = () => {
                     className="truncate-2-lines"
                     to="/categories/women/26091"
                   >
-                    Sports
+                    Sportswear
                   </Link>
                 </button>
               </div>

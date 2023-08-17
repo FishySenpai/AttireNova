@@ -16,7 +16,7 @@ const MobileNav = ({ setMenToggle, setWomenToggle, menToggle, womenToggle, logo,
     };
   return (
     <div>
-      <ul className="list-none flex flex-col lg:hidden space-x-4 z-20 px-0 sm:px-16 ">
+      <ul className="list-none flex flex-col lg:hidden space-x-4 z-20 px-0 sm:px-10 ">
         <div className="flex flex-row relative">
           <li className="text-[22px] font-bold text-white ml-5 ">
             <button

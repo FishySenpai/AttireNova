@@ -7,7 +7,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import arrowLeft from "./Assets/arrowLeft.png";
 import arrowRight from "./Assets/arrowRight.png";
-const CategoriesProducts = ({ products, view, name }) => {
+const CategoriesProducts = ({ products, from, to, name }) => {
   const [fillColor, setFillColor] = useState("black");
   const [user, setUser] = useState({});
   const [productId, setProductId] = useState([]);
@@ -130,7 +130,7 @@ const CategoriesProducts = ({ products, view, name }) => {
   if (products) {
     return (
       <div>
-        <div className=" items-center mx-auto container justify-between">
+        <div className=" items-center mx-auto container justify-between ">
           <div className="flex text-left pt-5 ml-4  font-mono text-2xl text-gray-600">
             {name}
           </div>
@@ -142,11 +142,11 @@ const CategoriesProducts = ({ products, view, name }) => {
               <button className="hidden md:block" onClick={handleLeft}>
                 <img
                   src={arrowLeft}
-                  className="absolute top-[170px] left-4 w-[50px] h-[50px] z-20 bg-gray-800/20 rounded-full "
+                  className="absolute top-[170px] left-4 w-[50px] h-[50px] z-20 bg-gray-200/80 rounded-full "
                 />
               </button>
               <ul className="flex flex-row sm:pl-4 ">
-                {products?.slice(3, 40).map((top, index) => (
+                {products?.slice(from, to).map((top, index) => (
                   <li
                     className="ml-3  mr-3 sm:ml-0 sm:mr-4 md:mr-8 pb-6 relative  "
                     key={top.id}
@@ -206,7 +206,7 @@ const CategoriesProducts = ({ products, view, name }) => {
               <button className="hidden md:block" onClick={handleRight}>
                 <img
                   src={arrowRight}
-                  className="absolute top-[170px] right-4 w-[50px] h-[50px] z-20 bg-gray-800/20 rounded-full"
+                  className="absolute top-[170px] right-4 w-[50px] h-[50px] z-20 bg-gray-200/80 rounded-full"
                 />
               </button>
             </div>

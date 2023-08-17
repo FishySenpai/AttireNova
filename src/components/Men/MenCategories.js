@@ -92,7 +92,7 @@ const MenCategories = () => {
               <div className="absolute bottom-6 flex flex-col py-2 left-0 w-full bg-gray-900/50 text-white text-md font-medium  cursor-pointer">
                 <button className="">
                   <Link className="truncate-2-lines" to="/categories/men/26090">
-                    Sports
+                    Sportswear
                   </Link>
                 </button>
               </div>

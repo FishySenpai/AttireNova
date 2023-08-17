@@ -5,7 +5,11 @@ module.exports = {
     display: ["responsive", "group-hover", "group-focus"],
   },
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        "3xl": "1665px",
+      },
+    },
   },
   plugins: [],
 };

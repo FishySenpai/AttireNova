@@ -5,9 +5,7 @@ import Home from "./components/home";
 import Search from "./components/Search";
 import "./App.css";
 import ProductInfo from "./components/ProductInfo";
-import { Makeup, SearchBar, Sneakers, Login, Registration, CartUser, CheckOut, Dresses, Shoes, WorkWear, WishList, OrderedItems, Men, Women, Footer, WomenHome } from "./components";
-import Test from "./components/test";
-import GetProductInfo from "./components/getProductInfo"
+import {Sneakers, Login, Registration, CartUser, CheckOut, WishList, OrderedItems, Men, Women, Footer, WomenHome } from "./components";
 import Products from "./components/Products";
 
 
@@ -25,8 +23,6 @@ function App() {
                 <>
                   <Home />
 
-                  {/* <Sneakers />
-                <Makeup />  */}
                 </>
               }
             />
@@ -39,21 +35,11 @@ function App() {
               }
             />
 
-            <Route path="/yh/:tcin" element={<GetProductInfo />} />
             <Route path="/categories/men/:id" element={<Men />} />
             <Route path="/categories/women/:id" element={<Women />} />
-            <Route
-              path="/test"
-              element={
-                <>
-                  <Search />
-                  <Test />
-                </>
-              }
-            />
+           
             <Route path="/info/:id" element={<ProductInfo />} />
             <Route path="/search/:search" element={<Search />} />
-            <Route path="/categories" element={<SearchBar />} />
             <Route
               path="/login"
               element={
@@ -70,14 +56,7 @@ function App() {
                 </>
               }
             />
-            <Route
-              path="/categories/:name"
-              element={
-                <>
-                  <SearchBar />
-                </>
-              }
-            />
+           
             <Route
               path="/cart"
               element={
@@ -111,7 +90,7 @@ function App() {
               }
             />
           </Routes>
-          <Footer />
+        <Footer/>
         </div>
       </Router>
     </div>

@@ -69,6 +69,11 @@ body {
 
   }
 
+   @media (min-width: 1665px) { /* 2xl breakpoint - 1px */
+    .search-2xl-min-width {
+      width: 20vw; /* Set your desired width for max 2xl */
+    }
+  }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

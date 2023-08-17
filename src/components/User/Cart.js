@@ -108,8 +108,8 @@ setShowError(true)
 
   return (
     <div>
-      <div className="flex flex-col sm:shadow-lg sm:w-[265px] mb-10 sm:mb-0 sm:h-auto pb-4 font-mono ">
-        <div className=" hidden sm:flex flex-row text-gray-700">
+      <div className="flex flex-col md:shadow-lg sm:w-[400px]  md:w-[265px] mb-10 md:mb-0 md:h-auto pb-4 font-mono ">
+        <div className=" hidden md:flex flex-row text-gray-700">
           <div className="text-[20px] text-red-700 ml-4">${quantityPrice}</div>
           <div className="text-[20px]  ml-auto pr-4">
             <button
@@ -122,8 +122,8 @@ setShowError(true)
             </button>
           </div>
         </div>
-        <div>
-          <div className="hidden sm:flex text-[16px] py-4 text-left ml-14">
+        <div className="">
+          <div className="hidden md:flex text-[16px] py-4 text-left ml-14">
             Sold by {brand?.name}
           </div>
           <div className="relative">
@@ -174,7 +174,7 @@ setShowError(true)
           </div>
           <div className="py-2  px-6 sm:px-0">
             <button
-              className="bg-gray-600 p-2 rounded text-white w-full sm:w-[200px]"
+              className="bg-gray-600 p-2 rounded text-white w-full sm:w-[300px] md:w-[200px]"
               onClick={addFav}
             >
               {cartSuccess[id] ? "Added to Cart" : "Add to Cart"}
@@ -186,7 +186,7 @@ setShowError(true)
             )}
           </div>
           <div className="px-6 sm:px-0">
-            <button className="bg-gray-600 p-2 rounded mt-2 text-white w-full sm:w-[200px]">
+            <button className="bg-gray-600 p-2 rounded mt-2 text-white w-full sm:w-[300px] md:w-[200px]">
               <Link to="/checkout">Buy Now</Link>
             </button>
           </div>

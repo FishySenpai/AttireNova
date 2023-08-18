@@ -29,7 +29,7 @@ const ProductInfo = () => {
         currency: "USD",
       },
       headers: {
-        "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key,
+        "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key, //ki
         "X-RapidAPI-Host": "asos2.p.rapidapi.com",
       },
     };
@@ -189,9 +189,9 @@ setIndex((prevIndex) => prevIndex + 1);
             </div>
           </div>
         </div>
-        {/* <div className="sm:ml-72 ml-6 sm:mt-12">
+        <div className="sm:ml-72 ml-6 sm:mt-12">
           <Similar />
-        </div> */}
+        </div>
       </div>
     );
   }

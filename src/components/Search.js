@@ -24,11 +24,10 @@ const Search = () => {
           offset: "0",
         },
         headers: {
-          "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key_Search,
+          "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key_Search, //n
           "X-RapidAPI-Host": "asos10.p.rapidapi.com",
         },
       };
-console.log(process.env.REACT_APP_X_RapidAPI_Key_Search);
       try {
         const response = await axios.request(options);
         console.log(response.data);

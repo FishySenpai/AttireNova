@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import arrow from "../Assets/arrow.png"
 import useOutsideClick from "./useOutsideClick";
-const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
+const CartPopUp = ({ product, quantityPrice, hideCartPopup, user}) => {
  const cartPopupRef = useRef(null);
 
  // Attach the useOutsideClick hook to the cart popup
@@ -61,7 +61,11 @@ const CartPopUp = ({ product, quantityPrice, hideCartPopup}) => {
               </div>
               <div>
                 <button className="bg-gray-600 p-2 rounded mt-2 text-white w-[200px] ml-4">
-                  <Link to="/checkout">Buy Now</Link>
+                  {!user?.isAnonymous ? (
+                    <Link to="/checkout">Buy Now</Link>
+                  ) : (
+                    <Link to="/login">Buy Now</Link>
+                  )}
                 </button>
               </div>
             </li>

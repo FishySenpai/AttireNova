@@ -205,7 +205,13 @@ const Cart = ({
                 {selectedSize ? (
                   <Link to="/checkout">Buy Now</Link>
                 ) : (
-                  <button onClick={()=>{setShowError(true);}} >Buy Now</button>
+                  <button
+                    onClick={() => {
+                      setShowError(true);
+                    }}
+                  >
+                    Buy Now
+                  </button>
                 )}
               </button>
             ) : (
@@ -216,10 +222,17 @@ const Cart = ({
           </div>
         </div>
       </div>
-      <div className="hidden 2xl:flex absolute top-[52px] right-[110px] ">
+      <div
+        className={`${
+          user?.isAnonymous
+            ? "hidden 2xl:flex absolute top-[52px] right-[102px]"
+            : "hidden 2xl:flex absolute top-[52px] right-[82px]"
+        }`}
+      >
         <div className={`${product && cartPopupVisible ? "flex" : "hidden"}`}>
           {
             <CartPopUp
+              user={user}
               product={product}
               quantityPrice={quantityPrice}
               hideCartPopup={hideCartPopup}

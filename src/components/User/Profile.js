@@ -25,6 +25,7 @@ const Profile = () => {
     await signOut(auth);
     window.localStorage.clear();
     setProfileToggle(false);
+    navigate("/")
   };
   return (
     <div className="flex flex-row relative">
@@ -34,7 +35,7 @@ const Profile = () => {
           className="hidden 2xl:flex flex-row font-medium cursor-pointer text-[16px] text-white  mx-4"
         >
           <h1 className="hover:text-red-400">
-            {user ? (
+            {user && !user?.isAnonymous ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="25px"
@@ -51,7 +52,6 @@ const Profile = () => {
                 Login
               </Link>
             )}
-            <Link to="/login">{user?.isAnonymous ? "Login" : ""}</Link>
           </h1>
           <div className={user ? "flex" : "hidden"}></div>
         </button>

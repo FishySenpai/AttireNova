@@ -287,7 +287,7 @@ setIndex((prevIndex) => prevIndex + 1);
                     </div>
                   </div>
                   <div className={showSize ? "flex" : "hidden"}>
-                    <div className="z-50 flex flex-col pb-3 ml-[72px] sm:ml-[102px] mt-0 w-[152px]  absolute overflow-y-auto scrollbar bg-white rounded font-normal text-left shadow-lg">
+                    <div className="z-50 flex flex-col pb-3 ml-[72px] sm:ml-[102px] mt-0 w-[152px]  absolute overflow-y-auto h-52 sm:h-64 scrollbar bg-white rounded font-normal text-left shadow-lg">
                       {variants?.map((size) => (
                         <ul className="flex flex-col " key={size.id}>
                           <li className="px-4 py-2">

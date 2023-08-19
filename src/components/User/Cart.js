@@ -14,27 +14,35 @@ import { auth, db } from "../firebaseConfig";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CartPopUp from "./CartPopUp";
 import useOutsideClick from "./useOutsideClick";
-const Cart = ({ price, brand, product, size, selectedSize, showError, setShowError }) => {
+const Cart = ({
+  price,
+  brand,
+  product,
+  size,
+  selectedSize,
+  showError,
+  setShowError,
+}) => {
   const [quantity, setQuantity] = useState(1);
   const [showQuantity, setShowQuantity] = useState(false);
   const [quantityPrice, setQuantityPrice] = useState(price);
   const [user, setUser] = useState({});
-  const [cartSuccess, setCartSuccess] = useState(false)
+  const [cartSuccess, setCartSuccess] = useState(false);
   const [wishSuccess, setWishSuccess] = useState(false);
-  const [popUp, setPopUp] = useState(false);
+  const [buy, setBuy] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
- const [cartPopupVisible, setCartPopupVisible] = useState(false);
-const cartPopupRef = useRef(null);
-const showCartPopup = () => {
-  // Show the cart popup when the button is clicked
-  setCartPopupVisible(true);
-};
+  const [cartPopupVisible, setCartPopupVisible] = useState(false);
+  const cartPopupRef = useRef(null);
+  const showCartPopup = () => {
+    // Show the cart popup when the button is clicked
+    setCartPopupVisible(true);
+  };
 
-const hideCartPopup = () => {
-  // Hide the cart popup when called
-  setCartPopupVisible(false);
-};
+  const hideCartPopup = () => {
+    // Hide the cart popup when called
+    setCartPopupVisible(false);
+  };
 
   useEffect(() => {
     setQuantityPrice(price * quantity);
@@ -85,7 +93,7 @@ const hideCartPopup = () => {
 
   const addFav = async () => {
     // Add a new document in collection "favs"
-    if(selectedSize){
+    if (selectedSize) {
       if (user) {
         try {
           await setDoc(doc(db, "users", user.uid, "cart", id), {
@@ -93,16 +101,17 @@ const hideCartPopup = () => {
             size,
             quantity,
           });
-         setCartSuccess((prevMap) => ({ ...prevMap, [id]: true }));
+          setCartSuccess((prevMap) => ({ ...prevMap, [id]: true }));
           showCartPopup();
+          setBuy(true)
         } catch (err) {
           console.log(err);
         }
       } else {
         navigate("/login");
       }
-    } else{
-setShowError(true)
+    } else {
+      setShowError(true);
     }
   };
 
@@ -181,14 +190,29 @@ setShowError(true)
             </button>
             {!selectedSize && showError && (
               <p className="text-red-500 mt-2 text-sm px-2">
-                Please select a size before adding to cart.
+                Please select a size before adding item.
               </p>
             )}
           </div>
           <div className="px-6 sm:px-0">
-            <button className="bg-gray-600 p-2 rounded mt-2 text-white w-full sm:w-[300px] md:w-[200px]">
-              <Link to="/checkout">Buy Now</Link>
-            </button>
+            {!user?.isAnonymous ? (
+              <button
+                className="bg-gray-600 p-2 rounded mt-2 text-white w-full sm:w-[300px] md:w-[200px]"
+                onClick={() => {
+                  addFav();
+                }}
+              >
+                {selectedSize ? (
+                  <Link to="/checkout">Buy Now</Link>
+                ) : (
+                  <button onClick={()=>{setShowError(true);}} >Buy Now</button>
+                )}
+              </button>
+            ) : (
+              <button className="bg-gray-600 p-2 rounded mt-2 text-white w-full sm:w-[300px] md:w-[200px]">
+                <Link to="/login">Buy Now</Link>
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ const Login = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [checkUser, setCheckUser] = useState();
+  const [err, setErr] = useState(false);
   const navigate = useNavigate();
 
   const login = async () => {
@@ -24,6 +25,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       console.log(error.message);
+      setErr(true)
     }
   };
   return (
@@ -66,6 +68,15 @@ const Login = () => {
           >
             Login
           </button>
+        </div>
+        <div>
+          {setErr ? (
+            <p className="text-red-500 mt-2 text-sm px-2">
+              Incorrect Username or Password
+            </p>
+          ) : (
+            ""
+          )}
         </div>
         <div className="w-full flex items-center justify-between py-5">
           <hr className="w-full bg-gray-400" />

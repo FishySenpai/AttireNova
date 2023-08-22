@@ -24,8 +24,9 @@ const Login = () => {
       console.log(user);
       navigate("/");
     } catch (error) {
+      setErr(true);
       console.log(error.message);
-      setErr(true)
+      
     }
   };
   return (
@@ -70,12 +71,12 @@ const Login = () => {
           </button>
         </div>
         <div>
-          {setErr ? (
-            <p className="text-red-500 mt-2 text-sm px-2">
-              Incorrect Username or Password
+          {err ? (
+             <p className="text-red-500 mt-2 text-sm px-2">
+              Incorrect Email or Password
             </p>
           ) : (
-            ""
+           ""
           )}
         </div>
         <div className="w-full flex items-center justify-between py-5">

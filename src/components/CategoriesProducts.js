@@ -16,8 +16,37 @@ const CategoriesProducts = ({ products, from, to, name }) => {
   const [currentId, setCurrentId] = useState();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [totalScrollWidth, setTotalScrollWidth] = useState(0);
+    const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const [showRightArrow, setShowRightArrow] = useState(false);
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
+
+
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+
+    function handleScroll() {
+      if (container) {
+        // Check if there's content to scroll to the left
+        setShowLeftArrow(container.scrollLeft > 0);
+
+        // Check if there's content to scroll to the right
+        setShowRightArrow(
+          container.scrollLeft < container.scrollWidth - container.clientWidth
+        );
+      }
+    }
+
+    // Attach the scroll event listener
+    container.addEventListener("scroll", handleScroll);
+
+    // Initial check when the component mounts
+    handleScroll();
+
+    // Clean up the event listener when the component unmounts
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, []);
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -135,16 +164,26 @@ const CategoriesProducts = ({ products, from, to, name }) => {
             {name}
           </div>
           <div className="sm:p-7 pt-6 items-center container justify-between relative ">
-            <div
-              className="overflow  md:overflow-x-hidden "
-              ref={scrollContainerRef}
-            >
+            {showLeftArrow && (
               <button className="hidden md:block" onClick={handleLeft}>
                 <img
                   src={arrowLeft}
                   className="absolute top-[170px] left-4 w-[50px] h-[50px] z-20 bg-gray-200/80 rounded-full "
                 />
               </button>
+            )}
+            <div
+              className="overflow  md:overflow-x-hidden "
+              ref={scrollContainerRef}
+            >
+              {showLeftArrow && (
+                <button className="hidden md:block" onClick={handleLeft}>
+                  <img
+                    src={arrowLeft}
+                    className="absolute top-[170px] left-4 w-[50px] h-[50px] z-20 bg-gray-200/80 rounded-full "
+                  />
+                </button>
+              )}
               <ul className="flex flex-row sm:pl-4 ">
                 {products?.slice(from, to).map((top, index) => (
                   <li
@@ -203,12 +242,14 @@ const CategoriesProducts = ({ products, from, to, name }) => {
                   </li>
                 ))}
               </ul>
-              <button className="hidden md:block" onClick={handleRight}>
-                <img
-                  src={arrowRight}
-                  className="absolute top-[170px] right-4 w-[50px] h-[50px] z-20 bg-gray-200/80 rounded-full"
-                />
-              </button>
+              {showRightArrow && (
+                <button className="hidden md:block" onClick={handleRight}>
+                  <img
+                    src={arrowRight}
+                    className="absolute top-[170px] right-4 w-[50px] h-[50px] z-20 bg-gray-200/80 rounded-full"
+                  />
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -129,7 +129,7 @@ const DesktopNav = ({
             </ul>
           </div>
         </div>
-        <div className="group hover:bg-gray-100 text-white hover:text-gray-600 ">
+        <div className="group hover:bg-gray-100 text-white hover:text-gray-600 mr-4 ">
           <button
             onClick={handleClick}
             className="font-medium cursor-pointer text-[16px] hover:text-red-400  lg:px-2 lg:mx-3 2xl:mx-0 2xl:px-5 py-4"
@@ -197,7 +197,7 @@ const DesktopNav = ({
         </div>
         <div className="flex flex-col md:flex-row justify-center">
           <form className="" onSubmit={handleSearch}>
-            <div className="flex flex-row mr-10 ">
+            <div className="flex flex-row mr-5 ">
               <input
                 className="w-[25vw] xl:w-[35vw] 2xl:w-[40vw] 3xl:w-[45vw] inline-flex align-left gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                 type="search"

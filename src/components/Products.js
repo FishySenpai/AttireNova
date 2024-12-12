@@ -23,7 +23,7 @@ const Products = ({ products, view, name }) => {
     const idAsString = id.toString();
     const options = {
       method: "GET",
-      url: "https://asos2.p.rapidapi.com/products/v3/detail",
+      url: "https://asos2.p.rapidapi.com/products/v4/detail",
       params: {
         id: idAsString,
         lang: "en-US",
@@ -75,21 +75,18 @@ const Products = ({ products, view, name }) => {
       console.log(err);
     }
   };
-useEffect(() => {
- wishList(currentId);
-}, [product])
-
+  useEffect(() => {
+    wishList(currentId);
+  }, [product]);
 
   const handleClick = async (id) => {
-    setCurrentId(id)
+    setCurrentId(id);
     FetchProducts(id);
     if (productId.includes(id)) {
       await deleteFav(id);
       // If the product is already in the array, remove it (toggle off)
       setProductId(productId.filter((product) => product !== id));
     } else {
-     
-
       // If the product is not in the array, add it (toggle on)
       setProductId([...productId, id]);
     }

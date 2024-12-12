@@ -16,12 +16,10 @@ const CategoriesProducts = ({ products, from, to, name }) => {
   const [currentId, setCurrentId] = useState();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [totalScrollWidth, setTotalScrollWidth] = useState(0);
-    const [showLeftArrow, setShowLeftArrow] = useState(false);
-    const [showRightArrow, setShowRightArrow] = useState(false);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
   const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
-
-
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -57,7 +55,7 @@ const CategoriesProducts = ({ products, from, to, name }) => {
     const idAsString = id.toString();
     const options = {
       method: "GET",
-      url: "https://asos2.p.rapidapi.com/products/v3/detail",
+      url: "https://asos2.p.rapidapi.com/products/v4/detail",
       params: {
         id: idAsString,
         lang: "en-US",
@@ -80,12 +78,12 @@ const CategoriesProducts = ({ products, from, to, name }) => {
       console.error(error);
     }
   };
- useEffect(() => {
-   const container = scrollContainerRef.current;
-   if (container) {
-     setTotalScrollWidth(container.scrollWidth);
-   }
- }, []);
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      setTotalScrollWidth(container.scrollWidth);
+    }
+  }, []);
 
   const wishList = async (id) => {
     const idAsString = id.toString();
@@ -133,28 +131,28 @@ const CategoriesProducts = ({ products, from, to, name }) => {
     setWish(true);
   };
 
- const handleLeft = () => {
-   const container = scrollContainerRef.current;
-   const scrollAmount = 1475; // Adjust this value as needed
-   const newScrollPosition = Math.max(0, scrollPosition - scrollAmount);
-   setScrollPosition(newScrollPosition);
-   if (container) {
-     container.scroll({ left: newScrollPosition, behavior: "smooth" });
-   }
- };
+  const handleLeft = () => {
+    const container = scrollContainerRef.current;
+    const scrollAmount = 1475; // Adjust this value as needed
+    const newScrollPosition = Math.max(0, scrollPosition - scrollAmount);
+    setScrollPosition(newScrollPosition);
+    if (container) {
+      container.scroll({ left: newScrollPosition, behavior: "smooth" });
+    }
+  };
 
- const handleRight = () => {
-   const container = scrollContainerRef.current;
-   const scrollAmount = 1475; // Adjust this value as needed
-   const newScrollPosition = Math.min(
-     container.scrollWidth - container.clientWidth,
-     scrollPosition + scrollAmount
-   );
-   setScrollPosition(newScrollPosition);
-   if (container) {
-     container.scroll({ left: newScrollPosition, behavior: "smooth" });
-   }
- };
+  const handleRight = () => {
+    const container = scrollContainerRef.current;
+    const scrollAmount = 1475; // Adjust this value as needed
+    const newScrollPosition = Math.min(
+      container.scrollWidth - container.clientWidth,
+      scrollPosition + scrollAmount
+    );
+    setScrollPosition(newScrollPosition);
+    if (container) {
+      container.scroll({ left: newScrollPosition, behavior: "smooth" });
+    }
+  };
 
   if (products) {
     return (

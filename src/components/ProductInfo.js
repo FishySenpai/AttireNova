@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Similar from "./Similar";
 import Cart from "./User/Cart";
-import arrowLeft from "./Assets/arrowLeft.png"
-import arrowRight from "./Assets/arrowRight.png"
+import arrowLeft from "./Assets/arrowLeft.png";
+import arrowRight from "./Assets/arrowRight.png";
 const ProductInfo = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
@@ -20,7 +20,7 @@ const ProductInfo = () => {
   const FetchProducts = async () => {
     const options = {
       method: "GET",
-      url: "https://asos2.p.rapidapi.com/products/v3/detail",
+      url: "https://asos2.p.rapidapi.com/products/v4/detail",
       params: {
         id: id,
         lang: "en-US",
@@ -37,7 +37,7 @@ const ProductInfo = () => {
     try {
       const response = await axios.request(options);
       setProduct(response.data);
-      console.log(response)
+      console.log(response);
       console.log(product);
       setThumbnail(response.data.media?.images[0].url);
       setLoading(false);
@@ -45,49 +45,69 @@ const ProductInfo = () => {
       console.error(error);
     }
   };
+  const FetchPrice = async () => {
+    const options = {
+      method: "GET",
+      url: "https://asos2.p.rapidapi.com/products/v4/get-stock-price",
+      params: {
+        productIds: id,
+        lang: "en-US",
+        store: "US",
+        sizeSchema: "US",
+        currency: "USD",
+      },
+      headers: {
+        "x-rapidapi-key": "ab5260649dmsh1c14116f3d59e38p17de0djsn0e0cd39cc3ff",
+        "x-rapidapi-host": "asos2.p.rapidapi.com",
+      },
+    };
 
-
+    try {
+      const response = await axios.request(options);
+      console.log(response.data[0]?.productPrice?.current.value);
+      setPrice(response.data[0]?.productPrice?.current.value);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     FetchProducts();
+    FetchPrice();
   }, [id]);
-  useEffect(() => {
-    // Update the price state here after the product state has been updated
-    console.log(product)
-    setPrice(product.price?.current.value);
-    console.log(price)
-  }, [product]);
-
+  // useEffect(() => {
+  //   // Update the price state here after the product state has been updated
+  //   console.log(product);
+  //   setPrice(product.price?.current.value);
+  //   console.log(price);
+  // }, [product]);
 
   const handleImageClick = (image) => {
     setThumbnail(image);
   };
-const handleImageBack = ()=>{
-if(product){
-  if(index>0){
-    setIndex((prevIndex) => prevIndex - 1);
-setThumbnail(product.media?.images[index-1].url);
-console.log(index);
-  } else{
-    setIndex(3);
-    setThumbnail(product.media?.images[3].url);
-  }
-  
-}
-}
-const handleImageForward = () => {
-  
-  if (product) {
-    
-    if (index < 3) {
-setIndex((prevIndex) => prevIndex + 1);
-      setThumbnail(product.media?.images[index+1].url);
-      console.log(index);
-    } else {
-      setIndex(0);
-      setThumbnail(product.media?.images[0].url);
+  const handleImageBack = () => {
+    if (product) {
+      if (index > 0) {
+        setIndex((prevIndex) => prevIndex - 1);
+        setThumbnail(product.media?.images[index - 1].url);
+        console.log(index);
+      } else {
+        setIndex(3);
+        setThumbnail(product.media?.images[3].url);
+      }
     }
-  }
-};
+  };
+  const handleImageForward = () => {
+    if (product) {
+      if (index < 3) {
+        setIndex((prevIndex) => prevIndex + 1);
+        setThumbnail(product.media?.images[index + 1].url);
+        console.log(index);
+      } else {
+        setIndex(0);
+        setThumbnail(product.media?.images[0].url);
+      }
+    }
+  };
 
   const { name, media, description, info, variants, brand } = product;
 
@@ -194,8 +214,7 @@ setIndex((prevIndex) => prevIndex + 1);
         </div>
       </div>
     );
-  }
-   else {
+  } else {
     return (
       <div className="flex flex-col overflow-hidden min-h-screen">
         <div className="flex md:flex-row flex-col">
@@ -297,7 +316,6 @@ setIndex((prevIndex) => prevIndex + 1);
                                   setSelectedSize(size.displaySizeText);
                                   setShowError(false);
                                   setSize(size.displaySizeText);
-                                  setPrice(size.price.current.value);
                                   console.log(price);
                                   setShowSize(false);
                                 }}
@@ -364,5 +382,5 @@ setIndex((prevIndex) => prevIndex + 1);
       </div>
     );
   }
-}
+};
 export default ProductInfo;

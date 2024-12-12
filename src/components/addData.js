@@ -6,9 +6,9 @@ import { auth } from "./firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import { useFetch } from "./getData";
 import { useNavigate } from "react-router-dom";
-const Sneakers = () => {
+const AddData = () => {
   const [user, setUser] = useState();
-  const id = 5668;
+  const id = 50711;
   const navigate = useNavigate();
   const { loading, products } = useFetch(id);
   useEffect(() => {
@@ -19,12 +19,12 @@ const Sneakers = () => {
   }, [user]);
   const addFav = async () => {
     // Add a new document in collection "favs"
-    const men = "men";
+    const men = "women";
     const idAsString = id.toString();
     if (user && products) {
       try {
         await setDoc(doc(db, "categories", men, "products", idAsString), {
-          name: "Men's Hoodies & Sweatshirts",
+          name: "Women's Sale",
           products,
         });
         console.log("success")
@@ -38,6 +38,7 @@ const Sneakers = () => {
   if (loading) {
     return (
       <div>
+        <button onClick={addFav}>Add</button>
         <div className="flex text-left ml-52 font-mono text-2xl text-gray-600">
           Women's New
         </div>
@@ -73,4 +74,4 @@ const Sneakers = () => {
   }
 };
 
-export default Sneakers;
+export default AddData;

@@ -1,6 +1,5 @@
 import Search from "./Search";
 import Products from "./Products";
-import Sneakers from "./Sneakers";
 import Login from "./User/Login";
 import Registration from "./User/Registration";
 import CartUser from "./User/CartUser";
@@ -27,8 +26,6 @@ import WomenHome from "./WomenHome";
 import Footer from "./Footer";
 export {
   Search,
-  Sneakers,
-
   Login,
   Registration,
   CartUser,

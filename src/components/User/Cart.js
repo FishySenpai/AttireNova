@@ -81,6 +81,7 @@ const Cart = ({
         console.log(product);
         await setDoc(doc(db, "users", user.uid, "wishlist", idAsString), {
           product,
+          price
         });
         setWishSuccess((prevMap) => ({ ...prevMap, [id]: true }));
       } catch (err) {
@@ -100,6 +101,7 @@ const Cart = ({
             product,
             size,
             quantity,
+            price
           });
           setCartSuccess((prevMap) => ({ ...prevMap, [id]: true }));
           showCartPopup();

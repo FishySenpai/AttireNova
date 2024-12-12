@@ -96,11 +96,7 @@ const CartUser = () => {
         setSubTotal(0);
         // Calculate the sum of all product prices
         const totalPrice = data.reduce((acc, top) => {
-          // Assuming price is a string and needs to be converted to a number for the calculation
-          const price = parseFloat(
-            top.product.price.current.text.replace(/\$/g, "")
-          );
-          return acc + price * top.quantity;
+          return acc + top.price * top.quantity;
         }, 0);
         setSubTotal(totalPrice);
       }
@@ -238,7 +234,7 @@ const CartUser = () => {
                         <div className="text-gray-700 text-left font-bold  mt-1">
                           $
                           {(
-                            top.product.price.current.value * top.quantity
+                            top.price * top.quantity
                           ).toFixed(2)}
                         </div>
                         <div className=" mt-4 text-[16px] space-x-6 sm:space-x-5 flex flex-row">

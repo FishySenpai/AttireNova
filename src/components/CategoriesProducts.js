@@ -13,6 +13,7 @@ const CategoriesProducts = ({ products, from, to, name }) => {
   const [productId, setProductId] = useState([]);
   const [product, setProduct] = useState();
   const [wish, setWish] = useState(false);
+  const [price, setPrice] = useState();
   const [currentId, setCurrentId] = useState();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [totalScrollWidth, setTotalScrollWidth] = useState(0);
@@ -78,6 +79,31 @@ const CategoriesProducts = ({ products, from, to, name }) => {
       console.error(error);
     }
   };
+  const FetchPrice = async (id) => {
+    const options = {
+      method: "GET",
+      url: "https://asos2.p.rapidapi.com/products/v4/get-stock-price",
+      params: {
+        productIds: id,
+        lang: "en-US",
+        store: "US",
+        sizeSchema: "US",
+        currency: "USD",
+      },
+      headers: {
+        "x-rapidapi-key": process.env.REACT_APP_X_RapidAPI_Key,
+        "x-rapidapi-host": "asos2.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data[0]?.productPrice?.current.value);
+      setPrice(response.data[0]?.productPrice?.current.value);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (container) {
@@ -94,6 +120,7 @@ const CategoriesProducts = ({ products, from, to, name }) => {
         console.log(product);
         await setDoc(doc(db, "users", user.uid, "wishlist", idAsString), {
           product,
+          price
         });
       } catch (err) {
         console.log(err);
@@ -120,6 +147,7 @@ const CategoriesProducts = ({ products, from, to, name }) => {
   const handleClick = async (id) => {
     setCurrentId(id);
     FetchProducts(id);
+    FetchPrice(id)
     if (productId.includes(id)) {
       await deleteFav(id);
       // If the product is already in the array, remove it (toggle off)

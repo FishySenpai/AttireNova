@@ -10,6 +10,7 @@ const Products = ({ products, view, name }) => {
   const [user, setUser] = useState({});
   const [productId, setProductId] = useState([]);
   const [product, setProduct] = useState();
+  const [price, setPrice] = useState();
   const [wish, setWish] = useState(false);
   const [currentId, setCurrentId] = useState();
   const navigate = useNavigate();
@@ -46,15 +47,40 @@ const Products = ({ products, view, name }) => {
       console.error(error);
     }
   };
+  const FetchPrice = async (id) => {
+    const options = {
+      method: "GET",
+      url: "https://asos2.p.rapidapi.com/products/v4/get-stock-price",
+      params: {
+        productIds: id,
+        lang: "en-US",
+        store: "US",
+        sizeSchema: "US",
+        currency: "USD",
+      },
+      headers: {
+        "x-rapidapi-key": process.env.REACT_APP_X_RapidAPI_Key,
+        "x-rapidapi-host": "asos2.p.rapidapi.com",
+      },
+    };
 
+    try {
+      const response = await axios.request(options);
+      console.log(response.data[0]?.productPrice?.current.value);
+      setPrice(response.data[0]?.productPrice?.current.value);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const wishList = async (id) => {
     const idAsString = id.toString();
 
     console.log(product);
     if (user) {
       try {
-        console.log(product);
+        console.log(product, price);
         await setDoc(doc(db, "users", user.uid, "wishlist", idAsString), {
+          price,
           product,
         });
       } catch (err) {
@@ -82,6 +108,7 @@ const Products = ({ products, view, name }) => {
   const handleClick = async (id) => {
     setCurrentId(id);
     FetchProducts(id);
+    FetchPrice(id);
     if (productId.includes(id)) {
       await deleteFav(id);
       // If the product is already in the array, remove it (toggle off)

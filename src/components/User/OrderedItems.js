@@ -154,14 +154,14 @@ if (user) {
                               </button>
                               <div className=" hidden md:flex flex-row sm:px-2 mb-2 space-x-5 sm:space-x-11 sm:ml-6 w-[150px]">
                                 <div className="text-gray-700 text-left font-bold ">
-                                  ${top.product.price.current.value}
+                                  ${top.price}
                                 </div>
                                 <div className="text-[16px] text-gray-800 ">
                                   Qty:{top.quantity}
                                 </div>
                                 <div className="text-gray-700 text-left font-bold">
                                   $
-                                  {top.product.price.current.value *
+                                  {top.price *
                                     top.quantity}
                                 </div>
                               </div>
@@ -181,14 +181,14 @@ if (user) {
 
                             <div className="md:hidden flex flex-row md:px-2 mb-2 space-x-14 md:ml-6 w-[150px] pt-2">
                               <div className="text-gray-700 text-left font-bold ">
-                                ${top.product.price.current.value}
+                                ${top.price}
                               </div>
                               <div className="text-[16px] text-gray-800 ">
                                 Qty:{top.quantity}
                               </div>
                               <div className="text-gray-700 text-left font-bold">
                                 $
-                                {top.product.price.current.value * top.quantity}
+                                {top.price * top.quantity}
                               </div>
                             </div>
                           </div>
@@ -203,7 +203,7 @@ if (user) {
                           {orders.data.reduce(
                             (total, top) =>
                               total +
-                              top.product.price.current.value * top.quantity,
+                              top.price * top.quantity,
                             0
                           )}
                         </div>
@@ -221,7 +221,7 @@ if (user) {
                           {orders.data.reduce(
                             (total, top) =>
                               total +
-                              top.product.price.current.value * top.quantity,
+                              top.price * top.quantity,
                             5
                           )}
                         </div>

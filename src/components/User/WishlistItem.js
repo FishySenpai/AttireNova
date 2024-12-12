@@ -60,7 +60,6 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
         try {
           await setDoc(doc(db, "users", user.uid, "cart", idAsString), {
             product,
-            size,
             quantity: 1,
           });
           showCartPopup();
@@ -140,7 +139,7 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
 
         <div className="divide-y">
           <div className="text-gray-700 text-left font-bold py-1">
-            {top.product.price.current.text}
+            ${top.price}
           </div>
           <div className="py-2">{top.product.variants[0].colour}</div>
           <div className="flex mb-2 font-mono  relative">

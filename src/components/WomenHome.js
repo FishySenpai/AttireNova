@@ -6,7 +6,6 @@ import AddData from "./addData"
 const WomenHome = () => {
   return (
     <div>
-      <AddData />
         <WomenSale/>
         <WomenPopular/>
         <WomenCategories/>

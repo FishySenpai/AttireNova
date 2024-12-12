@@ -57,7 +57,7 @@ const ProductInfo = () => {
         currency: "USD",
       },
       headers: {
-        "x-rapidapi-key": "ab5260649dmsh1c14116f3d59e38p17de0djsn0e0cd39cc3ff",
+        "x-rapidapi-key": process.env.REACT_APP_X_RapidAPI_Key,
         "x-rapidapi-host": "asos2.p.rapidapi.com",
       },
     };

@@ -9,12 +9,12 @@ import { Navigate } from "react-router-dom";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBmgSCq8UcNwOl_lnkfTiXqEG3oLnol-Gk",
-  authDomain: "ecommerce-360f0.firebaseapp.com",
-  projectId: "ecommerce-360f0",
-  storageBucket: "ecommerce-360f0.appspot.com",
-  messagingSenderId: "230413125751",
-  appId: "1:230413125751:web:cfc3e923d31bb2b8df9e72",
+  apiKey: process.env.REACT_APP_X_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_X_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_X_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_X_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_X_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_X_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase

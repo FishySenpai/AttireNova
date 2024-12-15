@@ -51,6 +51,7 @@ const WishList = () => {
               {data.map((top, index) => (
                 <WishlistItem //the cartpop exists individually for each item state with wishlist item component
                   top={top}
+                  price={top.price}
                   key={top.product.id}
                   reFetch={reFetch}
                   setReFetch={setReFetch}

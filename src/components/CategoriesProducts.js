@@ -141,8 +141,10 @@ const CategoriesProducts = ({ products, from, to, name }) => {
     }
   };
   useEffect(() => {
-    wishList(currentId);
-  }, [product]);
+    if (price && product) {
+      wishList(currentId);
+    }
+  }, [product, price]);
 
   const handleClick = async (id) => {
     setCurrentId(id);

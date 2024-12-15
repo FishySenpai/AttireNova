@@ -102,8 +102,10 @@ const Products = ({ products, view, name }) => {
     }
   };
   useEffect(() => {
-    wishList(currentId);
-  }, [product]);
+    if (price && product) {
+      wishList(currentId);
+    }
+  }, [product, price]);
 
   const handleClick = async (id) => {
     setCurrentId(id);

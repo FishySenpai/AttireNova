@@ -14,7 +14,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import CartPopUp from "./CartPopUp";
 
-const WishlistItem = ({ top, reFetch, setReFetch }) => { 
+const WishlistItem = ({ top, price, reFetch, setReFetch }) => {
   const [user, setUser] = useState({});
   const [size, setSize] = useState("Select size:");
   const [showSize, setShowSize] = useState(false);
@@ -59,6 +59,7 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
         console.log(size);
         try {
           await setDoc(doc(db, "users", user.uid, "cart", idAsString), {
+            price,
             product,
             quantity: 1,
           });
@@ -78,6 +79,7 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
     if (user) {
       try {
         await updateDoc(doc(db, "users", user.uid, "wishlist", idAsString), {
+          price,
           product,
           size: newSize,
         });
@@ -143,28 +145,28 @@ const WishlistItem = ({ top, reFetch, setReFetch }) => {
           </div>
           <div className="py-2">{top.product.variants[0].colour}</div>
           <div className="flex mb-2 font-mono  relative">
-              <button
-                type="button"
-                className="text-left rounded-md w-full py-2 text-sm font-semibold text-gray-900 shadow-sm "
-                id="menu-button"
-                onClick={() => handleClick(top.product.id)} // Update the onClick handler
-              >
-                {top.size ? top.size : "Select size: "}
-                <div className="absolute  top-0 right-[0px] mr-2 mt-2">
-                  <svg
-                    className="-mr-1 h-5 w-5 text-gray-400"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </button>       
+            <button
+              type="button"
+              className="text-left rounded-md w-full py-2 text-sm font-semibold text-gray-900 shadow-sm "
+              id="menu-button"
+              onClick={() => handleClick(top.product.id)} // Update the onClick handler
+            >
+              {top.size ? top.size : "Select size: "}
+              <div className="absolute  top-0 right-[0px] mr-2 mt-2">
+                <svg
+                  className="-mr-1 h-5 w-5 text-gray-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </button>
           </div>
           <div
             className={

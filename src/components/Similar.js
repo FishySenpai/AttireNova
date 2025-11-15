@@ -13,13 +13,9 @@ const Similar = () => {
   const FetchProducts = async (query) => {
     const options = {
       method: "GET",
-      url: "https://asos10.p.rapidapi.com/api/v1/getYouMightAlsoLike",
+      url: "https://asos10.p.rapidapi.com/api/v1/getPeopleAlsoBought",
       params: {
         productId: id,
-        currency: "USD",
-        country: "US",
-        store: "US",
-        language: "en-US",
       },
       headers: {
         "x-rapidapi-key": process.env.REACT_APP_X_RapidAPI_Key,

@@ -60,7 +60,7 @@ const CategoriesProducts = ({ products, from, to, name }) => {
       params: {
         id: idAsString,
         lang: "en-US",
-        store: "US",
+        store: "USA",
         sizeSchema: "US",
         currency: "USD",
       },
